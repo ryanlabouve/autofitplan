@@ -1,0 +1,12 @@
+<select onchange={{action "goToProgram"}} data-test-programs>
+  {{#if (not selectedProgram)}}
+    <option value="">Choose Program</option>
+  {{/if}}
+
+  {{#each programs as |program|}}
+    <option value={{program.slug}} selected={{if (eq program.slug selectedProgram.slug) "selected"}}>
+      {{program.name}}
+    </option>
+  {{/each}}
+</select>
+{{programs.length}}
