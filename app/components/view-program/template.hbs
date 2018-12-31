@@ -1,3 +1,11 @@
 <div>
   <div data-test-program-name>{{program.name}}</div>
+  {{#each (range 1 (add 1 program.plan.weeks)) as |n|}}
+    <div data-test-week>
+      <div class="text-2xl">Week {{n}}</div>
+        {{#each program.plan.week as |day|}}
+          {{view-workout workout=day}}
+        {{/each}}
+    </div>
+  {{/each}}
 </div>

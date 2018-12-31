@@ -1,0 +1,4 @@
+<div class="text-xl">{{workout.name}}</div>
+{{#each workout.moves as |move|}}
+  {{view-move move=move}}
+{{/each}}
