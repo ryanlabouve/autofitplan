@@ -1,9 +1,11 @@
 import {module, test} from 'qunit';
 import {visit, fillIn, currentURL, pauseTest} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
+import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
 module('Acceptance | happy path', function(hooks) {
   setupApplicationTest(hooks);
+  setupMirage(hooks);
 
   test('Can switch programs', async function(assert) {
     await visit('/');
@@ -26,8 +28,8 @@ module('Acceptance | happy path', function(hooks) {
   });
 
   test('Can see the program', async function(assert) {
-    await visit('/progrm/ryans-program');
+    await visit('/program/ryans-program');
 
-    assert.dom('[data-test-program-name]').hasValue(`Ryan's Program`);
+    assert.dom('[data-test-program-name]').hasText(`Ryan's Program`);
   });
 });

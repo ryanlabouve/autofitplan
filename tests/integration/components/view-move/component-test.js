@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import {module, test} from 'qunit';
+import {setupRenderingTest} from 'ember-qunit';
+import {render} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | view-move', function(hooks) {
@@ -10,17 +10,12 @@ module('Integration | Component | view-move', function(hooks) {
     // Set any properties with this.set('myProperty', 'value');
     // Handle any actions with this.set('myAction', function(val) { ... });
 
-    await render(hbs`{{view-move}}`);
+    this.set('move', {
+      code: 'lp_variant',
+    });
 
-    assert.equal(this.element.textContent.trim(), '');
+    await render(hbs`{{view-move move=move}}`);
 
-    // Template block usage:
-    await render(hbs`
-      {{#view-move}}
-        template block text
-      {{/view-move}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.ok(this.element.textContent.trim());
   });
 });

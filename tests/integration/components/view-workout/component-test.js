@@ -1,6 +1,6 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import {module, test} from 'qunit';
+import {setupRenderingTest} from 'ember-qunit';
+import {render} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
 module('Integration | Component | view-workout', function(hooks) {
@@ -12,15 +12,6 @@ module('Integration | Component | view-workout', function(hooks) {
 
     await render(hbs`{{view-workout}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
-
-    // Template block usage:
-    await render(hbs`
-      {{#view-workout}}
-        template block text
-      {{/view-workout}}
-    `);
-
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.ok(!this.element.textContent.trim());
   });
 });
