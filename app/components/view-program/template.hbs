@@ -1,5 +1,5 @@
 <div>
-  <div data-test-program-name>{{program.name}}</div>
+  <div data-test-program-name class="bg-grey p-1 m-y-4">{{program.name}}</div>
   {{#each (range 1 (add 1 program.plan.weeks)) as |n|}}
     <div data-test-week>
       <div class="text-2xl">Week {{n}}</div>

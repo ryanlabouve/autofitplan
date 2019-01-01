@@ -1,3 +1,17 @@
-<div>
-  {{move.sets}} x {{move.reps_low}}-{{move.reps_high}} @ {{move.rpe}}RPE, ({{name}})
+<div class="pt-8">
+  <div>
+    <select>
+      <option selected="selected">
+        {{selectedExercise.name}}
+      </option>
+      {{#each rawMove.exercises as |exercise|}}
+        <option>
+          {{exercise.name}}
+        </option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="mx-6">
+    <input class="appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline" placeholder="weight in lbs"> {{move.sets}} x {{move.reps_low}}-{{move.reps_high}} @ {{move.rpe}}RPE, ({{name}})
+  </div>
 </div>
