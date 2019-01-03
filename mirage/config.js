@@ -24,7 +24,16 @@ export default function() {
   */
 
   this.namespace = '/api';
-  this.get('/macrocycles');
+  this.get('/macrocycles', ({macrocycles}, request) => {
+    const {queryParams} = request;
+
+    if (!Object.keys(queryParams).length) {
+      return macrocycles.all();
+    }
+
+    let slug = queryParams['filter[slug]'];
+    return macrocycles.where({slug});
+  });
   this.get('/mesocycles');
   this.get('/mesocycles/:id');
   this.get('/microcycles');

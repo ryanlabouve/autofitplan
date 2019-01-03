@@ -1,5 +1,10 @@
 <div class="border m-2 p-2">
   <div class="text-xl">{{session.name}}</div>
+  <div class="float-right">
+    <button class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded">
+      Start Session
+    </button>
+  </div>
   {{#each session.exercises as |exercise|}}
     {{view-move exercise=exercise}}
   {{/each}}

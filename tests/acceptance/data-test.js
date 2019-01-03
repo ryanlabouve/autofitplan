@@ -2,6 +2,7 @@ import {module, test} from 'qunit';
 import {visit, currentURL} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
+import moment from 'moment';
 
 module('Acceptance | data', function(hooks) {
   setupApplicationTest(hooks);
@@ -47,5 +48,10 @@ module('Acceptance | data', function(hooks) {
       user.macrocycles.models[0].mesocycles.models[0].microcycles.models[0]
         .sessions.models[0].exercises.models[0].code;
     assert.equal(code, 'lp_variant');
+
+    let loggedSession = server.create('loggedSession', {
+      session: sessionMonday,
+      date: moment(),
+    });
   });
 });
