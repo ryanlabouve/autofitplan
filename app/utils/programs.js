@@ -175,7 +175,7 @@ const PLAN_BB_ULTRA_NOVICE = {
     },
   ],
 };
-const _PLAN_BB_NOVICE = {
+const PLAN_BB_NOVICE = {
   weeks: 12,
   week: [
     {

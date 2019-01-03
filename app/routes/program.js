@@ -1,15 +1,21 @@
 import Route from '@ember/routing/route';
-import programs from 'auto-hypertrophy/utils/programs';
+import {hash} from 'rsvp';
 
 export default Route.extend({
   model({slug}) {
-    let program = programs.find(program => {
-      return program.slug === slug;
-    });
+    let macrocycles = this.store.findAll('macrocycle');
+    let macrocycle = this.store
+      .query('macrocycle', {
+        filter: {
+          slug,
+        },
+        include: 'mesocycles.microcycles.sessions.exercises',
+      })
+      .then(macrocycles => macrocycles.get('firstObject'));
 
-    return {
-      programs,
-      program,
-    };
+    return hash({
+      macrocycles,
+      macrocycle,
+    });
   },
 });

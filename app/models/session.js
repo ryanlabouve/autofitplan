@@ -1,9 +1,8 @@
 import DS from 'ember-data';
-
-const {attr, hasMany} = DS;
+const {attr, hasMany, belongsTo} = DS;
 
 export default DS.Model.extend({
+  microcycle: belongsTo(),
+  exercises: hasMany(),
   name: attr('string'),
-  slug: attr('string'),
-  mesocycles: hasMany(),
 });

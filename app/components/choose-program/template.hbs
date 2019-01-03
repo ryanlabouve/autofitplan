@@ -1,11 +1,11 @@
 <select onchange={{action "goToProgram"}} data-test-programs>
-  {{#if (not selectedProgram)}}
+  {{#if (not selectedMacrocycle)}}
     <option value="">Choose Program</option>
   {{/if}}
 
-  {{#each programs as |program|}}
-    <option value={{program.slug}} selected={{if (eq program.slug selectedProgram.slug) "selected"}}>
-      {{program.name}}
+  {{#each macrocycles as |macrocycle|}}
+    <option value={{macrocycle.slug}} selected={{if (eq macrocycle.slug selectedMacrocycle.slug) "selected"}}>
+      {{macrocycle.name}}
     </option>
   {{/each}}
 </select>

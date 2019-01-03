@@ -25,4 +25,12 @@ export default function() {
 
   this.namespace = '/api';
   this.get('/macrocycles');
+  this.get('/mesocycles');
+  this.get('/mesocycles/:id');
+  this.get('/microcycles');
+  this.get('/microcycles/:id');
+  this.get('/sessions');
+  this.get('/sessions/:id');
+  this.get('/exercises');
+  this.get('/exercises/:id');
 }

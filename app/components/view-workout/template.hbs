@@ -1,6 +1,6 @@
 <div class="border m-2 p-2">
-  <div class="text-xl">{{workout.name}}</div>
-  {{#each workout.moves as |move|}}
-    {{view-move move=move}}
+  <div class="text-xl">{{session.name}}</div>
+  {{#each session.exercises as |exercise|}}
+    {{view-move exercise=exercise}}
   {{/each}}
 </div>

@@ -1,12 +1,11 @@
 import Route from '@ember/routing/route';
-import programs from 'auto-hypertrophy/utils/programs';
+import {hash} from 'rsvp';
 
 export default Route.extend({
   model() {
     let macrocycles = this.store.findAll('macrocycle');
-    return {
-      programs,
+    return hash({
       macrocycles,
-    };
+    });
   },
 });

@@ -4,7 +4,7 @@
       <option selected="selected">
         {{selectedExercise.name}}
       </option>
-      {{#each rawMove.exercises as |exercise|}}
+      {{#each rawExercise.exercises as |exercise|}}
         <option>
           {{exercise.name}}
         </option>
@@ -12,6 +12,6 @@
     </select>
   </div>
   <div class="mx-6">
-    <input class="appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline" placeholder="weight in lbs"> {{move.sets}} x {{move.reps_low}}-{{move.reps_high}} @ {{move.rpe}}RPE, ({{name}})
+    <input class="appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline" placeholder="weight in lbs"> {{exercise.sets}} x {{exercise.repsLow}}-{{exercise.repsHigh}} @ {{exercise.rpe}}RPE, ({{name}})
   </div>
 </div>

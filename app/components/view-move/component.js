@@ -232,15 +232,19 @@ const EXERCISE_MAP = {
 };
 
 export default Component.extend({
-  rawMove: computed('move.code', function() {
-    return EXERCISE_MAP[get(this, 'move.code')];
+  rawExercise: computed('exercise.code', function() {
+    return EXERCISE_MAP[get(this, 'exercise.code')];
   }),
 
   didInsertElement() {
-    set(this, 'selectedExercise', get(this, 'rawMove.exercises.firstObject'));
+    set(
+      this,
+      'selectedExercise',
+      get(this, 'rawExercise.exercises.firstObject'),
+    );
   },
 
-  name: computed('move.code', function() {
-    return get(this, 'rawMove').name;
+  name: computed('exercise.code', function() {
+    return get(this, 'rawExercise').name;
   }),
 });
