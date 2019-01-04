@@ -51,7 +51,7 @@ module('Acceptance | data', function(hooks) {
 
     let loggedSession = server.create('loggedSession', {
       session: sessionMonday,
-      date: moment(),
+      startTime: moment(),
     });
   });
 });

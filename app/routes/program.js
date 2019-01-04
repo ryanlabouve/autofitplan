@@ -9,7 +9,8 @@ export default Route.extend({
         filter: {
           slug,
         },
-        include: 'mesocycles.microcycles.sessions.exercises',
+        include:
+          'mesocycles.microcycles.sessions.exercises,mesocycles.microcycles.sessions.loggedSessions.loggedExercises',
       })
       .then(macrocycles => macrocycles.get('firstObject'));
 

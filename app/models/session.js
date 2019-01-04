@@ -5,4 +5,5 @@ export default DS.Model.extend({
   microcycle: belongsTo(),
   exercises: hasMany(),
   name: attr('string'),
+  loggedSessions: hasMany(),
 });

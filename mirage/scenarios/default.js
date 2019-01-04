@@ -29,7 +29,12 @@ export default function(server) {
     name: 'Day 1, Lower',
   });
 
-  server.create('exercise', {
+  let loggedSession = server.create('loggedSession', {
+    session: day1,
+    week: 1,
+  });
+
+  let exercise = server.create('exercise', {
     session: day1,
     code: 'sq_variant',
     sets: 4,
@@ -37,6 +42,12 @@ export default function(server) {
     repsHigh: 5,
     percentRM: 85,
     rpe: 8,
+  });
+
+  server.create('loggedExercise', {
+    loggedSession,
+    exercise,
+    weight: 100,
   });
 
   server.create('exercise', {
@@ -115,6 +126,16 @@ export default function(server) {
     reps_low: 5,
     reps_high: 7,
     percent_rm: 80,
+    rpe: 8,
+  });
+
+  server.create('exercise', {
+    session: day2,
+    code: 'ver_pull',
+    sets: 3,
+    reps_low: 6,
+    reps_high: 8,
+    percent_rm: null,
     rpe: 8,
   });
 

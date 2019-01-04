@@ -12,6 +12,14 @@
     </select>
   </div>
   <div class="mx-6">
-    <input class="appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline" placeholder="weight in lbs"> {{exercise.sets}} x {{exercise.repsLow}}-{{exercise.repsHigh}} @ {{exercise.rpe}}RPE, ({{name}})
+    {{#if loggedSession}}
+      <input
+        class="appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline"
+        placeholder="weight in lbs"
+        value={{loggedExercise.weight}}
+      >
+      {{log loggedExercise}}
+    {{/if}}
+      {{exercise.sets}} x {{exercise.repsLow}}-{{exercise.repsHigh}} @ {{exercise.rpe}}RPE, ({{name}})
   </div>
 </div>
