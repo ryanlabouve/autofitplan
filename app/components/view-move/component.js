@@ -1,5 +1,7 @@
 import Component from '@ember/component';
 import {computed, get, set} from '@ember/object';
+import {task, timeout} from 'ember-concurrency';
+import {inject as service} from '@ember/service';
 
 const EXERCISE_MAP = {
   sq_variant: {
@@ -232,6 +234,7 @@ const EXERCISE_MAP = {
 };
 
 export default Component.extend({
+  loggedExerciseService: service('logged-exercise'),
   rawExercise: computed('exercise.code', function() {
     return EXERCISE_MAP[get(this, 'exercise.code')];
   }),
@@ -246,5 +249,15 @@ export default Component.extend({
 
   name: computed('exercise.code', function() {
     return get(this, 'rawExercise').name;
+  }),
+
+  updateLoggedExercise: task(function*(loggedExercise, weight) {
+    yield timeout(200);
+    yield get(this, 'loggedExerciseService').updateLoggedExercise(
+      loggedExercise,
+      {
+        weight,
+      },
+    );
   }),
 });

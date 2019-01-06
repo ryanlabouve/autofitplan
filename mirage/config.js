@@ -26,5 +26,5 @@ export default function() {
   this.get('/logged-exercises');
   this.get('/logged-exercises/:id');
   this.post('/logged-exercises');
-  this.patch('/logged-exercises');
+  this.patch('/logged-exercises/:id');
 }

@@ -5,7 +5,7 @@ import {inject as service} from '@ember/service';
 export default Service.extend({
   store: service(),
 
-  async createLoggedSession({session}) {
+  async createLoggedSession({session, week}) {
     let store = get(this, 'store');
     let loggedSession = store.createRecord('loggedSession', {
       session,

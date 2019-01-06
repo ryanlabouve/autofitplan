@@ -133,7 +133,9 @@ module('Acceptance | happy path', function(hooks) {
   });
 
   test('Can see worouts that have already been started', async function(assert) {
-    let {sessionMonday} = setupDefaultPrograms(this.server);
+    let {sessionMonday, exerciseForSessionMonday} = setupDefaultPrograms(
+      this.server,
+    );
 
     let loggedSession = this.server.create('loggedSession', {
       session: sessionMonday,
@@ -143,7 +145,7 @@ module('Acceptance | happy path', function(hooks) {
 
     server.create('loggedExercise', {
       loggedSession,
-      exerciseForSessionMonday,
+      exercise: exerciseForSessionMonday,
       weight: 100,
     });
 
@@ -165,5 +167,23 @@ module('Acceptance | happy path', function(hooks) {
       1,
       'And there are no other stray end buttons on the screen',
     );
+  });
+
+  test('Does a workout', async function(assert) {
+    setupDefaultPrograms(this.server);
+    await visit('/program/ryans-program');
+    let firstSession = findAll('[data-test-session]')[0];
+    let startSessionButton = firstSession.querySelector(
+      '[data-test-start-session-button]',
+    );
+    await click(startSessionButton);
+
+    let weightInput = firstSession.querySelectorAll(
+      '[data-test-exercise-weight]',
+    )[0];
+
+    await fillIn(weightInput, 224);
+
+    assert.equal(server.db.loggedExercises[0].weight, 224, 'Saved weight');
   });
 });
