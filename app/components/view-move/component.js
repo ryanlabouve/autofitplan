@@ -209,6 +209,19 @@ const EXERCISE_MAP = {
       },
     ],
   },
+
+  flys: {
+    name: 'Weighted Back Extension',
+    exercises: [
+      {
+        name: 'Pec Deck',
+      },
+      {
+        name: 'Dumbbell Flys',
+      },
+    ],
+  },
+
   face_pull: {
     name: 'Face Pull',
     exercises: [
@@ -252,12 +265,12 @@ export default Component.extend({
   }),
 
   updateLoggedExercise: task(function*(loggedExercise, weight) {
-    yield timeout(200);
+    yield timeout(300);
     yield get(this, 'loggedExerciseService').updateLoggedExercise(
       loggedExercise,
       {
         weight,
       },
     );
-  }),
+  }).restartable(),
 });

@@ -14,6 +14,7 @@
     "build": "ember build",
     "lint:js": "eslint .",
     "start": "ember serve",
+    "start:mirage": "ENABLE_MIRAGE=true ember serve",
     "test": "ember test"
   },
   "devDependencies": {

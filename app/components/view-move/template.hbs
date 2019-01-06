@@ -1,9 +1,15 @@
 <div class="pt-8">
   <div>
     <select>
-      <option selected="selected">
-        {{selectedExercise.name}}
-      </option>
+      {{#if selectedExercise}}
+        <option selected="selected">
+          {{selectedExercise.name}}
+        </option>
+      {{else}}
+        <option selected="selected">
+          {{rawExercise.exercises.firstObject.name}}
+        </option>
+      {{/if}}
       {{#each rawExercise.exercises as |exercise|}}
         <option>
           {{exercise.name}}
