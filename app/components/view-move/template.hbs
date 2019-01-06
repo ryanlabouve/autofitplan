@@ -1,17 +1,8 @@
 <div class="pt-8">
   <div>
-    <select>
-      {{#if selectedExercise}}
-        <option selected="selected">
-          {{selectedExercise.name}}
-        </option>
-      {{else}}
-        <option selected="selected">
-          {{rawExercise.exercises.firstObject.name}}
-        </option>
-      {{/if}}
+    <select onchange={{perform updateLoggedExerciseName value="target.value"}}>
       {{#each rawExercise.exercises as |exercise|}}
-        <option>
+        <option value={{exercise.name}} selected={{eq loggedExercise.name exercise.name 'selected'}}>
           {{exercise.name}}
         </option>
       {{/each}}

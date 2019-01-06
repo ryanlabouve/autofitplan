@@ -273,4 +273,13 @@ export default Component.extend({
       },
     );
   }).restartable(),
+
+  updateLoggedExerciseName: task(function*(name) {
+    yield timeout(300);
+    let loggedExercise = get(this, 'loggedExercise');
+    if (loggedExercise) {
+      loggedExercise.set('name', name);
+      loggedExercise.save();
+    }
+  }),
 });

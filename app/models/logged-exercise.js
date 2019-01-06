@@ -5,4 +5,5 @@ export default DS.Model.extend({
   exercise: belongsTo(),
   loggedSession: belongsTo(),
   weight: attr('number'),
+  name: attr('string'),
 });
