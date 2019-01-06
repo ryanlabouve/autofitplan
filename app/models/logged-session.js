@@ -5,4 +5,7 @@ export default DS.Model.extend({
   session: belongsTo(),
   loggedExercises: hasMany(),
   week: attr('number'),
+
+  createdAt: attr('date'),
+  endedAt: attr('string'),
 });

@@ -1,6 +1,7 @@
 import Component from '@ember/component';
 import {get, set} from '@ember/object';
 import {inject as service} from '@ember/service';
+import moment from 'moment';
 
 export default Component.extend({
   loggedSessionService: service('logged-session'),
@@ -17,5 +18,9 @@ export default Component.extend({
     set(this, 'loggedSession', loggedSession);
   },
 
-  async endSession() {},
+  async endSession() {
+    let loggedSession = get(this, 'loggedSession');
+    loggedSession.set('endedAt', moment().format());
+    loggedSession.save();
+  },
 });

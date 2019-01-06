@@ -58,6 +58,7 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     // here you can enable a production-specific feature
+    ENV.API.host = 'https://auto-hypertrophy-api.herokuapp.com/';
   }
 
   return ENV;
