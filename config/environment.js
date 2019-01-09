@@ -29,7 +29,6 @@ module.exports = function(environment) {
       enabled: true,
     };
   } else {
-    console.log('miraged disabled');
     ENV['ember-cli-mirage'] = {
       enabled: false,
     };
@@ -41,7 +40,11 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
-    ENV.API.host = 'http://localhost:3009';
+    if (ENV['ember-cli-mirage'].enabled) {
+      ENV.API.host = '/';
+    } else {
+      ENV.API.host = 'http://localhost:3009';
+    }
   }
 
   if (environment === 'test') {
@@ -54,6 +57,8 @@ module.exports = function(environment) {
 
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
+
+    ENV.API.host = '/';
   }
 
   if (environment === 'production') {

@@ -10,75 +10,7 @@ import {
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import moment from 'moment';
-
-let setupDefaultPrograms = server => {
-  let user = server.create('user', {
-    name: 'ryan',
-  });
-
-  let macrocycle = server.create('macrocycle', {
-    user,
-    name: "Ryan's Program",
-    slug: 'ryans-program',
-  });
-
-  let mesocycle = server.create('mesocycle', {
-    macrocycle,
-  });
-
-  let microcycle = server.create('microcycle', {
-    mesocycle,
-  });
-
-  let sessionMonday = server.create('session', {
-    name: 'Day 1, Lower',
-    microcycle,
-  });
-
-  let exerciseForSessionMonday = server.create('exercise', {
-    session: sessionMonday,
-    code: 'lp_variant',
-    sets: 3,
-    repsLow: 5,
-    repsHigh: 8,
-    percentRM: 80,
-    rpe: 8,
-  });
-
-  let macrocycle2 = server.create('macrocycle', {
-    user,
-    name: "Robyn's Program",
-    slug: 'robyns-program',
-  });
-
-  let mesocycle2 = server.create('mesocycle', {
-    macrocycle,
-  });
-
-  let microcycle2 = server.create('microcycle', {
-    mesocycle,
-  });
-
-  let sessionMonday2 = server.create('session', {
-    name: 'Day 1, Lower (second)',
-    microcycle: microcycle2,
-  });
-
-  server.create('exercise', {
-    session: sessionMonday2,
-    code: 'lp_variant',
-    sets: 3,
-    repsLow: 5,
-    repsHigh: 8,
-    percentRM: 80,
-    rpe: 8,
-  });
-
-  return {
-    sessionMonday,
-    exerciseForSessionMonday,
-  };
-};
+import {setupDefaultPrograms} from 'auto-hypertrophy/tests/helpers/program-creator';
 
 module('Acceptance | happy path', function(hooks) {
   setupApplicationTest(hooks);

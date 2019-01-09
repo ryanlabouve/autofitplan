@@ -1,26 +1,47 @@
 <div class="border m-2 p-2" data-test-session>
-  <div class="text-xl">{{session.name}}</div>
-  <div class="float-right">
-    {{#if (not loggedSession)}}
-      <button onclick={{action startSession}} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" data-test-start-session-button>
-        Start Session
-      </button>
-    {{else}}
-      {{#if loggedSession.endedAt}}
-        Finished at:<br>
-        {{loggedSession.endedAt}}
+  <div class="cf clearfix">
+    <div class="text-xl float-left">{{session.name}}</div>
+
+    <div class="float-right">
+      &nbsp;
+      {{#if isShowing}}
+        <button onclick={{action (mut isShowing) false}}>
+          {{fa-icon "chevron-up" size=1}}
+        </button>
       {{else}}
-        <button onclick={{action endSession}} class="bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded" data-test-end-session-button>
-          End Session
+        <button onclick={{action (mut isShowing) true}}>
+          {{fa-icon "chevron-down" size=1}}
         </button>
       {{/if}}
-    {{/if}}
+    </div>
+
+    <div class="float-right">
+      {{#if (not loggedSession)}}
+        <button onclick={{action startSession}} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" data-test-start-session-button>
+          Start Session
+        </button>
+      {{else}}
+        {{#if loggedSession.endedAt}}
+          Finished: {{moment-format loggedSession.endedAt 'YYYY-MM-DD [at] h:mm a'}}
+        {{else}}
+          <button onclick={{action endSession}} class="bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded" data-test-end-session-button>
+            End Session
+          </button>
+        {{/if}}
+      {{/if}}
+    </div>
   </div>
-  {{#each session.exercises as |exercise|}}
-    {{view-move
-      exercise=exercise
-      loggedExercise=(get-logged-exercise loggedSession.loggedExercises exercise)
-      loggedSession=loggedSession
-    }}
-  {{/each}}
+  {{#if isShowing}}
+    {{#each session.exercises as |exercise|}}
+      <div data-test-moves>
+        {{view-move
+          exercise=exercise
+          loggedExercise=(get-logged-exercise loggedSession.loggedExercises exercise)
+          loggedSession=loggedSession
+        }}
+      </div>
+    {{/each}}
+  {{else}}
+    <div data-test-moves-hidden></div>
+  {{/if}}
 </div>

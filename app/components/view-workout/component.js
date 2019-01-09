@@ -5,6 +5,16 @@ import moment from 'moment';
 
 export default Component.extend({
   loggedSessionService: service('logged-session'),
+  isShowing: false,
+
+  didInsertElement() {
+    let loggedSession = get(this, 'loggedSession');
+    let loggedSessionEndAt = get(this, 'loggedSession.endedAt');
+
+    if (!loggedSession || !loggedSessionEndAt) {
+      set(this, 'isShowing', true);
+    }
+  },
 
   async startSession() {
     let session = get(this, 'session');
