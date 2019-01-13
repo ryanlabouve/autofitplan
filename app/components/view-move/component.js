@@ -265,7 +265,7 @@ export default Component.extend({
   }),
 
   updateLoggedExercise: task(function*(loggedExercise, weight) {
-    yield timeout(300);
+    yield timeout(600);
     yield get(this, 'loggedExerciseService').updateLoggedExercise(
       loggedExercise,
       {
@@ -275,7 +275,7 @@ export default Component.extend({
   }).restartable(),
 
   updateLoggedExerciseName: task(function*(name) {
-    yield timeout(300);
+    yield timeout(600);
     let loggedExercise = get(this, 'loggedExercise');
     if (loggedExercise) {
       loggedExercise.set('name', name);

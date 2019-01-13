@@ -1,11 +1,16 @@
-<select onchange={{action "goToProgram"}} data-test-programs>
-  {{#if (not selectedMacrocycle)}}
-    <option value="">Choose Program</option>
-  {{/if}}
+<div style="position: relative;">
+  <div style="display: inline-block; position: absolute; right: 1rem; top: .5rem ; opacity: 0.5">
+    👈
+  </div>
+  <select class=" w-full py-2 text-xs" onchange={{action "goToProgram"}} data-test-programs>
+    {{#if (not selectedMacrocycle)}}
+      <option value="">Choose Program</option>
+    {{/if}}
 
-  {{#each macrocycles as |macrocycle|}}
-    <option value={{macrocycle.slug}} selected={{if (eq macrocycle.slug selectedMacrocycle.slug) "selected"}}>
-      {{macrocycle.name}}
-    </option>
-  {{/each}}
-</select>
+    {{#each macrocycles as |macrocycle|}}
+      <option value={{macrocycle.slug}} selected={{if (eq macrocycle.slug selectedMacrocycle.slug) "selected"}}>
+        {{macrocycle.name}}
+      </option>
+    {{/each}}
+  </select>
+</div>
