@@ -207,14 +207,23 @@ const EXERCISE_MAP = {
       {
         name: 'Weighted Back Extension',
       },
+      {
+        name: 'RDL',
+      },
+      {
+        name: 'Good Mornings',
+      },
     ],
   },
 
   flys: {
-    name: 'Weighted Back Extension',
+    name: 'Flys',
     exercises: [
       {
         name: 'Pec Deck',
+      },
+      {
+        name: 'Cable Fly',
       },
       {
         name: 'Dumbbell Flys',
