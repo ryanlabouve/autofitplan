@@ -46,6 +46,9 @@ const EXERCISE_MAP = {
       {
         name: 'Prone Leg-Curl',
       },
+      {
+        name: 'Dumbbell Leg-Curl',
+      },
     ],
   },
   st_calf: {
