@@ -2,7 +2,7 @@
   <div style="display: inline-block; position: absolute; right: 1rem; top: .5rem ; opacity: 0.5">
     👈
   </div>
-  <select class=" w-full py-2 text-xs" onchange={{action "goToProgram"}} data-test-programs>
+  <select class="bg-grey-lightest w-full py-2 text-xs" onchange={{action "goToProgram"}} data-test-programs>
     {{#if (not selectedMacrocycle)}}
       <option value="">Choose Program</option>
     {{/if}}
