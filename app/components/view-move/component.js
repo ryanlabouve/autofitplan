@@ -24,6 +24,9 @@ const EXERCISE_MAP = {
       {
         name: 'KettleBell Deadlift',
       },
+      {
+        name: 'Trap Bar',
+      },
     ],
   },
   sl_variant: {
@@ -65,6 +68,9 @@ const EXERCISE_MAP = {
       },
       {
         name: 'Dumb-Bell Calf Raise',
+      },
+      {
+        name: 'Yoke Calf Raise',
       },
     ],
   },
