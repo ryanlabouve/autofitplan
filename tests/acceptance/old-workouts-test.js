@@ -10,7 +10,7 @@ import {setupApplicationTest} from 'ember-qunit';
 import {
   setupBasicProgram,
   logSomeSessions,
-} from 'auto-hypertrophy/tests/helpers/program-creator';
+} from 'autofitplan/tests/helpers/program-creator';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
 module('Acceptance | old workouts', function(hooks) {

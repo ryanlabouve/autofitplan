@@ -10,7 +10,7 @@ import {
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import moment from 'moment';
-import {setupDefaultPrograms} from 'auto-hypertrophy/tests/helpers/program-creator';
+import {setupDefaultPrograms} from 'autofitplan/tests/helpers/program-creator';
 
 module('Acceptance | happy path', function(hooks) {
   setupApplicationTest(hooks);

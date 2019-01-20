@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'auto-hypertrophy',
+    modulePrefix: 'autofitplan',
     environment,
     rootURL: '/',
     locationType: 'auto',
