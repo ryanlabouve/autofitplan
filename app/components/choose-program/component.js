@@ -10,7 +10,7 @@ export default Component.extend({
       if (!slug) {
         return;
       }
-      this.get('router').transitionTo('program', slug);
+      this.get('router').transitionTo('protected.program', slug);
     },
   },
 });

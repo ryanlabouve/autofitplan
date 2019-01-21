@@ -1,12 +1,12 @@
 import { module, test } from 'qunit';
 import { setupTest } from 'ember-qunit';
 
-module('Unit | Service | loggedSession', function(hooks) {
+module('Unit | Controller | login', function(hooks) {
   setupTest(hooks);
 
   // Replace this with your real tests.
   test('it exists', function(assert) {
-    let service = this.owner.lookup('service:logged-session');
-    assert.ok(service);
+    let controller = this.owner.lookup('controller:login');
+    assert.ok(controller);
   });
 });

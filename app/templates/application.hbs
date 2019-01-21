@@ -1,5 +1,19 @@
-<div class="bg-grey-lighter p-3">
-  <div class="">AutoFitPlan</div>
+{{#if navOpen}}
+  <Nav
+    @closeMenu={{action (mut navOpen) false}}
+    @logout={{action "invalidateSession"}}
+  >
+  </Nav>
+{{/if}}
+<div class="bg-grey-lighter p-3 flex">
+  <div class="flex-grow">
+    <img src="/images/4.png" alt="logo" style="width: 140px;"/>
+  </div>
+  <div class="">
+    <button onclick={{action (mut navOpen) true}}>
+      {{fa-icon "bars" size="1"}}
+    </button>
+  </div>
 </div>
 <div class="p-3">
   {{outlet}}

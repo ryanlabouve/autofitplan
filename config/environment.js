@@ -41,7 +41,7 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
     if (ENV['ember-cli-mirage'].enabled) {
-      ENV.API.host = '/';
+      ENV.API.host = '';
     } else {
       ENV.API.host = 'http://localhost:3009';
     }
@@ -58,7 +58,7 @@ module.exports = function(environment) {
     ENV.APP.rootElement = '#ember-testing';
     ENV.APP.autoboot = false;
 
-    ENV.API.host = '/';
+    ENV.API.host = '';
   }
 
   if (environment === 'production') {
