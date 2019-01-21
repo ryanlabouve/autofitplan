@@ -1,5 +1,9 @@
 {{#if navOpen}}
-  <Nav @closeMenu={{action (mut navOpen) false}}></Nav>
+  <Nav
+    @closeMenu={{action (mut navOpen) false}}
+    @logout={{action "invalidateSession"}}
+  >
+  </Nav>
 {{/if}}
 <div class="bg-grey-lighter p-3 flex">
   <div class="flex-grow">
