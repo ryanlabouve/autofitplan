@@ -15,6 +15,9 @@ export default Base.extend({
       return fetch(this.getTokenLink(), {
         method: 'post',
         body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/vnd.api+json',
+        },
       })
         .then(response => {
           return response.json().then(json => resolve(json));

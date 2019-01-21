@@ -20,6 +20,9 @@ export default Service.extend({
       let res = yield fetch(this.getAuthLink(), {
         method: 'post',
         body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/vnd.api+json',
+        },
       });
       let json = yield res.json();
 
@@ -35,6 +38,9 @@ export default Service.extend({
       let res = yield fetch(this.getTokenLink(), {
         method: 'post',
         body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/vnd.api+json',
+        },
       });
       let tokenJSON = yield res.json();
 
