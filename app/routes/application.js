@@ -1,13 +1,4 @@
 import Route from '@ember/routing/route';
-import {inject as service} from '@ember/service';
-import {get} from '@ember/object';
+import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
 
-export default Route.extend({
-  session: service(),
-  beforeModel() {
-    let authed = get(this, 'session.isAuthenticated');
-    if (authed) {
-      this.transitionTo('protected');
-    }
-  },
-});
+export default Route.extend(ApplicationRouteMixin, {});

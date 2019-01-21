@@ -7,9 +7,11 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('program', {path: '/program/:slug'});
-  this.route('protected');
+  this.route('protected', {path: '/'}, function() {
+    this.route('program', {path: '/program/:slug'});
+  });
   this.route('login');
+  this.route('token', {path: '/token/:token'});
 });
 
 export default Router;

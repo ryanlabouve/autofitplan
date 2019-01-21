@@ -13,11 +13,17 @@ import {
 } from 'autofitplan/tests/helpers/program-creator';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
+import {
+  authenticateSession,
+  invalidateSession,
+} from 'ember-simple-auth/test-support';
+
 module('Acceptance | old workouts', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
   test('visiting /old-workouts', async function(assert) {
+    authenticateSession();
     setupBasicProgram(server);
     setupBasicProgram(server);
     setupBasicProgram(server);

@@ -1,17 +1,32 @@
-<p>
-  Login with email
-</p>
 {{#if email}}
   <h1 data-test-login-success-message>
     Email sent to {{email}}
   </h1>
 {{else}}
-  <form onsubmit={{action 'submitLoginForm'}}>
-    <div>
-      <input name="email" data-test-email>
+  {{#if error}}
+    <div class="p-3 text-white bg-red text-xl" data-test-login-success-message>
+      Something went wrong
     </div>
-    <div>
-      <input type="submit" data-test-login-button>
+  {{/if}}
+  <form class="mt-4" onsubmit={{action 'submitLoginForm'}}>
+    <p class="text-4xl">
+      Get started with your email
+    </p>
+    <div class="mt-4">
+      <input
+        autocomplete="off"
+        placeholder="email address"
+        class="bg-grey-lighter appearance-none border-2 border-grey-lighter rounded w-full py-2 px-4 text-grey-darker leading-tight focus:outline-none focus:bg-white focus:border-purple"
+        name="email"
+        data-test-email
+      >
+    </div>
+    <div class="mt-4">
+      <input
+        type="submit"
+        class="shadow bg-purple hover:bg-purple-light focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+        data-test-login-button
+      >
     </div>
   </form>
 {{/if}}

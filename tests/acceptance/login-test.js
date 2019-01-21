@@ -14,10 +14,10 @@ module('Acceptance | login', function(hooks) {
   test('already logged in', async function(assert) {
     await authenticateSession();
     await visit('/');
-    assert.equal(currentURL(), '/protected');
+    assert.equal(currentURL(), '/');
   });
 
-  test('already logged in', async function(assert) {
+  test('not already logged in', async function(assert) {
     await invalidateSession();
     await visit('/');
 
@@ -30,5 +30,24 @@ module('Acceptance | login', function(hooks) {
     assert
       .dom('[data-test-login-success-message]')
       .hasText('Email sent to mickey@mouse.clubhouse');
+  });
+
+  test('smooshes with magic link token', async function(assert) {
+    await invalidateSession();
+    await visit('/token/hotdog');
+    assert.equal(currentURL(), '/');
+  });
+
+  test('no smooshes with magic link and invalid token', async function(assert) {
+    await invalidateSession();
+    await visit('/token/nothotdog');
+    assert.equal(currentURL(), '/login');
+  });
+
+  test('resolve token from previous session', async function(assert) {
+    await invalidateSession();
+    await visit('/token/hotdog');
+    await visit('/');
+    assert.equal(currentURL(), '/');
   });
 });

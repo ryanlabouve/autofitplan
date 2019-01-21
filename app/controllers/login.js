@@ -16,14 +16,18 @@ export default Controller.extend({
       let email = formElements.find(el => el.name === 'email').value;
       let that = this;
 
-      let a = this.get('magicLink');
       this.get('magicLink')
         .sendMagicLink.perform(email)
-        .then(email => {
-          set(that, 'email', email);
+        .then(json => {
+          if (!json.data.email) {
+            set(this, 'error', json.error);
+          } else {
+            set(that, 'email', json.data.email);
+          }
         })
         .catch(e => {
           console.error(e);
+          set(this, 'error', e);
         });
     },
   },
