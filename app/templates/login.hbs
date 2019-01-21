@@ -1,0 +1,17 @@
+<p>
+  Login with email
+</p>
+{{#if email}}
+  <h1 data-test-login-success-message>
+    Email sent to {{email}}
+  </h1>
+{{else}}
+  <form onsubmit={{action 'submitLoginForm'}}>
+    <div>
+      <input name="email" data-test-email>
+    </div>
+    <div>
+      <input type="submit" data-test-login-button>
+    </div>
+  </form>
+{{/if}}

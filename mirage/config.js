@@ -1,6 +1,11 @@
 export default function() {
   this.namespace = '/api';
   this.logging = true;
+
+  this.post('/login', (_, req) => {
+    return req.requestBody;
+  });
+
   this.get('/macrocycles', ({macrocycles}, request) => {
     const {queryParams} = request;
 

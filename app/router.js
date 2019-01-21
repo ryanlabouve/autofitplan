@@ -8,6 +8,8 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('program', {path: '/program/:slug'});
+  this.route('protected');
+  this.route('login');
 });
 
 export default Router;
