@@ -57,7 +57,6 @@ module('Acceptance | login', function(hooks) {
     await visit('/');
     await click('[data-test-nav]');
     await click('[data-test-logout]');
-    let a = currentSession;
     assert.equal(currentSession().isAuthenticated, false);
     assert.equal(currentURL(), '/login');
   });
@@ -67,5 +66,22 @@ module('Acceptance | login', function(hooks) {
     await visit('/');
     await click('[data-test-nav]');
     assert.dom('[data-test-logout]').doesNotExist();
+  });
+
+  test('me', async function(assert) {
+    await authenticateSession();
+    await currentSession().set('data', {
+      authenticated: {
+        authenticator: 'authenticator:magic-link',
+        token: 'hotdog',
+      },
+    });
+    await visit('/');
+    await pauseTest();
+
+    // assert.equal(, false);
+    // set current user info
+    // test /api/me returns the user stuff
+    // make sure we can see self login info
   });
 });

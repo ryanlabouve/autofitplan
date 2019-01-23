@@ -8,6 +8,10 @@ export default function() {
     return req.requestBody;
   });
 
+  this.get('/users/me', (_, req) => {
+    debugger;
+  });
+
   this.post('/token', (_, req) => {
     let body = JSON.parse(req.requestBody);
     if (body.data.token === 'hotdog') {
