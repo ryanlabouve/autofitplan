@@ -5,8 +5,10 @@
       close
     </button>
     <h1>assadf</h1>
-    <button onclick={{action logout}} class="bg-red text-white">
-      Logout
-    </button>
+    {{#if session.isAuthenticated}}
+      <button onclick={{action (queue (action logout) (action closeMenu))}} class="bg-red text-white" data-test-logout>
+        Logout
+      </button>
+    {{/if}}
   </div>
 {{/ember-wormhole}}

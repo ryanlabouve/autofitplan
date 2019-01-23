@@ -5,6 +5,7 @@ import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import {
   authenticateSession,
   invalidateSession,
+  currentSession,
 } from 'ember-simple-auth/test-support';
 
 module('Acceptance | login', function(hooks) {
@@ -49,5 +50,22 @@ module('Acceptance | login', function(hooks) {
     await visit('/token/hotdog');
     await visit('/');
     assert.equal(currentURL(), '/');
+  });
+
+  test('logout', async function(assert) {
+    await authenticateSession();
+    await visit('/');
+    await click('[data-test-nav]');
+    await click('[data-test-logout]');
+    let a = currentSession;
+    assert.equal(currentSession().isAuthenticated, false);
+    assert.equal(currentURL(), '/login');
+  });
+
+  test('logout button is not there when logged out', async function(assert) {
+    await invalidateSession();
+    await visit('/');
+    await click('[data-test-nav]');
+    assert.dom('[data-test-logout]').doesNotExist();
   });
 });
