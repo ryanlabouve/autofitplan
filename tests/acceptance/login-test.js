@@ -7,6 +7,7 @@ import {
   invalidateSession,
   currentSession,
 } from 'ember-simple-auth/test-support';
+import {setupDefaultPrograms} from 'autofitplan/tests/helpers/program-creator';
 
 module('Acceptance | login', function(hooks) {
   setupApplicationTest(hooks);
@@ -70,6 +71,12 @@ module('Acceptance | login', function(hooks) {
 
   test('me', async function(assert) {
     await authenticateSession();
+
+    server.create('user', {
+      email: 'test@user.com',
+    });
+
+    // need to create user first
     await currentSession().set('data', {
       authenticated: {
         authenticator: 'authenticator:magic-link',
@@ -77,11 +84,7 @@ module('Acceptance | login', function(hooks) {
       },
     });
     await visit('/');
-    await pauseTest();
-
-    // assert.equal(, false);
-    // set current user info
-    // test /api/me returns the user stuff
-    // make sure we can see self login info
+    await click('[data-test-nav]');
+    assert.dom('[data-test-current-user]').hasText('test@user.com');
   });
 });

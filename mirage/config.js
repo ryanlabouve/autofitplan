@@ -8,8 +8,13 @@ export default function() {
     return req.requestBody;
   });
 
-  this.get('/users/me', (_, req) => {
-    debugger;
+  this.get('/users/me', ({users}, req) => {
+    let res = new Mirage.Response(404, {}, {});
+
+    if (req.requestHeaders['Authorization'] === 'Bearer hotdog') {
+      res = users.find(1) || res;
+    }
+    return res;
   });
 
   this.post('/token', (_, req) => {

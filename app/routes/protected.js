@@ -14,11 +14,10 @@ export default Route.extend({
     return this.get('currentUser')
       .load()
       .catch(error => {
-        debugger;
         this.get('session').invalidate();
+        this.transitionTo('login');
       })
       .then(() => {
-        debugger;
         let authed = get(this, 'session.isAuthenticated');
         if (!authed) {
           this.transitionTo('login');

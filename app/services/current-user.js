@@ -6,11 +6,15 @@ export default Service.extend({
   store: service(),
 
   load() {
+    let that = this;
     if (this.get('session.isAuthenticated')) {
       return this.get('store')
         .queryRecord('user', {me: true})
         .then(user => {
-          this.set('user', user);
+          that.set('user', user);
+        })
+        .catch(error => {
+          console.error(error);
         });
     } else {
       return RSVP.resolve();

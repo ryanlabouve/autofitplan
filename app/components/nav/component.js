@@ -5,4 +5,5 @@ export default Component.extend({
   session: service(),
   closeMenu: () => {},
   logout: () => {},
+  currentUser: null,
 });

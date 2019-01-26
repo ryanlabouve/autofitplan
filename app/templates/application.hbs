@@ -4,6 +4,7 @@
   <Nav
     @closeMenu={{action (mut navOpen) false}}
     @logout={{action "invalidateSession"}}
+    @currentUser={{currentUser.user}}
   >
   </Nav>
 {{/if}}
