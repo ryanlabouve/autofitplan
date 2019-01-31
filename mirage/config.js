@@ -29,12 +29,12 @@ export default function() {
   this.get('/macrocycles', ({macrocycles}, request) => {
     const {queryParams} = request;
 
-    if (!Object.keys(queryParams).length) {
+    let slug = queryParams['filter[slug]'];
+    if (slug) {
+      return macrocycles.where({slug});
+    } else {
       return macrocycles.all();
     }
-
-    let slug = queryParams['filter[slug]'];
-    return macrocycles.where({slug});
   });
   this.get('/mesocycles');
   this.get('/mesocycles/:id');

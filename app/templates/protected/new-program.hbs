@@ -1,1 +1,6 @@
 {{outlet}}
+{{#each model.macrocycles as |macrocycle|}}
+  <PreviewProgram
+    @macrocycle={{macrocycle}}
+  />
+{{/each}}
