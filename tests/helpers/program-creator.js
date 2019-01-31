@@ -1,10 +1,13 @@
 import moment from 'moment';
 
-let setupDefaultPrograms = server => {
+let setupDefaultUser = sever => {
   let user = server.create('user', {
     name: 'ryan',
   });
+};
 
+let setupDefaultCycles = server => {
+  let user = server.schema.users.find(1);
   let macrocycle = server.create('macrocycle', {
     user,
     name: "Ryan's Program",
@@ -62,11 +65,16 @@ let setupDefaultPrograms = server => {
     percentRM: 80,
     rpe: 8,
   });
+};
 
-  return {
-    sessionMonday,
-    exerciseForSessionMonday,
-  };
+let setupDefaultPrograms = server => {
+  setupDefaultUser(server);
+  setupDefaultCycles(server);
+
+  // return {
+  //   sessionMonday,
+  //   exerciseForSessionMonday,
+  // };
 };
 
 let setupBasicProgram = server => {
@@ -112,4 +120,19 @@ let logSomeSessions = server => {
   });
 };
 
-export {setupDefaultPrograms, setupBasicProgram, logSomeSessions};
+let startNewProgram = server => {
+  let macrocycle = server.schema.macrocycles.find(1);
+  let mesocycle = server.schema.mesocycles.find(macrocycle.mesocycleIds[0]);
+  let microcycle = server.schema.microcycles.find(mesocycle.microcycleIds[0]);
+  // debugger;
+  // create LoggedMacrocycle
+  // create LoggedMesocycle
+  // create LoggedMicrocycle
+};
+
+export {
+  logSomeSessions,
+  setupBasicProgram,
+  setupDefaultPrograms,
+  startNewProgram,
+};

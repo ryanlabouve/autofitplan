@@ -85,6 +85,8 @@ module('Acceptance | login', function(hooks) {
     });
     await visit('/');
     await click('[data-test-nav]');
+    server.logging = true;
+    await pauseTest();
     assert.dom('[data-test-current-user]').hasText('test@user.com');
   });
 });

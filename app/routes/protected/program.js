@@ -5,12 +5,10 @@ export default Route.extend({
   model({slug}) {
     let macrocycles = this.store.findAll('macrocycle');
     let macrocycle = this.store
-      .query('macrocycle', {
+      .query('logged-macrocycle', {
         filter: {
           slug,
         },
-        include:
-          'mesocycles.microcycles.sessions.exercises,mesocycles.microcycles.sessions.loggedSessions.loggedExercises',
       })
       .then(macrocycles => macrocycles.get('firstObject'));
 

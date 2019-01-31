@@ -1,5 +1,6 @@
 import Service from '@ember/service';
 import {inject as service} from '@ember/service';
+import {resolve} from 'rsvp';
 
 export default Service.extend({
   session: service(),
@@ -17,7 +18,7 @@ export default Service.extend({
           console.error(error);
         });
     } else {
-      return RSVP.resolve();
+      return resolve();
     }
   },
 });
