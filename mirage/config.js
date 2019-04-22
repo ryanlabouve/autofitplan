@@ -44,12 +44,19 @@ export default function() {
   this.get('/sessions/:id');
   this.get('/exercises');
   this.get('/exercises/:id');
+
   this.get('/logged-sessions');
   this.get('/logged-sessions/:id');
   this.post('/logged-sessions');
   this.patch('/logged-sessions');
+
   this.get('/logged-exercises');
   this.get('/logged-exercises/:id');
   this.post('/logged-exercises');
   this.patch('/logged-exercises/:id');
+
+  this.get('/performance-tests');
+  this.get('/performance-tests/:id');
+  this.post('/performance-tests');
+  this.patch('/performance-tests/:id');
 }

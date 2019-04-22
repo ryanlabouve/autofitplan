@@ -1,3 +1,14 @@
+<div>
+  <h2>Time to test your performance!</h2>
+
+  <UiButton
+    @clickAction={{perform createNewPerformanceTest}}
+    @disabled={{"false"}}
+    data-test-new-performance-test>
+    Start new performance test
+  </UiButton>
+</div>
+
 Choose Program:
 {{choose-program macrocycles=model.macrocycles}}
 {{outlet}}

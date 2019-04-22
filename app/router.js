@@ -8,6 +8,7 @@ const Router = EmberRouter.extend({
 
 Router.map(function() {
   this.route('protected', {path: '/'}, function() {
+    this.route('performance-tests', {path: '/performance-tests/:id'});
     this.route('program', {path: '/program/:slug'});
     this.route('new-program');
   });
