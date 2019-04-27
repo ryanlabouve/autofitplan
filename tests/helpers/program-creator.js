@@ -1,7 +1,7 @@
 import moment from 'moment';
 
-let setupDefaultUser = sever => {
-  let user = server.create('user', {
+let setupDefaultUser = server => {
+  server.create('user', {
     name: 'ryan',
   });
 };
@@ -27,7 +27,7 @@ let setupDefaultCycles = server => {
     microcycle,
   });
 
-  let exerciseForSessionMonday = server.create('exercise', {
+  server.create('exercise', {
     session: sessionMonday,
     code: 'lp_variant',
     sets: 3,
@@ -37,13 +37,13 @@ let setupDefaultCycles = server => {
     rpe: 8,
   });
 
-  let macrocycle2 = server.create('macrocycle', {
+  server.create('macrocycle', {
     user,
     name: "Robyn's Program",
     slug: 'robyns-program',
   });
 
-  let mesocycle2 = server.create('mesocycle', {
+  let _mesocycle2 = server.create('mesocycle', {
     macrocycle,
   });
 
@@ -70,11 +70,6 @@ let setupDefaultCycles = server => {
 let setupDefaultPrograms = server => {
   setupDefaultUser(server);
   setupDefaultCycles(server);
-
-  // return {
-  //   sessionMonday,
-  //   exerciseForSessionMonday,
-  // };
 };
 
 let setupBasicProgram = server => {
@@ -123,11 +118,64 @@ let logSomeSessions = server => {
 let startNewProgram = server => {
   let macrocycle = server.schema.macrocycles.find(1);
   let mesocycle = server.schema.mesocycles.find(macrocycle.mesocycleIds[0]);
-  let microcycle = server.schema.microcycles.find(mesocycle.microcycleIds[0]);
-  // debugger;
-  // create LoggedMacrocycle
-  // create LoggedMesocycle
-  // create LoggedMicrocycle
+  let _microcycle = server.schema.microcycles.find(mesocycle.microcycleIds[0]);
+};
+
+let startNewPerformanceTest = server => {
+  let user = server.schema.users.find(1);
+
+  let _exercise = server.create('exercise');
+
+  let performanceTest = server.create('performance-test', {
+    user,
+  });
+
+  let e1 = server.create('exercise', {
+    name: 'Squat',
+    code: 'sq_variant',
+    sets: 1,
+    repsLow: 1,
+    repsHigh: 1,
+    rpe: 9,
+    performanceTest,
+  });
+
+  server.create('logged-exercise', {
+    exercise: e1,
+    performanceTest,
+  });
+
+  let e2 = server.create('exercise', {
+    name: 'Run',
+    code: 'run',
+    sets: 1,
+    distance: '1000',
+    rpe: 9,
+    performanceTest,
+  });
+
+  server.create('logged-exercise', {
+    exercise: e2,
+    performanceTest,
+  });
+
+  let e3 = server.create('exercise', {
+    name: 'Pushups',
+    code: 'pushups',
+    sets: 1,
+    amrap: true,
+    rpe: 9,
+    performanceTest,
+  });
+
+  server.create('logged-exercise', {
+    exercise: e3,
+    performanceTest,
+  });
+
+  return {
+    performanceTest,
+  };
 };
 
 export {
@@ -135,4 +183,5 @@ export {
   setupBasicProgram,
   setupDefaultPrograms,
   startNewProgram,
+  startNewPerformanceTest,
 };

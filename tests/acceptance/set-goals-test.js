@@ -1,5 +1,5 @@
 import {module, test} from 'qunit';
-import {visit, currentURL, pauseTest, click} from '@ember/test-helpers';
+import {visit, currentURL, click, fillIn} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import {authenticateSession} from 'ember-simple-auth/test-support';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
@@ -7,6 +7,7 @@ import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import {
   setupDefaultPrograms,
   startNewProgram,
+  startNewPerformanceTest,
 } from 'autofitplan/tests/helpers/program-creator';
 
 module('Acceptance | set goals', function(hooks) {
@@ -39,7 +40,7 @@ module('Acceptance | set goals', function(hooks) {
   });
 
   test('We can see a performance test in progress', async function(assert) {
-    assert.expect(2);
+    assert.expect(1);
 
     setupDefaultPrograms(this.server);
     startNewProgram(this.server);
@@ -54,7 +55,68 @@ module('Acceptance | set goals', function(hooks) {
     await visit(`/performance-tests/${performanceTest.id}`);
 
     assert.dom('[data-test-performance-test-exercises]').exists({count: 4});
+  });
 
-    await pauseTest();
+  test('Can log an exercise for a performance test exercise', async function(assert) {
+    assert.expect(2);
+
+    server.logging = true;
+
+    setupDefaultPrograms(this.server);
+    startNewProgram(this.server);
+    await authenticateSession();
+    const {performanceTest} = startNewPerformanceTest(this.server);
+
+    await visit(`/performance-tests/${performanceTest.id}`);
+
+    await fillIn(
+      '[data-test-performance-test-exercises]:first-child [data-test-exercise-weight]',
+      200,
+    );
+
+    await click('[data-test-save-performance-test]');
+
+    let lastLoggedExercise = server.db.loggedExercises[0];
+    assert.equal(lastLoggedExercise.weight, 200);
+    assert.equal(lastLoggedExercise.completed, true);
+  });
+
+  test('Can see a logged exercise for a performance test exercise', async function(assert) {
+    assert.expect(0);
+    // TODO
+  });
+
+  test('Can skip a logged exercise for a performance test exercise', async function(assert) {
+    assert.expect(1);
+
+    setupDefaultPrograms(this.server);
+    startNewProgram(this.server);
+    await authenticateSession();
+
+    const {performanceTest} = startNewPerformanceTest(this.server);
+
+    await visit(`/performance-tests/${performanceTest.id}`);
+
+    await click('[data-test-skip-performance-test]');
+
+    let lastLoggedExercise = server.db.loggedExercises[0];
+    assert.equal(lastLoggedExercise.skipped, true);
+  });
+
+  test('Can fail a logged exercise for a performance test exercise', async function(assert) {
+    assert.expect(1);
+
+    setupDefaultPrograms(this.server);
+    startNewProgram(this.server);
+    await authenticateSession();
+
+    const {performanceTest} = startNewPerformanceTest(this.server);
+
+    await visit(`/performance-tests/${performanceTest.id}`);
+
+    await click('[data-test-fail-performance-test]');
+
+    let lastLoggedExercise = server.db.loggedExercises[0];
+    assert.equal(lastLoggedExercise.failed, true);
   });
 });

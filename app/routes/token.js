@@ -9,7 +9,7 @@ export default Route.extend({
     return this.get('magicLink')
       .authenticateMagicLink.perform(params.token.token)
       .then(_ => {
-        console.log(_);
+        console.error(_);
       })
       .catch(e => {
         console.error(e);

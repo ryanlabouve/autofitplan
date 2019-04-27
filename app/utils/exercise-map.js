@@ -97,6 +97,24 @@ const EXERCISE_MAP = {
       },
     ],
   },
+
+  run: {
+    name: 'Run',
+    exercises: [{name: 'Run'}],
+  },
+  row: {
+    name: 'Row',
+    exercises: [{name: 'Row'}],
+  },
+  pushup_variant: {
+    name: 'Pushup',
+    exercises: [{name: 'Pushup'}],
+  },
+
+  plank: {
+    name: 'Plank',
+    exercises: [{name: 'Plank'}],
+  },
   ver_push: {
     name: 'Vertical Push',
     exercises: [

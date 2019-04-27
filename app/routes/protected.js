@@ -13,7 +13,7 @@ export default Route.extend({
   _loadCurrentUser() {
     return this.get('currentUser')
       .load()
-      .catch(error => {
+      .catch(_error => {
         this.get('session').invalidate();
         this.transitionTo('login');
       })

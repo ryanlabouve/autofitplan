@@ -55,6 +55,8 @@ export default function() {
   this.post('/logged-exercises');
   this.patch('/logged-exercises/:id');
 
+  this.get('/logged-macrocycles');
+
   this.get('/performance-tests');
   this.get('/performance-tests/:id');
   this.post('/performance-tests');

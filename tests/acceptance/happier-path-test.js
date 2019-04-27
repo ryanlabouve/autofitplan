@@ -1,5 +1,5 @@
 import {module, test} from 'qunit';
-import {visit, currentURL, pauseTest, click} from '@ember/test-helpers';
+import {visit, currentURL, click} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import {authenticateSession} from 'ember-simple-auth/test-support';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
@@ -20,7 +20,6 @@ module('Acceptance | happier path', function(hooks) {
     await visit('/');
     await click('[data-test-new-program-button]');
 
-    await pauseTest();
     assert.equal(currentURL(), '/new-program');
   });
 });

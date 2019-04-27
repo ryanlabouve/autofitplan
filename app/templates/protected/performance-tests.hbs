@@ -1,23 +1,11 @@
 {{#each model.performanceTest.exercises as |exercise|}}
-  {{log exercise}}
   <div data-test-performance-test-exercises>
-    <h2>{{exercise.code}}</h2>
-    <p>Goal Reps: {{exercise.repsLow}}</p>
-    <p>Weight: TODO</p>
-    <p>Time: </p>
-    <p>
-      For running:
-    </p>
-
-    <p>
-      For lifting:
-    </p>
-
-    <p>
-      If you can't complete:
-    </p>
-    <button>Save</button>
-    <button>Skip</button>
-    <button>Fail</button>
+    {{view-performance-test-exercise
+      exercise=exercise
+      loggedExercise=(get-logged-exercise
+        model.performanceTest.loggedExercises
+        exercise
+      )
+    }}
   </div>
 {{/each}}

@@ -1,6 +1,8 @@
 import DS from 'ember-data';
-const {hasMany} = DS;
+const {belongsTo, hasMany} = DS;
 
 export default DS.Model.extend({
-  exercises: hasMany(),
+  user: belongsTo('user', {async: false}),
+  exercises: hasMany('exercise', {async: false}),
+  loggedExercises: hasMany('logged-exercise', {async: false}),
 });

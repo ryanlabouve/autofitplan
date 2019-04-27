@@ -3,6 +3,7 @@ const {attr, belongsTo} = DS;
 
 export default DS.Model.extend({
   session: belongsTo(),
+  loggedExercise: belongsTo('loggedExercise', {async: false}),
   code: attr('string'),
   sets: attr('number'),
   repsLow: attr('number'),

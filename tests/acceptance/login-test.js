@@ -1,5 +1,5 @@
 import {module, test} from 'qunit';
-import {visit, currentURL, click, fillIn, pauseTest} from '@ember/test-helpers';
+import {visit, currentURL, click, fillIn} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import {
@@ -7,7 +7,6 @@ import {
   invalidateSession,
   currentSession,
 } from 'ember-simple-auth/test-support';
-import {setupDefaultPrograms} from 'autofitplan/tests/helpers/program-creator';
 
 module('Acceptance | login', function(hooks) {
   setupApplicationTest(hooks);
@@ -85,8 +84,6 @@ module('Acceptance | login', function(hooks) {
     });
     await visit('/');
     await click('[data-test-nav]');
-    server.logging = true;
-    await pauseTest();
     assert.dom('[data-test-current-user]').hasText('test@user.com');
   });
 });
