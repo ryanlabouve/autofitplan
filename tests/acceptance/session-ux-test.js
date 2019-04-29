@@ -9,7 +9,7 @@ import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
 import {authenticateSession} from 'ember-simple-auth/test-support';
 
-module('Acceptance | old workouts', function(hooks) {
+module('Acceptance | session ux test', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 

@@ -1,29 +1,34 @@
-import {test, skip} from 'qunit';
+import {module, test} from 'qunit';
 import {visit, fillIn, findAll, click} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import moment from 'moment';
-
-import {setupDefaultPrograms} from 'autofitplan/tests/helpers/program-creator';
+import {
+  setupDefaultPrograms,
+  startNewProgram,
+} from 'autofitplan/tests/helpers/program-creator';
 
 import {authenticateSession} from 'ember-simple-auth/test-support';
 
-// TODO
-skip('Acceptance | happy path', function(hooks) {
+module('Acceptance | session test', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
   test('Can start a workout', async function(assert) {
     await authenticateSession();
     setupDefaultPrograms(this.server);
-    await visit('/program/ryans-program');
+    let {loggedMacrocycle} = startNewProgram(this.server);
+
+    await visit(`/program/${loggedMacrocycle.id}`);
     let session = findAll('[data-test-session]');
     let startSessionButton = session[0].querySelector(
       '[data-test-start-session-button]',
     );
+
     await click(startSessionButton);
-    assert.equal(this.server.db.loggedSessions.length, 1);
-    assert.equal(this.server.db.loggedSessions[0].sessionId, 1);
+    assert.ok(
+      server.db.loggedSessions.firstObject.startedAt,
+      'We started the session',
+    );
 
     let endSessionButton = session[0].querySelectorAll(
       '[data-test-end-session-button]',
@@ -34,23 +39,14 @@ skip('Acceptance | happy path', function(hooks) {
 
   test('Can see worouts that have already been started', async function(assert) {
     await authenticateSession();
-    let {sessionMonday, exerciseForSessionMonday} = setupDefaultPrograms(
-      this.server,
-    );
 
-    let loggedSession = this.server.create('loggedSession', {
-      session: sessionMonday,
-      week: 1,
-      startTime: moment(),
-    });
+    setupDefaultPrograms(this.server);
+    let {loggedMacrocycle} = startNewProgram(this.server);
 
-    server.create('loggedExercise', {
-      loggedSession,
-      exercise: exerciseForSessionMonday,
-      weight: 100,
-    });
+    server.db.loggedSessions.update(1, {startedAt: new Date()});
+    server.db.loggedExercises.update(1, {weight: 100});
 
-    await visit('/program/ryans-program');
+    await visit(`/program/${loggedMacrocycle.id}`);
 
     let session = findAll('[data-test-session]');
     let endSessionButton = session[0].querySelectorAll(
@@ -73,7 +69,9 @@ skip('Acceptance | happy path', function(hooks) {
   test('Does a workout', async function(assert) {
     await authenticateSession();
     setupDefaultPrograms(this.server);
-    await visit('/program/ryans-program');
+    let {loggedMacrocycle} = startNewProgram(this.server);
+
+    await visit(`/program/${loggedMacrocycle.id}`);
     let firstSession = findAll('[data-test-session]')[0];
     let startSessionButton = firstSession.querySelector(
       '[data-test-start-session-button]',

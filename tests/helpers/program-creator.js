@@ -115,10 +115,44 @@ let logSomeSessions = server => {
   });
 };
 
-let startNewProgram = server => {
-  let macrocycle = server.schema.macrocycles.find(1);
-  let mesocycle = server.schema.mesocycles.find(macrocycle.mesocycleIds[0]);
-  let _microcycle = server.schema.microcycles.find(mesocycle.microcycleIds[0]);
+let startNewProgram = (server, user, macrocycle) => {
+  user = user || server.schema.users.find(1);
+  macrocycle = macrocycle || server.schema.macrocycles.find(1);
+
+  let loggedMacrocycle = server.create('logged-macrocycle', {
+    macrocycle,
+  });
+
+  macrocycle.mesocycles.models.forEach(function(mesocycle) {
+    let loggedMesocycle = server.create('logged-mesocycle', {
+      loggedMacrocycle,
+      mesocycle,
+    });
+    mesocycle.microcycles.models.forEach(function(microcycle) {
+      let loggedMicrocycle = server.create('logged-microcycle', {
+        microcycle,
+        loggedMesocycle,
+      });
+
+      microcycle.sessions.models.forEach(function(session) {
+        let loggedSession = server.create('logged-session', {
+          loggedMicrocycle,
+          session,
+        });
+
+        session.exercises.models.forEach(function(exercise) {
+          server.create('logged-exercise', {
+            exercise,
+            loggedSession,
+          });
+        });
+      });
+    });
+  });
+
+  return {
+    loggedMacrocycle,
+  };
 };
 
 let startNewPerformanceTest = server => {

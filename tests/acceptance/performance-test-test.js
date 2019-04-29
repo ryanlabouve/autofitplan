@@ -10,7 +10,7 @@ import {
   startNewPerformanceTest,
 } from 'autofitplan/tests/helpers/program-creator';
 
-module('Acceptance | set goals', function(hooks) {
+module('Acceptance | performance test', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -64,6 +64,8 @@ module('Acceptance | set goals', function(hooks) {
 
     setupDefaultPrograms(this.server);
     startNewProgram(this.server);
+    server.db.loggedSessions.update(1, {startedAt: new Date()});
+
     await authenticateSession();
     const {performanceTest} = startNewPerformanceTest(this.server);
 
@@ -76,7 +78,8 @@ module('Acceptance | set goals', function(hooks) {
 
     await click('[data-test-save-performance-test]');
 
-    let lastLoggedExercise = server.db.loggedExercises[0];
+    // TODO: why does this have to be 2?
+    let lastLoggedExercise = server.db.loggedExercises[2];
     assert.equal(lastLoggedExercise.weight, 200);
     assert.equal(lastLoggedExercise.completed, true);
   });
@@ -99,7 +102,7 @@ module('Acceptance | set goals', function(hooks) {
 
     await click('[data-test-skip-performance-test]');
 
-    let lastLoggedExercise = server.db.loggedExercises[0];
+    let lastLoggedExercise = server.db.loggedExercises[2];
     assert.equal(lastLoggedExercise.skipped, true);
   });
 
@@ -116,7 +119,7 @@ module('Acceptance | set goals', function(hooks) {
 
     await click('[data-test-fail-performance-test]');
 
-    let lastLoggedExercise = server.db.loggedExercises[0];
+    let lastLoggedExercise = server.db.loggedExercises[2];
     assert.equal(lastLoggedExercise.failed, true);
   });
 });

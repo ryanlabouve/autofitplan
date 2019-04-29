@@ -36,6 +36,8 @@ export default function() {
       return macrocycles.all();
     }
   });
+  this.get('/macrocycles/:id');
+
   this.get('/mesocycles');
   this.get('/mesocycles/:id');
   this.get('/microcycles');
@@ -48,7 +50,7 @@ export default function() {
   this.get('/logged-sessions');
   this.get('/logged-sessions/:id');
   this.post('/logged-sessions');
-  this.patch('/logged-sessions');
+  this.patch('/logged-sessions/:id');
 
   this.get('/logged-exercises');
   this.get('/logged-exercises/:id');
@@ -56,6 +58,7 @@ export default function() {
   this.patch('/logged-exercises/:id');
 
   this.get('/logged-macrocycles');
+  this.get('/logged-macrocycles/:id');
 
   this.get('/performance-tests');
   this.get('/performance-tests/:id');

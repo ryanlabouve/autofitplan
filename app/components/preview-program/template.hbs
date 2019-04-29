@@ -1,9 +1,10 @@
 <div class="border border-grey rounded p-4 my-4">
+  asdf
   <h1>
-    {{macrocycle.name}}
+    {{loggedMacrocycle.macrocycle.name}}
   </h1>
 
-  {{#each macrocycle.mesocycles as |mesocycle|}}
+  {{#each loggedMacrocycle.macrocycle.mesocycles as |mesocycle|}}
     mesocycle
     <div class="border border-grey border-round my-2 p-2">
     {{#each mesocycle.microcycles as |microcycle|}}
