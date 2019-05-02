@@ -15,9 +15,11 @@ module('Acceptance | performance test', function(hooks) {
   setupMirage(hooks);
 
   test('Starting a new performance test', async function(assert) {
-    setupDefaultPrograms(this.server);
-    startNewProgram(this.server);
-    await authenticateSession();
+    await setupDefaultPrograms(this.server);
+    await startNewProgram(this.server);
+
+    server.db.profiles.update(1, {needsNewPerformanceTest: true});
+
     await visit('/');
 
     assert.dom('h2').hasText('Time to test your performance!');
@@ -42,8 +44,8 @@ module('Acceptance | performance test', function(hooks) {
   test('We can see a performance test in progress', async function(assert) {
     assert.expect(1);
 
-    setupDefaultPrograms(this.server);
-    startNewProgram(this.server);
+    await setupDefaultPrograms(this.server);
+    await startNewProgram(this.server);
     await authenticateSession();
 
     let performanceTest = server.create('performanceTest');
@@ -62,8 +64,8 @@ module('Acceptance | performance test', function(hooks) {
 
     server.logging = true;
 
-    setupDefaultPrograms(this.server);
-    startNewProgram(this.server);
+    await setupDefaultPrograms(this.server);
+    await startNewProgram(this.server);
     server.db.loggedSessions.update(1, {startedAt: new Date()});
 
     await authenticateSession();
@@ -92,8 +94,8 @@ module('Acceptance | performance test', function(hooks) {
   test('Can skip a logged exercise for a performance test exercise', async function(assert) {
     assert.expect(1);
 
-    setupDefaultPrograms(this.server);
-    startNewProgram(this.server);
+    await setupDefaultPrograms(this.server);
+    await startNewProgram(this.server);
     await authenticateSession();
 
     const {performanceTest} = startNewPerformanceTest(this.server);
@@ -109,8 +111,8 @@ module('Acceptance | performance test', function(hooks) {
   test('Can fail a logged exercise for a performance test exercise', async function(assert) {
     assert.expect(1);
 
-    setupDefaultPrograms(this.server);
-    startNewProgram(this.server);
+    await setupDefaultPrograms(this.server);
+    await startNewProgram(this.server);
     await authenticateSession();
 
     const {performanceTest} = startNewPerformanceTest(this.server);

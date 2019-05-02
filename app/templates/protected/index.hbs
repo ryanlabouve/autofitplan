@@ -1,23 +1,26 @@
-<div>
-  <h2>Time to test your performance!</h2>
+{{#if currentUser.user.profile.needsNewPerformanceTest}}
+  <div>
+    <h2>Time to test your performance!</h2>
 
-  <UiButton
-    @clickAction={{perform createNewPerformanceTest}}
-    @disabled={{"false"}}
-    data-test-new-performance-test>
-    Start new performance test
-  </UiButton>
-</div>
+    <UiButton
+      @clickAction={{perform createNewPerformanceTest}}
+      @disabled={{"false"}}
+      data-test-new-performance-test>
+      Start new performance test
+    </UiButton>
+  </div>
+{{/if}}
 
 Choose Program:
 {{choose-program macrocycles=model.macrocycles}}
 {{outlet}}
 
-{{test}}
-<div class="my-4">
-  <UiButton
-    @clickAction={{transition-to "protected.new-program"}}
-    data-test-new-program-button>
-    Start new program
-  </UiButton>
-</div>
+{{#if currentUser.user.profile.needsNewProgram}}
+  <div class="my-4">
+    <UiButton
+      @clickAction={{transition-to "protected.new-program"}}
+      data-test-new-program-button>
+      Start new program
+    </UiButton>
+  </div>
+{{/if}}

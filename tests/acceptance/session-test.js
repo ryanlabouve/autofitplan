@@ -14,9 +14,8 @@ module('Acceptance | session test', function(hooks) {
   setupMirage(hooks);
 
   test('Can start a workout', async function(assert) {
-    await authenticateSession();
-    setupDefaultPrograms(this.server);
-    let {loggedMacrocycle} = startNewProgram(this.server);
+    await setupDefaultPrograms(this.server);
+    let {loggedMacrocycle} = await startNewProgram(this.server);
 
     await visit(`/program/${loggedMacrocycle.id}`);
     let session = findAll('[data-test-session]');
@@ -40,8 +39,8 @@ module('Acceptance | session test', function(hooks) {
   test('Can see worouts that have already been started', async function(assert) {
     await authenticateSession();
 
-    setupDefaultPrograms(this.server);
-    let {loggedMacrocycle} = startNewProgram(this.server);
+    await setupDefaultPrograms(this.server);
+    let {loggedMacrocycle} = await startNewProgram(this.server);
 
     server.db.loggedSessions.update(1, {startedAt: new Date()});
     server.db.loggedExercises.update(1, {weight: 100});
@@ -68,8 +67,8 @@ module('Acceptance | session test', function(hooks) {
 
   test('Does a workout', async function(assert) {
     await authenticateSession();
-    setupDefaultPrograms(this.server);
-    let {loggedMacrocycle} = startNewProgram(this.server);
+    await setupDefaultPrograms(this.server);
+    let {loggedMacrocycle} = await startNewProgram(this.server);
 
     await visit(`/program/${loggedMacrocycle.id}`);
     let firstSession = findAll('[data-test-session]')[0];

@@ -10,7 +10,7 @@ export default Service.extend({
     let that = this;
     if (this.get('session.isAuthenticated')) {
       return this.get('store')
-        .queryRecord('user', {me: true})
+        .queryRecord('user', {me: true, include: 'profile'})
         .then(user => {
           that.set('user', user);
         })

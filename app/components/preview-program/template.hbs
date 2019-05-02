@@ -4,7 +4,7 @@
     {{loggedMacrocycle.macrocycle.name}}
   </h1>
 
-  {{#each loggedMacrocycle.macrocycle.mesocycles as |mesocycle|}}
+  {{#each macrocycle.mesocycles as |mesocycle|}}
     mesocycle
     <div class="border border-grey border-round my-2 p-2">
     {{#each mesocycle.microcycles as |microcycle|}}
@@ -22,7 +22,10 @@
     {{/each}}
     </div>
   {{/each}}
-  <UiButton>
+  <UiButton
+    onclick={{action startNewProgram this.macrocycle}}
+    data-test-start-program
+    >
     Start Program
   </UiButton>
 </div>

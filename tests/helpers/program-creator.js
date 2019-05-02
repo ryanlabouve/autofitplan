@@ -1,8 +1,25 @@
 import moment from 'moment';
 
-let setupDefaultUser = server => {
-  server.create('user', {
+import {
+  authenticateSession,
+  currentSession,
+} from 'ember-simple-auth/test-support';
+
+let setupDefaultUser = async server => {
+  let user = server.create('user', {
     name: 'ryan',
+  });
+
+  server.create('profile', {
+    user,
+  });
+
+  await authenticateSession();
+  await currentSession().set('data', {
+    authenticated: {
+      authenticator: 'authenticator:magic-link',
+      token: 'hotdog',
+    },
   });
 };
 
@@ -67,8 +84,8 @@ let setupDefaultCycles = server => {
   });
 };
 
-let setupDefaultPrograms = server => {
-  setupDefaultUser(server);
+let setupDefaultPrograms = async server => {
+  await setupDefaultUser(server);
   setupDefaultCycles(server);
 };
 
@@ -115,7 +132,7 @@ let logSomeSessions = server => {
   });
 };
 
-let startNewProgram = (server, user, macrocycle) => {
+let startNewProgram = async (server, user, macrocycle) => {
   user = user || server.schema.users.find(1);
   macrocycle = macrocycle || server.schema.macrocycles.find(1);
 
