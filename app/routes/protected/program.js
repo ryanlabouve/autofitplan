@@ -6,6 +6,7 @@ export default Route.extend({
     let loggedMacrocycle = this.store.findRecord('logged-macrocycle', id, {
       include:
         'macrocycle.mesocycles.microcycles.sessions.exercises,loggedMesocycles.loggedMicrocycles.loggedSessions.loggedExercises',
+      reload: true,
     });
 
     return hash({

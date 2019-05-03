@@ -1,8 +1,11 @@
 import {module, test} from 'qunit';
-import {visit, click} from '@ember/test-helpers';
+import {visit, click, currentURL, pauseTest} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
-import {setupDefaultPrograms} from 'autofitplan/tests/helpers/program-creator';
+import {
+  setupDefaultPrograms,
+  startNewProgram,
+} from 'autofitplan/tests/helpers/program-creator';
 
 module('Acceptance | home screen test', function(hooks) {
   setupApplicationTest(hooks);
@@ -44,4 +47,28 @@ module('Acceptance | home screen test', function(hooks) {
     await visit(`/`);
     await assert.dom('[data-test-new-performance-test]').doesNotExist();
   });
+
+  test('We can see programs on the home screen', async function(assert) {
+    await setupDefaultPrograms(this.server);
+
+    let {loggedMacrocycle} = await startNewProgram(this.server);
+
+    let item = server.create('home-screen-item', {
+      loggedMacrocycle,
+    });
+
+    await visit(`/`);
+
+    await assert.dom('[data-test-home-screen-items]').exists();
+    await assert.dom('[data-test-home-screen-item]').exists({count: 1});
+    await click('[data-test-go-to-program]');
+
+    assert.equal(
+      currentURL(),
+      `/program/${loggedMacrocycle.id}`,
+      'We land on the correct program URL',
+    );
+  });
+
+  // test('We can see performance tests on the home screen', async function(assert) {
 });

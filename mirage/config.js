@@ -65,4 +65,6 @@ export default function() {
   this.get('/performance-tests/:id');
   this.post('/performance-tests');
   this.patch('/performance-tests/:id');
+
+  this.get('/home-screen-items');
 }
