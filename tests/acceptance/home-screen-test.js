@@ -70,5 +70,30 @@ module('Acceptance | home screen test', function(hooks) {
     );
   });
 
-  // test('We can see performance tests on the home screen', async function(assert) {
+  test('We can see performance tests on the home screen', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    await startNewProgram(this.server);
+
+    let performanceTest = server.create('performanceTest');
+
+    server.createList('exercise', 4, {
+      performanceTest,
+    });
+
+    let item = server.create('home-screen-item', {
+      performanceTest,
+    });
+
+    await visit(`/`);
+
+    await assert.dom('[data-test-home-screen-items]').exists();
+    await assert.dom('[data-test-home-screen-item]').exists({count: 1});
+    await click('[data-test-go-to-performance-test]');
+
+    assert.equal(
+      currentURL(),
+      `/performance-tests/${performanceTest.id}`,
+      'We land on the correct performance test URL',
+    );
+  });
 });

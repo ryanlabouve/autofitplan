@@ -6,8 +6,12 @@
           data-test-go-to-program="true"
         }}
       {{/if}}
-      // if program, show one component
-      // if performance test, show another component
+
+      {{#if homeScreenItem.performanceTest}}
+        {{link-to "Go to perf test" "protected.performance-tests" homeScreenItem.performanceTest.id
+          data-test-go-to-performance-test="true"
+        }}
+      {{/if}}
     </div>
   {{/each}}
 </div>
