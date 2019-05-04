@@ -1,3 +1,64 @@
-Choose Program:
-{{choose-program macrocycles=model.macrocycles}}
-{{outlet}}
+{{#if currentUser.user.profile.needsNewPerformanceTest}}
+  <Box>
+    <Sides
+      as |sides s|>
+      <s.Side
+        @activeSide={{eq sides.activeSideName 'one'}}>
+
+        <div class="text-center mt-2">
+          <UiButton
+            @clickAction={{perform createNewPerformanceTest}}
+            @disabled={{"false"}}
+            data-test-new-performance-test>
+            Start Performance Test
+          </UiButton>
+        </div>
+        <div class="text-center mb-2">
+          <button class="underline text-grey-dark mt-2" onClick={{action (mut sides.activeSideName) 'two'}}>Learn more</button>
+        </div>
+      </s.Side>
+      <s.Side
+        @activeSide={{eq sides.activeSideName 'two'}}
+        >
+        <h2>Test Your Fitness</h2>
+
+        <p>It's been x weeks since your last test. Time to check your progress.</p>
+        <h3>Bodyweight Tests</h3>
+        <h3>Power Tests</h3>
+        <h3>Cardio Tests</h3>
+        <UiButton onClick={{action (mut sides.activeSideName) 'one'}}>Back</UiButton>
+      </s.Side>
+    </Sides>
+  </Box>
+{{/if}}
+
+{{#if currentUser.user.profile.needsNewProgram}}
+  <Box>
+    <Sides as |sides s|>
+      <s.Side
+        @activeSide={{eq sides.activeSideName 'one'}}
+        >
+        <div class="text-center mt-2">
+          <UiButton
+            @clickAction={{transition-to "protected.new-program"}}
+            data-test-new-program-button>
+            Choose new program
+          </UiButton>
+        </div>
+        <div class="text-center mb-2">
+          <button class="underline text-grey-dark mt-2" onClick={{action (mut sides.activeSideName) 'two'}}>Learn more</button>
+        </div>
+      </s.Side>
+      <s.Side
+        @activeSide={{eq sides.activeSideName 'two'}}
+        >
+        Some info about starting a program
+
+        <UiButton onClick={{action (mut sides.activeSideName) 'one'}}>Back</UiButton>
+      </s.Side>
+  </Sides>
+  </Box>
+{{/if}}
+
+<HomeScreen>
+</HomeScreen>

@@ -1,22 +1,17 @@
 import Route from '@ember/routing/route';
 import {hash} from 'rsvp';
+import ResetScroll from 'autofitplan/mixins/reset-scroll';
 
-export default Route.extend({
-  model({slug}) {
-    let macrocycles = this.store.findAll('macrocycle');
-    let macrocycle = this.store
-      .query('macrocycle', {
-        filter: {
-          slug,
-        },
-        include:
-          'mesocycles.microcycles.sessions.exercises,mesocycles.microcycles.sessions.loggedSessions.loggedExercises',
-      })
-      .then(macrocycles => macrocycles.get('firstObject'));
+export default Route.extend(ResetScroll, {
+  model({id}) {
+    let loggedMacrocycle = this.store.findRecord('logged-macrocycle', id, {
+      include:
+        'macrocycle.mesocycles.microcycles.sessions.exercises,logged-mesocycles.logged-microcycles.logged-sessions.logged-exercises',
+      reload: true,
+    });
 
     return hash({
-      macrocycles,
-      macrocycle,
+      loggedMacrocycle,
     });
   },
 });

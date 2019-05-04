@@ -1,0 +1,66 @@
+<div class="pt-8">
+  <div class="text-sm font-bold mb-1">{{name}}</div>
+  <div style="position: relative;">
+    <div style="display: inline-block; position: absolute; right: 1rem; top: .5rem ; opacity: 0.5">
+      {{fa-icon "exchange"}}
+    </div>
+    <select
+      class="w-full py-2 px-1 bg-grey-lightest"
+      style=""
+      onchange={{perform updateLoggedExerciseName value="target.value"}}
+    >
+
+      {{#each rawExercise.exercises as |exercise|}}
+
+        <option value={{exercise.name}} selected={{eq loggedExercise.name exercise.name 'selected'}}>
+          {{exercise.name}}
+        </option>
+      {{/each}}
+    </select>
+  </div>
+  <div class="mt-2">
+      <input
+        type="number"
+        style="width: 80px;"
+        class="appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline"
+        placeholder="weight in lbs"
+        value={{loggedExercise.weight}}
+        oninput={{perform updateLoggedExercise loggedExercise value="target.value"}}
+        data-test-exercise-weight
+      > lbs
+      {{exercise.sets}} x {{exercise.repsLow}}-{{exercise.repsHigh}} @ {{exercise.rpe}}RPE
+
+      {{#if updateLoggedExercise.isRunning}}
+        {{fa-icon "spinner" class=" mt-2 spinspin text-red float-right"}}
+      {{/if}}
+  </div>
+
+  <div>
+    <p>
+      For running:
+    </p>
+
+    <p>
+      For lifting:
+    </p>
+
+    <p>
+      If you can't complete:
+    </p>
+    <button
+      onclick={{perform saveLoggedExercise loggedExercise}}
+      data-test-save-performance-test
+    >
+      Save
+    </button>
+    <button
+      onclick={{perform skipLoggedExercise loggedExercise}}
+      data-test-skip-performance-test
+      >Skip</button>
+    <button
+      onclick={{perform failLoggedExercise loggedExercise}}
+      data-test-fail-performance-test
+      >
+      Fail</button>
+  </div>
+</div>

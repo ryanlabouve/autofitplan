@@ -1,5 +1,5 @@
 import {module, test} from 'qunit';
-import {visit, currentURL, click, fillIn, pauseTest} from '@ember/test-helpers';
+import {visit, currentURL, click, fillIn} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import {
@@ -57,7 +57,6 @@ module('Acceptance | login', function(hooks) {
     await visit('/');
     await click('[data-test-nav]');
     await click('[data-test-logout]');
-    let a = currentSession;
     assert.equal(currentSession().isAuthenticated, false);
     assert.equal(currentURL(), '/login');
   });
@@ -67,5 +66,24 @@ module('Acceptance | login', function(hooks) {
     await visit('/');
     await click('[data-test-nav]');
     assert.dom('[data-test-logout]').doesNotExist();
+  });
+
+  test('me', async function(assert) {
+    await authenticateSession();
+
+    server.create('user', {
+      email: 'test@user.com',
+    });
+
+    // need to create user first
+    await currentSession().set('data', {
+      authenticated: {
+        authenticator: 'authenticator:magic-link',
+        token: 'hotdog',
+      },
+    });
+    await visit('/');
+    await click('[data-test-nav]');
+    assert.dom('[data-test-current-user]').hasText('test@user.com');
   });
 });

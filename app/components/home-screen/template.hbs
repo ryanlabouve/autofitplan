@@ -1,0 +1,23 @@
+<div data-test-home-screen-items>
+  {{#each homeScreenItems as |homeScreenItem|}}
+    <div data-test-home-screen-item>
+      {{#if homeScreenItem.loggedMacrocycle}}
+        <Box>
+          <h2>Active Program</h2>
+          {{link-to "Continue Working Out" "protected.program" homeScreenItem.loggedMacrocycle.id
+            data-test-go-to-program="true"
+          }}
+        </Box>
+      {{/if}}
+
+      {{#if homeScreenItem.performanceTest}}
+        <Box>
+          <h2>Active Performance Test</h2>
+          {{link-to "Continue Performance Test" "protected.performance-tests" homeScreenItem.performanceTest.id
+            data-test-go-to-performance-test="true"
+          }}
+        </Box>
+      {{/if}}
+    </div>
+  {{/each}}
+</div>

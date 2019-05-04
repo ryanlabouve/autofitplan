@@ -8,6 +8,15 @@ export default function() {
     return req.requestBody;
   });
 
+  this.get('/users/me', ({users}, req) => {
+    let res = new Mirage.Response(404, {}, {});
+
+    if (req.requestHeaders['Authorization'] === 'Bearer hotdog') {
+      res = users.find(1) || res;
+    }
+    return res;
+  });
+
   this.post('/token', (_, req) => {
     let body = JSON.parse(req.requestBody);
     if (body.data.token === 'hotdog') {
@@ -20,13 +29,15 @@ export default function() {
   this.get('/macrocycles', ({macrocycles}, request) => {
     const {queryParams} = request;
 
-    if (!Object.keys(queryParams).length) {
+    let slug = queryParams['filter[slug]'];
+    if (slug) {
+      return macrocycles.where({slug});
+    } else {
       return macrocycles.all();
     }
-
-    let slug = queryParams['filter[slug]'];
-    return macrocycles.where({slug});
   });
+  this.get('/macrocycles/:id');
+
   this.get('/mesocycles');
   this.get('/mesocycles/:id');
   this.get('/microcycles');
@@ -35,12 +46,25 @@ export default function() {
   this.get('/sessions/:id');
   this.get('/exercises');
   this.get('/exercises/:id');
+
   this.get('/logged-sessions');
   this.get('/logged-sessions/:id');
   this.post('/logged-sessions');
-  this.patch('/logged-sessions');
+  this.patch('/logged-sessions/:id');
+
   this.get('/logged-exercises');
   this.get('/logged-exercises/:id');
   this.post('/logged-exercises');
   this.patch('/logged-exercises/:id');
+
+  this.get('/logged-macrocycles');
+  this.post('/logged-macrocycles');
+  this.get('/logged-macrocycles/:id');
+
+  this.get('/performance-tests');
+  this.get('/performance-tests/:id');
+  this.post('/performance-tests');
+  this.patch('/performance-tests/:id');
+
+  this.get('/home-screen-items');
 }

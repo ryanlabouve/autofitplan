@@ -6,4 +6,7 @@ export default DS.Model.extend({
   loggedSession: belongsTo(),
   weight: attr('number'),
   name: attr('string'),
+  completed: attr('boolean'),
+  skipped: attr('boolean'),
+  failed: attr('boolean'),
 });

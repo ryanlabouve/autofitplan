@@ -45,7 +45,7 @@ export default Service.extend({
       let tokenJSON = yield res.json();
 
       // authenticate session
-      let authenticate = yield this.get('session')
+      let _authenticate = yield this.get('session')
         .authenticate('authenticator:magic-link', tokenJSON)
         .catch(reason => {
           return reason;

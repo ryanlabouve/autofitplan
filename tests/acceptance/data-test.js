@@ -1,5 +1,4 @@
 import {module, test} from 'qunit';
-import {visit, currentURL} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import moment from 'moment';
@@ -49,7 +48,7 @@ module('Acceptance | data', function(hooks) {
         .sessions.models[0].exercises.models[0].code;
     assert.equal(code, 'lp_variant');
 
-    let loggedSession = server.create('loggedSession', {
+    server.create('loggedSession', {
       session: sessionMonday,
       startTime: moment(),
     });

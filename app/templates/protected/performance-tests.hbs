@@ -1,0 +1,14 @@
+<h1>Performance Test</h1>
+<p>Doing a performance test every 12 weeks helps benchmark improvements in your fitness</p>
+<p>Do these at a pace of your choosing. The only requirement is to complete all of these in a one week period while not doing active programming.</p>
+{{#each model.performanceTest.exercises as |exercise|}}
+  <div data-test-performance-test-exercises>
+    {{view-performance-test-exercise
+      exercise=exercise
+      loggedExercise=(get-logged-exercise
+        model.performanceTest.loggedExercises
+        exercise
+      )
+    }}
+  </div>
+{{/each}}

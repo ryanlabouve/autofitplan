@@ -1,7 +1,6 @@
 <div class="border m-2 p-2" data-test-session>
   <div class="cf clearfix">
     <div class="text-xl float-left">{{session.name}}</div>
-
     <div class="float-right">
       &nbsp;
       {{#if isShowing}}
@@ -16,7 +15,7 @@
     </div>
 
     <div class="float-right">
-      {{#if (not loggedSession)}}
+      {{#if (not loggedSession.startedAt)}}
         <button onclick={{action startSession}} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" data-test-start-session-button>
           Start Session
         </button>
