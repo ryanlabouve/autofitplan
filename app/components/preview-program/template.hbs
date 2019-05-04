@@ -1,34 +1,55 @@
 <div class="border border-grey rounded p-4 my-4">
-  <h1>
+
+  <div class="float-right">
+    <UiButton
+      onclick={{action startNewProgram this.macrocycle}}
+      data-test-start-program
+      >
+      Start Program
+    </UiButton>
+  </div>
+
+  <h1 class="text-xl">
     {{macrocycle.name}}
   </h1>
 
-  <p>
-    {{macrocycle.description}}
+  <p class="my-2">
+    Program Description: {{macrocycle.description}}
   </p>
 
-  {{#each macrocycle.mesocycles as |mesocycle|}}
-    mesocycle
-    <div class="border border-grey border-round my-2 p-2">
-    {{#each mesocycle.microcycles as |microcycle|}}
-      microcycle
-      <div class="border border-grey border-round my-2 p-2">
-      {{#each microcycle.sessions as |session|}}
-        session
+  {{#if (not seeProgramDetails)}}
+    <button class="underline text-grey-dark mt-2" onClick={{action (mut seeProgramDetails) true}}>See program details</button>
+  {{else}}
+    <button class="underline text-grey-dark mt-2" onClick={{action (mut seeProgramDetails) false}}>Hide program details</button>
+  {{/if}}
+
+  {{#if seeProgramDetails}}
+    <div class="mt-4">
+      {{#each macrocycle.mesocycles as |mesocycle|}}
+        <strong class="text-xs">mesocycle</strong>
         <div class="border border-grey border-round my-2 p-2">
-          {{#each session.exercises as |exercise|}}
-            <ViewMove @exercise={{exercise}} />
+          {{#each mesocycle.microcycles as |microcycle|}}
+            <strong class="text-xs">microcycle</strong>
+            <div class="border border-grey border-round my-2 p-2">
+              {{#each microcycle.sessions as |session|}}
+                <strong class="text-xs">session</strong>
+                <p>{{session.name}}</p>
+                <div class="border border-grey border-round p-2">
+                  {{#each session.exercises as |exercise|}}
+                    <ViewMove @exercise={{exercise}} />
+                  {{/each}}
+                </div>
+              {{/each}}
+            </div>
           {{/each}}
         </div>
       {{/each}}
     </div>
-    {{/each}}
-    </div>
-  {{/each}}
-  <UiButton
-    onclick={{action startNewProgram this.macrocycle}}
-    data-test-start-program
-    >
-    Start Program
-  </UiButton>
+    <UiButton
+      onclick={{action startNewProgram this.macrocycle}}
+      data-test-start-program
+      >
+      Start {{macrocycle.name}}
+    </UiButton>
+  {{/if}}
 </div>

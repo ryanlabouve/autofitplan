@@ -6,4 +6,5 @@ export default DS.Model.extend({
   microcycle: belongsTo(),
   loggedMesocycle: belongsTo(),
   loggedSessions: hasMany(),
+  week: DS.attr('number'),
 });
