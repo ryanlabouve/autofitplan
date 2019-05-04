@@ -1,24 +1,61 @@
 {{#if currentUser.user.profile.needsNewPerformanceTest}}
-  <div>
-    <h2>Time to test your performance!</h2>
+  <Box>
+    <Sides
+      as |sides s|>
+      <s.Side
+        @activeSide={{eq sides.activeSideName 'one'}}>
 
-    <UiButton
-      @clickAction={{perform createNewPerformanceTest}}
-      @disabled={{"false"}}
-      data-test-new-performance-test>
-      Start new performance test
-    </UiButton>
-  </div>
+        <div class="text-center mt-2">
+          <UiButton
+            @clickAction={{perform createNewPerformanceTest}}
+            @disabled={{"false"}}
+            data-test-new-performance-test>
+            Start Performance Test
+          </UiButton>
+        </div>
+        <div class="text-center mb-2">
+          <button onClick={{action (mut sides.activeSideName) 'two'}}>Learn more</button>
+        </div>
+      </s.Side>
+      <s.Side
+        @activeSide={{eq sides.activeSideName 'two'}}
+        >
+        <h2>Test Your Fitness</h2>
+
+        <p>It's been x weeks since your last test. Time to check your progress.</p>
+        <h3>Bodyweight Tests</h3>
+        <h3>Power Tests</h3>
+        <h3>Cardio Tests</h3>
+        <button onClick={{action (mut sides.activeSideName) 'one'}}>Back</button>
+      </s.Side>
+    </Sides>
+  </Box>
 {{/if}}
 
 {{#if currentUser.user.profile.needsNewProgram}}
-  <div class="my-4">
-    <UiButton
-      @clickAction={{transition-to "protected.new-program"}}
-      data-test-new-program-button>
-      Start new program
-    </UiButton>
-  </div>
+  <Box>
+    <Sides as |sides s|>
+      <s.Side
+        @activeSide={{eq sides.activeSideName 'one'}}
+        >
+        <div class="text-center mt-2">
+          <UiButton
+            @clickAction={{transition-to "protected.new-program"}}
+            data-test-new-program-button>
+            Choose new program
+          </UiButton>
+        </div>
+        <div class="text-center mb-2">
+          <button onClick={{action (mut sides.activeSideName) 'two'}}>Learn more</button>
+        </div>
+      </s.Side>
+      <s.Side
+        @activeSide={{eq sides.activeSideName 'two'}}
+        >
+        Some info about starting a program
+      </s.Side>
+  </Sides>
+  </Box>
 {{/if}}
 
 <HomeScreen>

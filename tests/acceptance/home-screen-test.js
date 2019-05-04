@@ -30,6 +30,12 @@ module('Acceptance | home screen test', function(hooks) {
       1,
       'belongs to the correct macrocycle',
     );
+
+    assert.equal(
+      currentURL(),
+      `/program/${loggedMacrocycle.id}`,
+      'redirect to the program after created',
+    );
   });
 
   test('doesnt ask to start new program when not necesssary', async function(assert) {

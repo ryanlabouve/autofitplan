@@ -1,6 +1,7 @@
 import Service from '@ember/service';
 import {inject as service} from '@ember/service';
 import {resolve} from 'rsvp';
+import {get} from '@ember/object';
 
 export default Service.extend({
   session: service(),
@@ -20,5 +21,9 @@ export default Service.extend({
     } else {
       return resolve();
     }
+  },
+
+  reloadUser() {
+    get(this, 'user').reload();
   },
 });

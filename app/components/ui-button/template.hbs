@@ -1,9 +1,11 @@
-<button class="
-  bg-blue hover:bg-white hover:text-blue text-white
-  border border-blue
-  rounded p-2
+<button
+  class="
+    border border-blue bg-blue
+    hover:bg-white hover:text-blue
+    text-white rounded p-2
   "
   onclick={{action clickAction}}
-  ...attributes>
+  ...attributes
+  >
   {{yield}}
 </button>

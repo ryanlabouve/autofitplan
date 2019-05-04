@@ -6,6 +6,6 @@ export default DS.Model.extend({
   loggedExercises: hasMany(),
   week: attr('number'),
 
-  startedAt: attr(),
+  startedAt: attr('string'),
   endedAt: attr('string'),
 });

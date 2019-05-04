@@ -10,7 +10,9 @@
 {{/if}}
 <div class="bg-grey-lighter p-3 flex">
   <div class="flex-grow">
-    <img src="/images/4.png" alt="logo" style="width: 140px;"/>
+    {{#link-to "application"}}
+      <img src="/images/4.png" alt="logo" style="width: 140px;"/>
+    {{/link-to}}
   </div>
   <div class="">
     <button onclick={{action (mut navOpen) true}} data-test-nav>
