@@ -9,15 +9,15 @@ import {
 
 import {authenticateSession} from 'ember-simple-auth/test-support';
 
-module('Acceptance | session test', function(hooks) {
+module('Acceptance | logged macrocycle test', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
   test('Can start a workout', async function(assert) {
     await setupDefaultPrograms(this.server);
-    let {firstLoggedSession} = await startNewProgram(this.server);
+    let {loggedMacrocycle} = await startNewProgram(this.server);
 
-    await visit(`/logged-sessions/${firstLoggedSession.id}`);
+    await visit(`/program/${loggedMacrocycle.id}`);
     let session = findAll('[data-test-session]');
     let startSessionButton = session[0].querySelector(
       '[data-test-start-session-button]',

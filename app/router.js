@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('performance-tests', {path: '/performance-tests/:id'});
     this.route('program', {path: '/program/:id'});
     this.route('new-program');
+    this.route('logged-sessions', {path: '/logged-sessions/:id'});
   });
   this.route('login');
   this.route('token', {path: '/token/:token'});

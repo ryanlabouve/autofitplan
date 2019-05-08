@@ -169,6 +169,9 @@ let startNewProgram = async (server, user, macrocycle) => {
 
   return {
     loggedMacrocycle,
+    firstLoggedSession:
+      loggedMacrocycle.loggedMesocycles.models.firstObject.loggedMicrocycles
+        .models.firstObject.loggedSessions.models.firstObject,
   };
 };
 

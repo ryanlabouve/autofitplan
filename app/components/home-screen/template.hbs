@@ -1,6 +1,11 @@
 <div data-test-home-screen-items>
   {{#each homeScreenItems as |homeScreenItem|}}
     <div data-test-home-screen-item>
+
+      {{#if homeScreenItem.title}}
+        <h1 data-test-home-screen-title>{{homeScreenItem.title}}</h1>
+      {{/if}}
+
       {{#if homeScreenItem.loggedMacrocycle}}
         <Box>
           <h2>Active Program</h2>
@@ -15,6 +20,18 @@
           <h2>Active Performance Test</h2>
           {{link-to "Continue Performance Test" "protected.performance-tests" homeScreenItem.performanceTest.id
             data-test-go-to-performance-test="true"
+          }}
+        </Box>
+      {{/if}}
+
+
+
+      {{#if homeScreenItem.loggedSession}}
+        <Box>
+          <p>Week: {{homeScreenItem.loggedSession.week}}</p>
+          <h2>{{homeScreenItem.loggedSession.session.name}}</h2>
+          {{link-to "Go to workout" "protected.logged-sessions" homeScreenItem.loggedSession.id
+            data-test-go-to-logged-session="true"
           }}
         </Box>
       {{/if}}

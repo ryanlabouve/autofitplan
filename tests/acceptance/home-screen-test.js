@@ -102,4 +102,33 @@ module('Acceptance | home screen test', function(hooks) {
       'We land on the correct performance test URL',
     );
   });
+
+  test('Can see a single session', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    let {firstLoggedSession} = await startNewProgram(this.server);
+
+    let item = server.create('home-screen-item', {
+      loggedSession: firstLoggedSession,
+    });
+
+    await visit('/');
+
+    await assert.dom('[data-test-home-screen-items]').exists();
+    await assert.dom('[data-test-home-screen-item]').exists({count: 1});
+
+    await click('[data-test-go-to-logged-session]');
+
+    assert.equal(currentURL(), `/logged-sessions/${firstLoggedSession.id}`);
+  });
+
+  test('Can see a header', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    let item = server.create('home-screen-item', {
+      title: 'Something Cool',
+    });
+
+    await visit('/');
+
+    assert.dom('[data-test-home-screen-title]').hasText('Something Cool');
+  });
 });

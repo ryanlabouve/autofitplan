@@ -17,7 +17,7 @@ export default Component.extend({
   loadHomeScreenItems: task(function*() {
     let store = get(this, 'store');
     let homeScreenItems = yield store.query('home-screen-item', {
-      include: 'logged-macrocycle,performance-test',
+      include: 'logged-macrocycle,performance-test,logged-session',
     });
     let items = set(this, 'homeScreenItems', homeScreenItems);
   }),

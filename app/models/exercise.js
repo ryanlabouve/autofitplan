@@ -2,7 +2,7 @@ import DS from 'ember-data';
 const {attr, belongsTo} = DS;
 
 export default DS.Model.extend({
-  session: belongsTo(),
+  session: belongsTo('session', {async: false}),
   loggedExercise: belongsTo('loggedExercise', {async: false}),
   code: attr('string'),
   sets: attr('number'),

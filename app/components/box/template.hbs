@@ -1,4 +1,9 @@
 <div
-  class="border border-grey rounded p-4 my-4" ...attributes>
+  class="
+    border
+    {{if (eq color 'green') 'border-green'}}
+    {{if (eq color 'yellow') 'border-yellow-dark'}}
+    {{if (eq color 'red') 'border-red'}}
+    rounded p-4 my-4" ...attributes>
   {{yield}}
 </div>
