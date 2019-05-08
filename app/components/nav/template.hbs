@@ -1,15 +1,42 @@
 {{#ember-wormhole to="nav"}}
   <div class="absolute pin-y bg-blue w-full z-50">
-    <button onclick={{action closeMenu}} class="float-right">
-      {{fa-icon "close" size="1"}}
-      close
-    </button>
-    {{#if session.isAuthenticated}}
-      {{log currentUser.user}}
-      Logged in as <span data-test-current-user>{{currentUser.email}}</span>
-      <button onclick={{action (queue (action logout) (action closeMenu))}} class="bg-red text-white" data-test-logout>
-        Logout
-      </button>
-    {{/if}}
+    <div class="flex flex-col" style="min-height: 100%;">
+      <div>
+        <button onclick={{action closeMenu}} class="float-right">
+          {{fa-icon "close" size="1"}}
+          close
+        </button>
+        {{#if session.isAuthenticated}}
+          {{log currentUser.user}}
+          Logged in as <span data-test-current-user>{{currentUser.email}}</span>
+        {{/if}}
+      </div>
+      <div class="flex-grow">
+        <div class="text-center">
+          <div>
+            <button
+              class="text-2xl my-2 "
+              onclick={{action (queue (transition-to "protected") (action closeMenu))}}>
+              Home
+            </button>
+          </div>
+          <div>
+            <button
+              class="text-2xl my-2 "
+              onclick={{action (queue (transition-to "protected.new-program") (action closeMenu))}}>
+              New Programs
+            </button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <button
+          onclick={{action (queue (action logout) (action closeMenu))}}
+          class="block w-full py-4 bg-red text-white" data-test-logout
+        >
+            Logout
+          </button>
+      </div>
+    </div>
   </div>
 {{/ember-wormhole}}
