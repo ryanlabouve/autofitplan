@@ -1,5 +1,5 @@
 import {module, test} from 'qunit';
-import {visit, click, currentURL, pauseTest} from '@ember/test-helpers';
+import {visit, click, currentURL} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import {
@@ -59,7 +59,7 @@ module('Acceptance | home screen test', function(hooks) {
 
     let {loggedMacrocycle} = await startNewProgram(this.server);
 
-    let item = server.create('home-screen-item', {
+    let _item = server.create('home-screen-item', {
       loggedMacrocycle,
     });
 
@@ -86,7 +86,7 @@ module('Acceptance | home screen test', function(hooks) {
       performanceTest,
     });
 
-    let item = server.create('home-screen-item', {
+    let _item = server.create('home-screen-item', {
       performanceTest,
     });
 
@@ -107,7 +107,7 @@ module('Acceptance | home screen test', function(hooks) {
     await setupDefaultPrograms(this.server);
     let {firstLoggedSession} = await startNewProgram(this.server);
 
-    let item = server.create('home-screen-item', {
+    let _item = server.create('home-screen-item', {
       loggedSession: firstLoggedSession,
     });
 
@@ -123,7 +123,7 @@ module('Acceptance | home screen test', function(hooks) {
 
   test('Can see a header', async function(assert) {
     await setupDefaultPrograms(this.server);
-    let item = server.create('home-screen-item', {
+    let _item = server.create('home-screen-item', {
       title: 'Something Cool',
     });
 

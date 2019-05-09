@@ -1,5 +1,5 @@
 import DS from 'ember-data';
-const {belongsTo, attr} = DS;
+const {belongsTo, attr, hasMany} = DS;
 
 export default DS.Model.extend({
   exercise: belongsTo('exercise', {async: false}),
@@ -9,4 +9,5 @@ export default DS.Model.extend({
   completed: attr('boolean'),
   skipped: attr('boolean'),
   failed: attr('boolean'),
+  loggedExerciseHistory: hasMany('logged-exercises'),
 });

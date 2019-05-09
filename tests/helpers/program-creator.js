@@ -1,5 +1,3 @@
-import moment from 'moment';
-
 import {
   authenticateSession,
   currentSession,
@@ -37,6 +35,7 @@ let setupDefaultCycles = server => {
 
   let microcycle = server.create('microcycle', {
     mesocycle,
+    timesToRepeat: 12,
   });
 
   let sessionMonday = server.create('session', {
@@ -93,7 +92,10 @@ let setupBasicProgram = server => {
   let user = server.create('user');
   let macrocycle = server.create('macrocycle', {user});
   let mesocycle = server.create('mesocycle', {macrocycle});
-  let microcycle = server.create('microcycle', {mesocycle});
+  let microcycle = server.create('microcycle', {
+    mesocycle,
+    timesToRepeat: 12,
+  });
 
   let days = ['Monday', 'Wednesday', 'Friday'];
 
@@ -111,24 +113,14 @@ let setupBasicProgram = server => {
 };
 
 let logSomeSessions = server => {
-  if (!server.db.sessions.length) {
+  if (!server.db.loggedSessions.length) {
     throw 'asdfasdfasd';
   }
 
-  let sessions = server.db.sessions;
-  sessions.slice(0, 4).forEach(session => {
-    let loggedSession = server.create('logged-session', {
-      sessionId: session.id,
-      endedAt: moment().format(),
-      week: 1,
-    });
+  let {loggedSessions} = server.db;
 
-    session.exerciseIds.map(exerciseId => {
-      server.create('logged-exercise', {
-        exerciseId: exerciseId,
-        loggedSession,
-      });
-    });
+  loggedSessions.slice(0, 4).forEach(loggedSession => {
+    server.db.loggedSessions.update(loggedSession.id, {endedAt: new Date()});
   });
 };
 
@@ -146,32 +138,41 @@ let startNewProgram = async (server, user, macrocycle) => {
       mesocycle,
     });
     mesocycle.microcycles.models.forEach(function(microcycle) {
-      let loggedMicrocycle = server.create('logged-microcycle', {
-        microcycle,
-        loggedMesocycle,
-      });
-
-      microcycle.sessions.models.forEach(function(session) {
-        let loggedSession = server.create('logged-session', {
-          loggedMicrocycle,
-          session,
+      for (let i = 0; i < microcycle.timesToRepeat; i++) {
+        let loggedMicrocycle = server.create('logged-microcycle', {
+          microcycle,
+          week: i + 1,
+          loggedMesocycle,
         });
 
-        session.exercises.models.forEach(function(exercise) {
-          server.create('logged-exercise', {
-            exercise,
-            loggedSession,
+        microcycle.sessions.models.forEach(function(session) {
+          let loggedSession = server.create('logged-session', {
+            loggedMicrocycle,
+            session,
+          });
+
+          session.exercises.models.forEach(function(exercise) {
+            server.create('logged-exercise', {
+              exercise,
+              loggedSession,
+            });
           });
         });
-      });
+        // break;
+      }
     });
   });
 
+  let loggedSessions = loggedMacrocycle.loggedMesocycles.models.firstObject.loggedMicrocycles.models.map(
+    lm => lm.loggedSessions.models.firstObject,
+  );
+  // debugger;
+  // let firstLoggedSession =
+
   return {
     loggedMacrocycle,
-    firstLoggedSession:
-      loggedMacrocycle.loggedMesocycles.models.firstObject.loggedMicrocycles
-        .models.firstObject.loggedSessions.models.firstObject,
+    firstLoggedSession: loggedSessions[0],
+    loggedSessions,
   };
 };
 

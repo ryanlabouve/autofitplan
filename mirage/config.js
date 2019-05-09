@@ -8,6 +8,7 @@ export default function() {
     return req.requestBody;
   });
 
+  this.get('/users/:id');
   this.get('/users/me', ({users}, req) => {
     let res = new Mirage.Response(404, {}, {});
 
@@ -52,7 +53,18 @@ export default function() {
   this.post('/logged-sessions');
   this.patch('/logged-sessions/:id');
 
-  this.get('/logged-exercises');
+  this.get('/logged-exercises', ({loggedExercises}, request) => {
+    // To support filtering by IDS for loggedExerciseHistory
+    let ids = request.queryParams['filter[loggedExerciseIds]'];
+    let returnedLoggedExercises = null;
+    if (ids) {
+      returnedLoggedExercises = loggedExercises.find(ids.split(','));
+    } else {
+      returnedLoggedExercises = loggedExercises.all();
+    }
+
+    return returnedLoggedExercises;
+  });
   this.get('/logged-exercises/:id');
   this.post('/logged-exercises');
   this.patch('/logged-exercises/:id');

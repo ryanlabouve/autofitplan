@@ -60,6 +60,18 @@
       {{/each}}
     </select>
   </div>
+  <div>
+    {{#if (not showHistory)}}
+      <button onClick={{action (queue (action (mut showHistory) true) (perform loadLoggedExerciseHistory))}} class="inline-block float-right mt-4 bold text-xs text-grey-dark underline" data-test-move-history>
+        View {{loggedExercise.name}} history
+      </button>
+    {{/if}}
+    {{#if showHistory}}
+      <button onClick={{action (mut showHistory) false}} class="inline-block float-right mt-4 bold text-xs text-grey-dark text-underline" data-test-move-history>
+        Hide {{loggedExercise.name}} history
+      </button>
+    {{/if}}
+  </div>
   <div class="mt-2">
     {{#if loggedSession}}
       <input
@@ -78,4 +90,35 @@
         {{fa-icon "spinner" class=" mt-2 spinspin text-red float-right"}}
       {{/if}}
   </div>
+
+  {{#if showHistory}}
+    <div class="clear clearfix p-4 bg-blue-lightest">
+      <table>
+        <thead>
+          <tr>
+            <td>
+              name
+            </td>
+            <td>
+              weight
+            </td>
+            <td>
+              date
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each loggedExerciseHistory as |oldLoggedExercise|}}
+            <tr data-test-move-histories>
+              <td>{{oldLoggedExercise.name}}</td>
+              <td>{{oldLoggedExercise.weight}}</td>
+              <td>{{moment oldLoggedExercise.loggedSession.endedAt 'YYYY-MM-DD'}}</td>
+            </tr>
+          {{else}}
+            <tr data-test-no-move-history-found><td>No History Found</td></tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{/if}}
 </Box>

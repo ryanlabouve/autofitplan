@@ -22,8 +22,6 @@ module('Acceptance | performance test', function(hooks) {
 
     await visit('/');
 
-    assert.dom('h2').hasText('Time to test your performance!');
-
     await click('[data-test-new-performance-test]');
 
     assert.equal(
@@ -71,19 +69,21 @@ module('Acceptance | performance test', function(hooks) {
     await authenticateSession();
     const {performanceTest} = startNewPerformanceTest(this.server);
 
+    let id = performanceTest.loggedExercises.models.firstObject.id;
+
     await visit(`/performance-tests/${performanceTest.id}`);
 
     await fillIn(
-      '[data-test-performance-test-exercises]:first-child [data-test-exercise-weight]',
+      `[data-test-performance-test-exercise-id="${id}"] [data-test-exercise-weight]`,
       200,
     );
 
     await click('[data-test-save-performance-test]');
 
-    // TODO: why does this have to be 2?
-    let lastLoggedExercise = server.db.loggedExercises[2];
-    assert.equal(lastLoggedExercise.weight, 200);
-    assert.equal(lastLoggedExercise.completed, true);
+    let exercise = performanceTest.loggedExercises.models.firstObject;
+    exercise.reload();
+    assert.equal(exercise.attrs.weight, 200);
+    assert.equal(exercise.attrs.completed, true);
   });
 
   test('Can see a logged exercise for a performance test exercise', async function(assert) {
@@ -100,12 +100,17 @@ module('Acceptance | performance test', function(hooks) {
 
     const {performanceTest} = startNewPerformanceTest(this.server);
 
+    let id = performanceTest.loggedExercises.models.firstObject.id;
+
     await visit(`/performance-tests/${performanceTest.id}`);
 
-    await click('[data-test-skip-performance-test]');
+    await click(
+      `[data-test-performance-test-exercise-id="${id}"] [data-test-skip-performance-test]`,
+    );
 
-    let lastLoggedExercise = server.db.loggedExercises[2];
-    assert.equal(lastLoggedExercise.skipped, true);
+    let exercise = performanceTest.loggedExercises.models.firstObject;
+    exercise.reload();
+    assert.equal(exercise.attrs.skipped, true);
   });
 
   test('Can fail a logged exercise for a performance test exercise', async function(assert) {
@@ -117,11 +122,15 @@ module('Acceptance | performance test', function(hooks) {
 
     const {performanceTest} = startNewPerformanceTest(this.server);
 
+    let id = performanceTest.loggedExercises.models.firstObject.id;
     await visit(`/performance-tests/${performanceTest.id}`);
 
-    await click('[data-test-fail-performance-test]');
+    await click(
+      `[data-test-performance-test-exercise-id="${id}"] [data-test-fail-performance-test]`,
+    );
 
-    let lastLoggedExercise = server.db.loggedExercises[2];
-    assert.equal(lastLoggedExercise.failed, true);
+    let exercise = performanceTest.loggedExercises.models.firstObject;
+    exercise.reload();
+    assert.equal(exercise.attrs.failed, true);
   });
 });

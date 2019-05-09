@@ -10,5 +10,13 @@
         exercise
       )
     }}
+
+    {{!view-move
+      exercise=exercise
+      loggedExercise=(get-logged-exercise
+        model.performanceTest.loggedExercises
+        exercise
+      )
+    }}
   </div>
 {{/each}}

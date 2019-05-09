@@ -1,5 +1,6 @@
 import Component from '@ember/component';
 import {computed, get, set} from '@ember/object';
+import {alias} from '@ember/object/computed';
 import {task, timeout} from 'ember-concurrency';
 import {inject as service} from '@ember/service';
 import EXERCISE_MAP from 'autofitplan/utils/exercise-map';
@@ -8,6 +9,8 @@ import {assert} from '@ember/debug';
 const SAVE_DELAY = 800;
 
 export default Component.extend({
+  store: service(),
+
   loggedExerciseService: service('logged-exercise'),
   rawExercise: computed('exercise.code', function() {
     let code = get(this, 'exercise.code');
@@ -18,12 +21,48 @@ export default Component.extend({
     return rawExercise;
   }),
 
+  loggedExerciseHistory: alias(
+    'loadLoggedExerciseHistory.lastSuccessful.value',
+  ),
+
+  loadLoggedExerciseHistory: task(function*() {
+    let loggedExercise = get(this, 'loggedExercise');
+    let loggedExerciseIds = loggedExercise
+      .hasMany('loggedExerciseHistory')
+      .ids();
+
+    if (loggedExerciseIds.length === 0) {
+      return [];
+    }
+
+    let store = get(this, 'store');
+
+    let oldLoggedExercises = yield store.query('logged-exercise', {
+      filter: {
+        loggedExerciseIds: loggedExerciseIds.join(','),
+      },
+      include: 'logged-session',
+    });
+    return oldLoggedExercises;
+  }),
+
+  updateDefaultLoggedExerciseNameIfBlank() {
+    let loggedExercise = get(this, 'loggedExercise');
+
+    if (!loggedExercise.get('name')) {
+      loggedExercise.set('name', get(this, 'name'));
+    }
+  },
+
   didInsertElement() {
     set(
       this,
       'selectedExercise',
       get(this, 'rawExercise.exercises.firstObject'),
     );
+
+    // TODO handle this in a more sophisticated way on the backend
+    this.updateDefaultLoggedExerciseNameIfBlank();
   },
 
   name: computed('exercise.code', function() {
@@ -39,15 +78,6 @@ export default Component.extend({
       },
     );
   }).restartable(),
-
-  updateLoggedExerciseName: task(function*(name) {
-    yield timeout(SAVE_DELAY);
-    let loggedExercise = get(this, 'loggedExercise');
-    if (loggedExercise) {
-      loggedExercise.set('name', name);
-      yield loggedExercise.save();
-    }
-  }),
 
   updateLoggedExerciseName: task(function*(name) {
     yield timeout(SAVE_DELAY);
@@ -92,16 +122,15 @@ export default Component.extend({
   }),
 
   color: computed('loggedExercise.{completed,skipped,failed}', function() {
-    let loggedExercise = get(this, 'loggedExercise');
-    if (loggedExercise.get('completed') === true) {
+    if (get(this, 'loggedExercise.completed') === true) {
       return 'green';
     }
 
-    if (loggedExercise.get('failed') === true) {
+    if (get(this, 'loggedExercise.failed') === true) {
       return 'red';
     }
 
-    if (loggedExercise.get('skipped') === true) {
+    if (get(this, 'loggedExercise.skipped') === true) {
       return 'yellow';
     }
   }),
