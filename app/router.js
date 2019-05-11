@@ -11,6 +11,7 @@ Router.map(function() {
     this.route('performance-tests', {path: '/performance-tests/:id'});
     this.route('program', {path: '/program/:id'});
     this.route('new-program');
+    this.route('goals-and-progress');
     this.route('logged-sessions', {path: '/logged-sessions/:id'});
     this.route('support-and-feedback', {path: '/support-and-feedback'});
   });
