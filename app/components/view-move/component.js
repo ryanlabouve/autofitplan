@@ -27,22 +27,7 @@ export default Component.extend({
 
   loadLoggedExerciseHistory: task(function*() {
     let loggedExercise = get(this, 'loggedExercise');
-    let loggedExerciseIds = loggedExercise
-      .hasMany('loggedExerciseHistory')
-      .ids();
-
-    if (loggedExerciseIds.length === 0) {
-      return [];
-    }
-
-    let store = get(this, 'store');
-
-    let oldLoggedExercises = yield store.query('logged-exercise', {
-      filter: {
-        loggedExerciseIds: loggedExerciseIds.join(','),
-      },
-      include: 'logged-session',
-    });
+    let oldLoggedExercises = yield loggedExercise.get('loggedExerciseHistory');
     return oldLoggedExercises;
   }),
 

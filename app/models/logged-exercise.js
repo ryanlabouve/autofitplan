@@ -3,7 +3,7 @@ const {belongsTo, attr, hasMany} = DS;
 
 export default DS.Model.extend({
   exercise: belongsTo('exercise', {async: false}),
-  loggedSession: belongsTo('logged-session', {async: false}),
+  loggedSession: belongsTo('logged-session'),
   weight: attr('number'),
   name: attr('string'),
   completed: attr('boolean'),
