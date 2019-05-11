@@ -35,7 +35,10 @@ export default Component.extend({
     let loggedExercise = get(this, 'loggedExercise');
 
     if (!loggedExercise.get('name')) {
-      loggedExercise.set('name', get(this, 'name'));
+      let name =
+        get(this, 'rawExercise.exercises.firstObject.name') ||
+        get(this, 'name');
+      loggedExercise.set('name', name);
     }
   },
 

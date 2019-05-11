@@ -63,7 +63,7 @@
   <div>
     {{#if (not showHistory)}}
       <button onClick={{action (queue (action (mut showHistory) true) (perform loadLoggedExerciseHistory))}} class="inline-block float-right mt-4 bold text-xs text-grey-dark underline" data-test-move-history>
-        View {{loggedExercise.name}} history
+        View {{name}} history
       </button>
     {{/if}}
     {{#if showHistory}}
