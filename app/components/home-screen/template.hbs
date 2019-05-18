@@ -1,9 +1,78 @@
 <div data-test-home-screen-items>
   {{#each homeScreenItems as |homeScreenItem|}}
-    <div data-test-home-screen-item>
-
+    <div data-test-home-screen-item="{{homeScreenItem.duty}}">
       {{#if homeScreenItem.title}}
         <h1 data-test-home-screen-title>{{homeScreenItem.title}}</h1>
+      {{/if}}
+
+      {{#if (eq homeScreenItem.duty 'log-weight')}}
+        {{log homeScreenItem}}
+        {{log "HomeScreenItem::LogWeight"}}
+        <Box>
+          <form onsubmit={{perform logWeightForToday homeScreenItem}}>
+              <UiLabel class="mt-4">
+                Weight (in pounds)
+              </UiLabel>
+              <UiInput
+                type="text"
+                onchange={{action (mut todaysWeight) value="target.value"}}
+                data-test-input-weight
+                value={{or todaysWeight homeScreenItem.dailyMeasurement.weight}}
+            />
+
+          <UiButton
+            class="mt-8" type="submit" data-test-log-weight
+            onclick="javascript:this.form.submit()"
+            >
+              Log Weight
+            </UiButton>
+          </form>
+        </Box>
+      {{/if}}
+
+      {{#if (eq homeScreenItem.duty 'log-macros')}}
+        <Box>
+          <form onsubmit={{perform logMacrosForToday homeScreenItem}}>
+            <div>
+              <UiLabel class="mt-4">
+                Carbs
+              </UiLabel>
+              <UiInput
+                type="text"
+                onchange={{action (mut todaysCarb) value="target.value"}}
+                data-test-input-carb
+                value={{or todaysCarb homeScreenItem.dailyMeasurement.carb}}
+              />
+            </div>
+            <div>
+              <UiLabel class="mt-4">
+                Fat
+              </UiLabel>
+              <UiInput
+                type="text"
+                onchange={{action (mut todaysFat) value="target.value"}}
+                data-test-input-fat
+                value={{or todaysFat homeScreenItem.dailyMeasurement.fat}} />
+            </div>
+            <div>
+              <UiLabel class="mt-4">
+                Protein
+              </UiLabel>
+              <UiInput
+                type="text"
+                onchange={{action (mut todaysProtein) value="target.value"}}
+                data-test-input-protein
+                value={{or todaysProtein homeScreenItem.dailyMeasurement.protein}}
+              />
+            </div>
+            <UiButton
+              class="mt-8"
+              onclick="javascript:this.form.submit()"
+              type="submit" data-test-log-macros>
+              Log Weight
+            </UiButton>
+          </form>
+        </Box>
       {{/if}}
 
       {{#if homeScreenItem.loggedMacrocycle}}

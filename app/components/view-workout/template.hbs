@@ -16,14 +16,14 @@
 
     <div class="float-right">
       {{#if (not loggedSession.startedAt)}}
-        <button onclick={{action startSession}} class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" data-test-start-session-button>
+        <button onclick={{action startSession}} class="bg-blue-500 hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" data-test-start-session-button>
           Start Session
         </button>
       {{else}}
         {{#if loggedSession.endedAt}}
           Finished: {{moment-format loggedSession.endedAt 'YYYY-MM-DD [at] h:mm a'}}
         {{else}}
-          <button onclick={{action endSession}} class="bg-red hover:bg-red-dark text-white font-bold py-2 px-4 rounded" data-test-end-session-button>
+          <button onclick={{action endSession}} class="bg-red-500 hover:bg-red-dark text-white font-bold py-2 px-4 rounded" data-test-end-session-button>
             End Session
           </button>
         {{/if}}

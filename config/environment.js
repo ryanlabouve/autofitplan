@@ -24,6 +24,12 @@ module.exports = function(environment) {
     API: {},
   };
 
+  if (environment === 'test') {
+    ENV['flashMessageDefaults'] = {
+      timeout: 0,
+    };
+  }
+
   if (process.env.ENABLE_MIRAGE) {
     ENV['ember-cli-mirage'] = {
       enabled: true,

@@ -5,7 +5,7 @@
   {{#if showOptions}}
     <div
       style="height: 2.5rem; width: 2.5rem; line-height: 2.5rem;"
-      class="rounded-full bg-green text-white text-center inline-block mr-2"
+      class="rounded-full bg-green-500 text-white text-center inline-block mr-2"
       onClick={{action 'thenClose' onComplete}}
       data-test-dot-dot-complete
     >
@@ -14,7 +14,7 @@
 
     <div
       style="height: 2.5rem; width: 2.5rem; line-height: 2.5rem;"
-      class="rounded-full bg-yellow text-white text-center inline-block mr-2"
+      class="rounded-full bg-yellow-500 text-white text-center inline-block mr-2"
 
       onClick={{action 'thenClose' onSkip}}
       data-test-dot-dot-skip
@@ -24,7 +24,7 @@
 
     <div
       style="height: 2.5rem; width: 2.5rem; line-height: 2.5rem;"
-      class="rounded-full bg-red text-white text-center inline-block mr-2"
+      class="rounded-full bg-red-500 text-white text-center inline-block mr-2"
       onClick={{action 'thenClose' onFail}}
 
       data-test-dot-dot-fail
@@ -43,7 +43,7 @@
     <div
       onClick={{action (mut showOptions) true}}
       style="height: 2.5rem; width: 2.5rem; line-height: 2.5rem;"
-      class="rounded-full bg-purple text-white text-center inline-block"
+      class="rounded-full bg-purple-500 text-white text-center inline-block"
       data-test-dot-dot-dot
       >
       <img src="/icons/more.svg" style="width: 60%; vertical-align: middle;">

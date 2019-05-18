@@ -79,4 +79,7 @@ export default function() {
   this.patch('/performance-tests/:id');
 
   this.get('/home-screen-items');
+
+  this.post('/daily-measurements');
+  this.patch('/daily-measurements/:id');
 }

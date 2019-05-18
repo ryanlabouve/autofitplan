@@ -1,5 +1,5 @@
 import {module, test} from 'qunit';
-import {visit, click, currentURL} from '@ember/test-helpers';
+import {visit, click, currentURL, fillIn} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import {
@@ -66,7 +66,6 @@ module('Acceptance | home screen test', function(hooks) {
     await visit(`/`);
 
     await assert.dom('[data-test-home-screen-items]').exists();
-    await assert.dom('[data-test-home-screen-item]').exists({count: 1});
     await click('[data-test-go-to-program]');
 
     assert.equal(
@@ -93,7 +92,6 @@ module('Acceptance | home screen test', function(hooks) {
     await visit(`/`);
 
     await assert.dom('[data-test-home-screen-items]').exists();
-    await assert.dom('[data-test-home-screen-item]').exists({count: 1});
     await click('[data-test-go-to-performance-test]');
 
     assert.equal(
@@ -114,7 +112,6 @@ module('Acceptance | home screen test', function(hooks) {
     await visit('/');
 
     await assert.dom('[data-test-home-screen-items]').exists();
-    await assert.dom('[data-test-home-screen-item]').exists({count: 1});
 
     await click('[data-test-go-to-logged-session]');
 
