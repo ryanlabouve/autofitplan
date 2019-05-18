@@ -1,4 +1,8 @@
-@import 'tailwind';
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
 
 body {
   font-family: 'Roboto', sans-serif;
@@ -30,8 +34,4 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-}
-
-.bg-red {
-  background-color: red;
 }
