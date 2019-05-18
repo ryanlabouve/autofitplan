@@ -24,27 +24,6 @@ export default Component.extend({
     let _items = set(this, 'homeScreenItems', homeScreenItems);
   }),
 
-  logWeightForToday: task(function*(homeScreenItem, e) {
-    e.preventDefault();
-
-    let store = get(this, 'store');
-    let flashMessages = get(this, 'flashMessages');
-    let dm = get(homeScreenItem, 'dailyMeasurement');
-    try {
-      if (!dm) {
-        dm = yield store.createRecord('daily-measurement');
-      }
-
-      set(dm, 'weight', get(this, 'todaysWeight'));
-      yield dm.save();
-      dm.get('homeScreenItems').pushObject(homeScreenItem);
-      flashMessages.success('Successfully saved!');
-    } catch (e) {
-      flashMessages.danger('Fail!');
-      console.error(e);
-    }
-  }),
-
   logMacrosForToday: task(function*(homeScreenItem, e) {
     e.preventDefault();
 

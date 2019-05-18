@@ -6,28 +6,10 @@
       {{/if}}
 
       {{#if (eq homeScreenItem.duty 'log-weight')}}
-        {{log homeScreenItem}}
-        {{log "HomeScreenItem::LogWeight"}}
-        <Box>
-          <form onsubmit={{perform logWeightForToday homeScreenItem}}>
-              <UiLabel class="mt-4">
-                Weight (in pounds)
-              </UiLabel>
-              <UiInput
-                type="text"
-                onchange={{action (mut todaysWeight) value="target.value"}}
-                data-test-input-weight
-                value={{or todaysWeight homeScreenItem.dailyMeasurement.weight}}
-            />
-
-          <UiButton
-            class="mt-8" type="submit" data-test-log-weight
-            onclick="javascript:this.form.submit()"
-            >
-              Log Weight
-            </UiButton>
-          </form>
-        </Box>
+        <HomeScreenItem::LogWeight
+          @homeScreenItem={{homeScreenItem}}
+          @dailyMeasurement={{homeScreenItem.dailyMeasurement}}
+        />
       {{/if}}
 
       {{#if (eq homeScreenItem.duty 'log-macros')}}

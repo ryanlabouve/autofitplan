@@ -1,2 +1,28 @@
-derp
-{{yield}}
+<Box
+  @color={{color}}
+  >
+
+  {{#if isComplete}}
+    <div data-test-logged-weight>
+      {{fa-icon "check"}}
+    </div>
+  {{/if}}
+  <form onsubmit={{perform logWeightForToday this.homeScreenItem}}>
+      <UiLabel class="mt-4">
+        Weight (in pounds)
+      </UiLabel>
+      <UiInput
+        type="text"
+        onchange={{action (mut todaysWeight) value="target.value"}}
+        data-test-input-weight
+        value={{or todaysWeight this.dailyMeasurement.weight}}
+    />
+
+  <UiButton
+    class="mt-8" type="submit" data-test-log-weight
+    onclick="javascript:this.form.submit()"
+    >
+      Log Weight
+    </UiButton>
+  </form>
+</Box>
