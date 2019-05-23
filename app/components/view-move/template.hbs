@@ -1,5 +1,6 @@
 <Box
   @color={{color}}
+  class="relative mt-8"
   >
   <div class="clear clearfix">
     <div class="text-lg font-bold float-left">
@@ -16,7 +17,7 @@
       {{/if}}
       {{name}}
     </div>
-    <div class="float-right">
+    <div class="absolute top-0 right-0" style="margin-top: -1.25rem; margin-right: 0.75em;">
       <Dotdotdot
         @onComplete={{perform completeLoggedExercise}}
         @onSkip={{perform skipLoggedExercise}}
