@@ -45,6 +45,7 @@ module('Acceptance | home screen | log weight test', function(hooks) {
     });
 
     await visit('/');
+    await click('[data-test-edit-weight]');
     await assert
       .dom('[data-test-home-screen-item="log-weight"]')
       .exists({count: 1});
@@ -85,7 +86,7 @@ module('Acceptance | home screen | log weight test', function(hooks) {
     assert.equal(server.db.dailyMeasurements.lastObject.protein, 190.0);
   });
 
-  test('Can log macros for a day (with no daily measurement already created)', async function(assert) {
+  test('Can log macros for a day (with daily measurement already created)', async function(assert) {
     await setupDefaultPrograms(this.server);
     await startNewProgram(this.server);
 
@@ -101,6 +102,8 @@ module('Acceptance | home screen | log weight test', function(hooks) {
     });
 
     await visit('/');
+    await click('[data-test-edit-macros]');
+
     await assert
       .dom('[data-test-home-screen-item="log-macros"]')
       .exists({count: 1});

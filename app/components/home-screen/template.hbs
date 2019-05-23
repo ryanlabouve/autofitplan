@@ -13,48 +13,11 @@
       {{/if}}
 
       {{#if (eq homeScreenItem.duty 'log-macros')}}
-        <Box>
-          <form onsubmit={{perform logMacrosForToday homeScreenItem}}>
-            <div>
-              <UiLabel class="mt-4">
-                Carbs
-              </UiLabel>
-              <UiInput
-                type="text"
-                onchange={{action (mut todaysCarb) value="target.value"}}
-                data-test-input-carb
-                value={{or todaysCarb homeScreenItem.dailyMeasurement.carb}}
-              />
-            </div>
-            <div>
-              <UiLabel class="mt-4">
-                Fat
-              </UiLabel>
-              <UiInput
-                type="text"
-                onchange={{action (mut todaysFat) value="target.value"}}
-                data-test-input-fat
-                value={{or todaysFat homeScreenItem.dailyMeasurement.fat}} />
-            </div>
-            <div>
-              <UiLabel class="mt-4">
-                Protein
-              </UiLabel>
-              <UiInput
-                type="text"
-                onchange={{action (mut todaysProtein) value="target.value"}}
-                data-test-input-protein
-                value={{or todaysProtein homeScreenItem.dailyMeasurement.protein}}
-              />
-            </div>
-            <UiButton
-              class="mt-8"
-              onclick="javascript:this.form.submit()"
-              type="submit" data-test-log-macros>
-              Log Weight
-            </UiButton>
-          </form>
-        </Box>
+        <HomeScreenItem::LogMacros
+          @homeScreenItem={{homeScreenItem}}
+          @dailyMeasurement={{homeScreenItem.dailyMeasurement}}
+        />
+
       {{/if}}
 
       {{#if homeScreenItem.loggedMacrocycle}}

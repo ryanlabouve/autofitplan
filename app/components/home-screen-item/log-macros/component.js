@@ -20,24 +20,47 @@ export default Component.extend({
     }
   }),
 
-  isComplete: computed(function() {
+  isComplete: computed('dailyMeasurement.{id,carb,fat,protein}', function() {
     let homeScreenItem = get(this, 'homeScreenItem');
     let dm = get(homeScreenItem, 'dailyMeasurement');
-    return dm && dm.get('id') && dm.get('weight') ? true : false;
+    return dm &&
+      dm.get('id') &&
+      dm.get('carb') &&
+      dm.get('fat') &&
+      dm.get('protein')
+      ? true
+      : false;
   }),
 
-  logWeightForToday: task(function*(homeScreenItem, e) {
+  logMacrosForToday: task(function*(homeScreenItem, e) {
     e.preventDefault();
 
     let store = get(this, 'store');
-    let flashMessages = get(this, 'flashMessages');
     let dm = get(homeScreenItem, 'dailyMeasurement');
+    let flashMessages = get(this, 'flashMessages');
+
     try {
       if (!dm) {
         dm = yield store.createRecord('daily-measurement');
       }
+    } catch (e) {
+      flashMessages.danger('Fail!');
+      console.error(e);
+    }
 
-      set(dm, 'weight', get(this, 'todaysWeight'));
+    try {
+      if (get(this, 'todaysFat')) {
+        set(dm, 'fat', get(this, 'todaysFat'));
+      }
+
+      if (get(this, 'todaysCarb')) {
+        set(dm, 'carb', get(this, 'todaysCarb'));
+      }
+
+      if (get(this, 'todaysProtein')) {
+        set(dm, 'protein', get(this, 'todaysProtein'));
+      }
+
       yield dm.save();
       dm.get('homeScreenItems').pushObject(homeScreenItem);
       flashMessages.success('Successfully saved!');

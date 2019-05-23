@@ -2,27 +2,57 @@
   @color={{color}}
   >
 
-  {{#if isComplete}}
-    <div data-test-logged-weight>
-      {{fa-icon "check"}}
+  {{#if isCollapsed}}
+    <div class="clear clearfix">
+      <div class="float-right">
+        <UiButton
+          onclick={{action (mut isCollapsed) false}}
+          data-test-edit-weight>
+          edit
+        </UiButton>
+      </div>
+      <span data-test-logged-weight>
+        {{fa-icon "check"}}
+      </span>
+      <strong>Weight</strong>
+      {{dailyMeasurement.weight}}
     </div>
-  {{/if}}
-  <form onsubmit={{perform logWeightForToday this.homeScreenItem}}>
-      <UiLabel class="mt-4">
-        Weight (in pounds)
-      </UiLabel>
-      <UiInput
-        type="text"
-        onchange={{action (mut todaysWeight) value="target.value"}}
-        data-test-input-weight
-        value={{or todaysWeight this.dailyMeasurement.weight}}
-    />
+  {{else}}
+    {{#if isComplete}}
+      <div class="claerfix">
+        <div class="float-right">
+          <UiButton
+            onclick={{action (mut isCollapsed) true}}
+            data-test-hide-weight>
+            hide
+          </UiButton>
+        </div>
 
-  <UiButton
-    class="mt-8" type="submit" data-test-log-weight
-    onclick="javascript:this.form.submit()"
-    >
-      Log Weight
-    </UiButton>
-  </form>
+        <span data-test-logged-weight>
+          {{fa-icon "check"}}
+        </span>
+      </div>
+    {{/if}}
+  {{/if}}
+
+  {{#if (not isCollapsed)}}
+    <form onsubmit={{perform logWeightForToday this.homeScreenItem}}>
+        <UiLabel class="mt-4">
+          Weight (in pounds)
+        </UiLabel>
+        <UiInput
+          type="text"
+          onchange={{action (mut todaysWeight) value="target.value"}}
+          data-test-input-weight
+          value={{or todaysWeight this.dailyMeasurement.weight}}
+      />
+
+    <UiButton
+      class="mt-8" type="submit" data-test-log-weight
+      onclick="javascript:this.form.submit()"
+      >
+        Log Weight
+      </UiButton>
+    </form>
+  {{/if}}
 </Box>

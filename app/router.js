@@ -12,6 +12,7 @@ Router.map(function() {
     this.route('program', {path: '/program/:id'});
     this.route('new-program');
     this.route('goals-and-progress');
+    this.route('macros-and-weight');
     this.route('logged-sessions', {path: '/logged-sessions/:id'});
     this.route('support-and-feedback', {path: '/support-and-feedback'});
   });

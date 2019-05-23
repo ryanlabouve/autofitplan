@@ -1,0 +1,81 @@
+<Box
+  @color={{color}}
+  >
+  {{#if isCollapsed}}
+    <div class="clear clearfix">
+      <div class="float-right">
+        <UiButton
+          onclick={{action (mut isCollapsed) false}}
+          data-test-edit-macros>
+          edit
+        </UiButton>
+      </div>
+      <span data-test-logged-weight>
+        {{fa-icon "check"}}
+      </span>
+      <strong>Macros</strong>
+      {{dailyMeasurement.carb}} Carbs /
+      {{dailyMeasurement.fat}} Fats /
+      {{dailyMeasurement.protein}} Proteins
+    </div>
+  {{else}}
+    {{#if isComplete}}
+      <div class="claerfix">
+        <div class="float-right">
+          <UiButton
+            onclick={{action (mut isCollapsed) true}}
+            data-test-hide-weight>
+            hide
+          </UiButton>
+        </div>
+
+        <span data-test-logged-weight>
+          {{fa-icon "check"}}
+        </span>
+      </div>
+    {{/if}}
+  {{/if}}
+
+  {{#if (not isCollapsed)}}
+    <form onsubmit={{perform logMacrosForToday homeScreenItem}}>
+      <div>
+        <UiLabel class="mt-4">
+          Carbs
+        </UiLabel>
+        <UiInput
+          type="text"
+          onchange={{action (mut todaysCarb) value="target.value"}}
+          data-test-input-carb
+          value={{or todaysCarb homeScreenItem.dailyMeasurement.carb}}
+        />
+      </div>
+      <div>
+        <UiLabel class="mt-4">
+          Fat
+        </UiLabel>
+        <UiInput
+          type="text"
+          onchange={{action (mut todaysFat) value="target.value"}}
+          data-test-input-fat
+          value={{or todaysFat homeScreenItem.dailyMeasurement.fat}} />
+      </div>
+      <div>
+        <UiLabel class="mt-4">
+          Protein
+        </UiLabel>
+        <UiInput
+          type="text"
+          onchange={{action (mut todaysProtein) value="target.value"}}
+          data-test-input-protein
+          value={{or todaysProtein homeScreenItem.dailyMeasurement.protein}}
+        />
+      </div>
+      <UiButton
+        class="mt-8"
+        onclick="javascript:this.form.submit()"
+        type="submit" data-test-log-macros>
+        Log Weight
+      </UiButton>
+    </form>
+  {{/if}}
+</Box>

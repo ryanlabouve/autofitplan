@@ -23,34 +23,4 @@ export default Component.extend({
     });
     let _items = set(this, 'homeScreenItems', homeScreenItems);
   }),
-
-  logMacrosForToday: task(function*(homeScreenItem, e) {
-    e.preventDefault();
-
-    let store = get(this, 'store');
-    let dm = get(homeScreenItem, 'dailyMeasurement');
-    let flashMessages = get(this, 'flashMessages');
-
-    try {
-      if (!dm) {
-        dm = yield store.createRecord('daily-measurement');
-      }
-    } catch (e) {
-      flashMessages.danger('Fail!');
-      console.error(e);
-    }
-
-    try {
-      set(dm, 'fat', get(this, 'todaysFat'));
-      set(dm, 'carb', get(this, 'todaysCarb'));
-      set(dm, 'protein', get(this, 'todaysProtein'));
-
-      yield dm.save();
-      dm.get('homeScreenItems').pushObject(homeScreenItem);
-      flashMessages.success('Successfully saved!');
-    } catch (e) {
-      flashMessages.danger('Fail!');
-      console.error(e);
-    }
-  }),
 });

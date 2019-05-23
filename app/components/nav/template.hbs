@@ -30,6 +30,13 @@
           <div>
             <button
               class="text-2xl my-2 "
+              onclick={{action (queue (transition-to "protected.macros-and-weight") (action closeMenu))}}>
+              Macros & Weight
+            </button>
+          </div>
+          <div>
+            <button
+              class="text-2xl my-2 "
               onclick={{action (queue (transition-to "protected.new-program") (action closeMenu))}}>
               New Programs
             </button>
