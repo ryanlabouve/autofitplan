@@ -4,11 +4,11 @@
   </h1>
 {{else}}
   {{#if error}}
-    <div class="p-3 text-white bg-red text-xl" data-test-login-success-message>
+    <div class="p-3 text-white bg-red-500 text-xl" data-test-login-success-message>
       Something went wrong
     </div>
   {{/if}}
-  <form class="mt-4" onsubmit={{action 'submitLoginForm'}}>
+  <form class="mt-4" action="login" onsubmit={{action 'submitLoginForm'}}>
     <p class="text-4xl">
       Get started with your email
     </p>
@@ -20,6 +20,8 @@
         name="email"
         data-test-email
       >
+    </div>
+    <div class="mt-4" id="notdoctor">
     </div>
     <div class="mt-4">
       <input

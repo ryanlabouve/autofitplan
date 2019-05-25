@@ -11,7 +11,7 @@
         {{#if loggedSession.endedAt}}
           Finished: {{moment-format loggedSession.endedAt 'YYYY-MM-DD [at] h:mm a'}}
         {{else}}
-          <button onclick={{action endSession}} class="bg-red-500 hover:bg-red-dark text-white font-bold py-2 px-4 rounded" data-test-end-session-button>
+          <button onclick={{action endSession}} class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded" data-test-end-session-button>
             End Session
           </button>
         {{/if}}
