@@ -14,7 +14,7 @@ export default Service.extend({
     return `${config.API.host}/api/token`;
   },
   sendMagicLink: task(function*({email, recaptchaKey}) {
-    let data = {data: {email, recaptchaKey}};
+    let data = {data: {email, recaptcha_key: recaptchaKey}};
 
     try {
       let res = yield fetch(this.getAuthLink(), {
