@@ -24,6 +24,7 @@
         <Box>
           <h2>Active Program</h2>
           {{link-to "Continue Working Out" "protected.program" homeScreenItem.loggedMacrocycle.id
+            class="text-blue-500"
             data-test-go-to-program="true"
           }}
         </Box>
@@ -33,6 +34,7 @@
         <Box>
           <h2>Active Performance Test</h2>
           {{link-to "Continue Performance Test" "protected.performance-tests" homeScreenItem.performanceTest.id
+            class="text-blue-500"
             data-test-go-to-performance-test="true"
           }}
         </Box>
@@ -45,6 +47,7 @@
           <p>Week: {{homeScreenItem.loggedSession.week}}</p>
           <h2>{{homeScreenItem.loggedSession.session.name}}</h2>
           {{link-to "Go to workout" "protected.logged-sessions" homeScreenItem.loggedSession.id
+            class="text-blue-500"
             data-test-go-to-logged-session="true"
           }}
         </Box>
