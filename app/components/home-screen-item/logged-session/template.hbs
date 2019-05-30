@@ -1,0 +1,19 @@
+<Box>
+
+  <h2 class="text-xl">
+    {{homeScreenItem.loggedSession.session.name}}
+    <span class="text-gray-500">(Week {{homeScreenItem.loggedSession.week}})</span>
+  </h2>
+  <p>
+    From {{homeScreenItem.loggedSession.session.microcycle.mesocycle.macrocycle.name}}
+  </p>
+
+  <div class="text-center mt-4">
+    <UiButton
+      onClick={{action (transition-to "protected.logged-sessions" homeScreenItem.loggedSession.id)}}
+      data-test-go-to-logged-session="true"
+      >
+      Go to workout
+    </UiButton>
+  </div>
+</Box>

@@ -15,51 +15,60 @@
       {{#if loggedExercise.skipped}}
         <img src="/icons/remove.svg" style="width: 20px;vertical-align: bottom">
       {{/if}}
-      {{name}}
     </div>
     <div class="absolute top-0 right-0" style="margin-top: -1.25rem; margin-right: 0.75em;">
-      <Dotdotdot
-        @onComplete={{perform completeLoggedExercise}}
-        @onSkip={{perform skipLoggedExercise}}
-        @onFail={{perform failLoggedExercise}}
-        >
-        <span data-test-exercise-status>
-          {{#if loggedExercise.completed}}
-            <span class="font-bold text-xs text-green">
-              completed
-            </span>
-          {{/if}}
-          {{#if loggedExercise.skipped}}
-            <span class="font-bold text-xs text-yellow-dark">
-              skipped
-            </span>
-          {{/if}}
-          {{#if loggedExercise.failed}}
-            <span class="font-bold text-xs text-red">
-              failed
-            </span>
-          {{/if}}
-        </span>
-      </Dotdotdot>
+      {{#if loggedSession}}
+        <Dotdotdot
+          @onComplete={{perform completeLoggedExercise}}
+          @onSkip={{perform skipLoggedExercise}}
+          @onFail={{perform failLoggedExercise}}
+          >
+          <span data-test-exercise-status>
+            {{#if loggedExercise.completed}}
+              <span class="font-bold text-xs text-green">
+                completed
+              </span>
+            {{/if}}
+            {{#if loggedExercise.skipped}}
+              <span class="font-bold text-xs text-yellow-dark">
+                skipped
+              </span>
+            {{/if}}
+            {{#if loggedExercise.failed}}
+              <span class="font-bold text-xs text-red">
+                failed
+              </span>
+            {{/if}}
+          </span>
+        </Dotdotdot>
+      {{/if}}
     </div>
   </div>
   <div style="position: relative;" class="mt-2">
-    <div style="display: inline-block; position: absolute; right: 1rem; top: .5rem ; opacity: 0.5">
-      {{fa-icon "exchange"}}
-    </div>
-    <select
-      class="w-full py-2 px-1 bg-gray-100 rounded"
-      style=""
-      onchange={{perform updateLoggedExerciseName value="target.value"}}
-    >
 
-      {{#each rawExercise.exercises as |exercise|}}
+    {{#if (gt rawExercise.exercises.length 1)}}
+      <div style="display: inline-block; position: absolute; right: 1rem; top: .5rem ; opacity: 0.5">
+        {{fa-icon "exchange"}}
+      </div>
+    {{/if}}
 
-        <option value={{exercise.name}} selected={{eq loggedExercise.name exercise.name 'selected'}}>
-          {{exercise.name}}
-        </option>
-      {{/each}}
-    </select>
+    {{#if (eq rawExercise.exercises.length 1)}}
+      <p class="text-lg">{{exercise.defaultExercise}}</p>
+    {{else}}
+      <select
+        class="w-full py-2 px-1 bg-gray-100 rounded"
+        style=""
+        onchange={{perform updateLoggedExerciseName value="target.value"}}
+      >
+        {{#each rawExercise.exercises as |exercise|}}
+          <option value={{exercise.name}} selected={{eq loggedExercise.name exercise.name 'selected'}}>
+            {{exercise.name}}
+          </option>
+        {{else}}
+          No movements found
+        {{/each}}
+      </select>
+    {{/if}}
   </div>
   <div>
     {{#if (not showHistory)}}
@@ -75,21 +84,39 @@
   </div>
   <div class="mt-2">
     {{#if loggedSession}}
-      <input
-        type="number"
-        style="width: 80px;"
-        class="appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline"
-        placeholder="weight in lbs"
-        value={{loggedExercise.weight}}
-        oninput={{perform updateLoggedExercise loggedExercise value="target.value"}}
-        data-test-exercise-weight
-      > lbs
-    {{/if}}
-      {{exercise.sets}} x {{exercise.repsLow}}-{{exercise.repsHigh}} @ {{exercise.rpe}}RPE
-
-      {{#if updateLoggedExercise.isRunning}}
-        {{fa-icon "spinner" class=" mt-2 spinspin text-red float-right"}}
+      {{#if (eq exercise.family "running")}}
+        <input
+          type="number"
+          style="width: 80px;"
+          class="appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline"
+          placeholder="pace"
+          value={{loggedExercise.weight}}
+          oninput={{perform updateLoggedExercise loggedExercise value="target.value"}}
+          data-test-exercise-weight
+        > miles/minute, x {{exercise.sets}} @ {{exercise.rpe}}RPE
+      {{else}}
+        <input
+          type="number"
+          style="width: 80px;"
+          class="appearance-none border py-2 px-3 focus:outline-none focus:shadow-outline"
+          placeholder="weight in lbs"
+          value={{loggedExercise.weight}}
+          oninput={{perform updateLoggedExercise loggedExercise value="target.value"}}
+          data-test-exercise-weight
+        > lbs
       {{/if}}
+    {{/if}}
+
+    {{#if loggedSession}}
+      {{#if (eq exercise.family "running")}}
+      {{else}}
+        {{exercise.sets}} x {{exercise.repsLow}}-{{exercise.repsHigh}} @ {{exercise.rpe}}RPE
+      {{/if}}
+    {{/if}}
+
+    {{#if updateLoggedExercise.isRunning}}
+      {{fa-icon "spinner" class=" mt-2 spinspin text-red float-right"}}
+    {{/if}}
   </div>
 
   {{#if showHistory}}

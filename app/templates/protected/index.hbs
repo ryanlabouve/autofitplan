@@ -5,6 +5,11 @@
       <s.Side
         @activeSide={{eq sides.activeSideName 'one'}}>
 
+        <div class="clearfix">
+          <div class="rounded-full text-xs font-bold text-white bg-purple-300 border border-purple-300 inline-block float-right py-1 px-2">
+            ALPHA
+          </div>
+        </div>
         <div class="text-center mt-2">
           <UiButton
             @clickAction={{perform createNewPerformanceTest}}
@@ -20,13 +25,42 @@
       <s.Side
         @activeSide={{eq sides.activeSideName 'two'}}
         >
-        <h2>Test Your Fitness</h2>
 
-        <p>It's been x weeks since your last test. Time to check your progress.</p>
-        <h3>Bodyweight Tests</h3>
-        <h3>Power Tests</h3>
-        <h3>Cardio Tests</h3>
-        <UiButton onClick={{action (mut sides.activeSideName) 'one'}}>Back</UiButton>
+        <div class="clearfix">
+          <div class="rounded-full text-xs font-bold text-white bg-purple-300 border border-purple-300 inline-block float-right py-1 px-2">
+            ALPHA
+          </div>
+        </div>
+
+        <p class="text-purple-500 my-3">
+          Warning, this feature is in active development! You're welcome to start helping me test and collect data, but the final product will be much more polished than this.
+        </p>
+        <h2 class="text-xl">Test Your Fitness</h2>
+
+        <p>Performance tests create a feedback cycle so you can clearly see how your training is effecting your overall health and fitness.</p>
+
+        <h3 class="text-lg text-gray-800 mt-4">1. Bodyweight Tests</h3>
+        <p class="mt-1">The first gauntlet involves a series of bodyweight challenges: pushups, pullups, etc</p>
+        <p class="mt-1">If these are challenging for you, fear not! We have specific programs designed to help increase your fitness level with body-weight exercises</p>
+        <h3 class="text-lg text-gray-800 mt-3">2. Cardio Tests</h3>
+        <p class="mt-1">The second gauntlet involves a series of cardio challenges: </p>
+        <p class="mt-1">If these are challenging for you, fear not! We have specific programs designed to help increase your fitness level with body-weight exercises</p>
+        <h3 class="text-lg text-gray-800 mt-3">3. Power Tests</h3>
+        <p class="mt-1">The third gauntlet involves a series of power challenges: squat, deadlift, benchpress, and overhead press</p>
+        <p class="mt-1">If these are challenging for you, fear not! We have specific programs designed to help increase your fitness level with body-weight exercises</p>
+        <div class="mt-8 clearfix">
+          <UiButton
+            @clickAction={{perform createNewPerformanceTest}}
+            @disabled={{"false"}}
+            class="float-right"
+            data-test-new-performance-test>
+            Start Performance Test
+          </UiButton>
+
+          <button class="underline text-color-blue-500 float-left" onClick={{action (mut sides.activeSideName) 'one'}}>
+            {{fa-icon "arrow-circle-left"}} Back
+          </button>
+        </div>
       </s.Side>
     </Sides>
   </Box>
@@ -38,6 +72,12 @@
       <s.Side
         @activeSide={{eq sides.activeSideName 'one'}}
         >
+
+        <div class="clearfix">
+          <div class="rounded-full text-xs font-bold text-white bg-green-300 border border-green-300 inline-block float-right py-1 px-2">
+            BETA
+          </div>
+        </div>
         <div class="text-center mt-2">
           <UiButton
             @clickAction={{transition-to "protected.new-program"}}
@@ -52,9 +92,26 @@
       <s.Side
         @activeSide={{eq sides.activeSideName 'two'}}
         >
-        Some info about starting a program
+        <div class="clearfix">
+          <div class="rounded-full text-xs font-bold text-white bg-green-300 border border-green-300 inline-block float-right py-1 px-2">
+            BETA
+          </div>
+        </div>
 
-        <UiButton onClick={{action (mut sides.activeSideName) 'one'}}>Back</UiButton>
+        <p class="text-green-500 my-3">
+          Warning, this feature is fresh out of the oven! You might run into a few bumps, and be missing a few feature, but please by all means click below to get started! Feedback welcome and appreciated.
+        </p>
+        <div class="clearfix">
+          <UiButton
+            @clickAction={{transition-to "protected.new-program"}}
+            class="float-right"
+            data-test-new-program-button>
+            Choose new program
+          </UiButton>
+          <button class="underline text-color-blue-500 float-left" onClick={{action (mut sides.activeSideName) 'one'}}>
+            {{fa-icon "arrow-circle-left"}} Back
+          </button>
+        </div>
       </s.Side>
   </Sides>
   </Box>

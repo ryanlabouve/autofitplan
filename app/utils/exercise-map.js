@@ -275,6 +275,33 @@ const EXERCISE_MAP = {
       },
     ],
   },
+
+  sprint: {
+    name: 'Sprint',
+    exercises: [
+      {
+        name: '400 m',
+      },
+    ],
+  },
+
+  interval: {
+    name: 'Interval',
+    exercises: [
+      {
+        name: '800 m',
+      },
+    ],
+  },
+
+  lsd: {
+    name: 'L.S.D.',
+    exercises: [
+      {
+        name: 'Long Slow Distance Run',
+      },
+    ],
+  },
 };
 
 export default EXERCISE_MAP;

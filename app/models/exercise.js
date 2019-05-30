@@ -9,5 +9,9 @@ export default DS.Model.extend({
   repsLow: attr('number'),
   repsHigh: attr('number'),
   percentRM: attr('number'),
+  // TODO
+  // pace: attr('number'),
   rpe: attr('number'),
+  defaultExercise: attr('string'),
+  family: attr('string'),
 });

@@ -1,8 +1,12 @@
 <div>
-  <div class="bg-grey-500 p-1 m-y-4" data-test-program-name>{{macrocycle.name}}</div>
+
+  {{#link-to "protected.index" class="text-blue-500"}}
+    {{fa-icon "arrow-circle-left"}} Back
+  {{/link-to}}
+  <div class="p-1 my-8 text-xl text-gray-800" data-test-program-name>{{macrocycle.name}} Program Summary</div>
   {{#each loggedMacrocycle.loggedMesocycles as |loggedMesocycle|}}
     {{#each loggedMesocycle.loggedMicrocycles as |loggedMicrocycle|}}
-      <div class="text-3xl mt-4">Week {{loggedMicrocycle.week}}</div>
+      <div class="text-3xl mt-16">Week {{loggedMicrocycle.week}}</div>
       {{#each loggedMicrocycle.loggedSessions as |loggedSession|}}
         {{view-workout
           session=loggedSession.session
