@@ -1,6 +1,36 @@
 <div class="m-2 mt-8 p-2" data-test-session>
-  <div class="cf clearfix">
-    <div class="text-xl mb-4 float-left">{{session.name}}</div>
+  <div class="cf clearfix relative">
+    {{#if loggedSession.endedAt}}
+      <div class="absolute text-green-500" style="left: -1.5rem; top: 4px;">
+        {{fa-icon "check"}}
+      </div>
+    {{/if}}
+    <div class="text-xl mb-4 float-left">
+      {{session.name}}
+      {{#if (not isShowing)}}
+        <button
+          class="
+            opacity-25 hover:opacity-100
+            bg-white hover:shadow-2xl
+            text-gray-500 text-xs
+            px-2 py-1 text-bold border rounded rounded-full uppercase"
+          onclick={{action (mut isShowing) true}}>
+          {{fa-icon "eye"}}
+          show
+        </button>
+      {{else}}
+        <button
+          class="
+            opacity-25 hover:opacity-100
+            bg-white hover:shadow-2xl
+            text-gray-500 text-xs
+            px-2 py-1 text-bold border rounded rounded-full uppercase"
+          onclick={{action (mut isShowing) false}}>
+          {{fa-icon "eye-slash"}}
+          hide
+        </button>
+      {{/if}}
+    </div>
 
     <div class="float-right">
       {{#if (not loggedSession.startedAt)}}
@@ -9,7 +39,9 @@
         </button>
       {{else}}
         {{#if loggedSession.endedAt}}
-          Finished: {{moment-format loggedSession.endedAt 'YYYY-MM-DD [at] h:mm a'}}
+          <span class="text-gray-500 text-sm">
+            Finished: {{moment-format loggedSession.endedAt 'YYYY-MM-DD [at] h:mm a'}}
+          </span>
         {{else}}
           <button onclick={{action endSession}} class="bg-red-500 hover:bg-red-800 text-white font-bold py-2 px-4 rounded" data-test-end-session-button>
             End Session
@@ -18,6 +50,7 @@
       {{/if}}
     </div>
   </div>
+
   {{#if isShowing}}
     {{#each session.exercises as |exercise|}}
       <div data-test-moves>

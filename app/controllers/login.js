@@ -1,4 +1,3 @@
-/* global window, grecaptcah */
 import Controller from '@ember/controller';
 import {get, set} from '@ember/object';
 import {inject as service} from '@ember/service';
@@ -10,7 +9,7 @@ export default Controller.extend({
   magicLink: service(),
 
   _loadRecaptcha() {
-    if (config.environment !== 'testing') {
+    if (config.environment !== 'test') {
       let recaptcha = document.createElement('script');
       recaptcha.setAttribute = 'text/javascript';
       // async defer>
@@ -21,6 +20,7 @@ export default Controller.extend({
     }
   },
 
+  /* eslint-disable */
   afterRecaptchaLoaded() {
     let verifyCallback = function(key) {
       set(this, 'recaptchaKey', key);
@@ -34,6 +34,7 @@ export default Controller.extend({
         });
       });
   },
+  /* eslint-enable */
 
   init() {
     this._super(...arguments);

@@ -19,7 +19,7 @@ export default Component.extend({
     let store = get(this, 'store');
     let homeScreenItems = yield store.query('home-screen-item', {
       include:
-        'logged-macrocycle,performance-test,logged-session.session,daily-measurement',
+        'logged-macrocycle.macrocycle.mesocycle.microcycle,performance-test,logged-session.session.microcycle.mesocycle,daily-measurement',
     });
     let _items = set(this, 'homeScreenItems', homeScreenItems);
   }),

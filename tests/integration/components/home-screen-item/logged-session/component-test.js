@@ -1,9 +1,11 @@
-import { module, test } from 'qunit';
-import { setupRenderingTest } from 'ember-qunit';
-import { render } from '@ember/test-helpers';
+import {module, test} from 'qunit';
+import {setupRenderingTest} from 'ember-qunit';
+import {render} from '@ember/test-helpers';
 import hbs from 'htmlbars-inline-precompile';
 
-module('Integration | Component | home-screen-item/logged-session', function(hooks) {
+module('Integration | Component | home-screen-item/logged-session', function(
+  hooks,
+) {
   setupRenderingTest(hooks);
 
   test('it renders', async function(assert) {
@@ -12,7 +14,7 @@ module('Integration | Component | home-screen-item/logged-session', function(hoo
 
     await render(hbs`{{home-screen-item/logged-session}}`);
 
-    assert.equal(this.element.textContent.trim(), '');
+    assert.ok(this.element.textContent.trim(), '');
 
     // Template block usage:
     await render(hbs`
@@ -21,6 +23,6 @@ module('Integration | Component | home-screen-item/logged-session', function(hoo
       {{/home-screen-item/logged-session}}
     `);
 
-    assert.equal(this.element.textContent.trim(), 'template block text');
+    assert.ok(this.element.textContent.trim(), 'template block text');
   });
 });
