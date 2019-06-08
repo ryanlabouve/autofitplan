@@ -118,38 +118,6 @@
       {{fa-icon "spinner" class=" mt-2 spinspin text-red float-right"}}
     {{/if}}
   </div>
-
-  {{#if showHistory}}
-    <div class="clear clearfix p-4 bg-blue-100">
-      <table>
-        <thead>
-          <tr>
-            <td>
-              name
-            </td>
-            <td>
-              weight
-            </td>
-            <td>
-              date
-            </td>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each loggedExerciseHistory as |oldLoggedExercise|}}
-            <tr data-test-move-histories>
-              <td>{{oldLoggedExercise.name}}</td>
-              <td>{{oldLoggedExercise.weight}}</td>
-              <td>{{moment oldLoggedExercise.loggedSession.endedAt 'YYYY-MM-DD'}}</td>
-            </tr>
-          {{else}}
-            <tr data-test-no-move-history-found><td>No History Found</td></tr>
-          {{/each}}
-        </tbody>
-      </table>
-    </div>
-  {{/if}}
-
 </Box>
 <AnimatedContainer>
   {{#animated-if (eq showAdvanced true) use=this.transition}}
@@ -168,6 +136,7 @@
               (action (mut showHistory) true)
             }}
             data-test-advanced-option
+            data-test-move-history
           >
             History
           </button>
@@ -175,7 +144,34 @@
         {{#if showSets}}
           Showing sets
         {{else if showHistory}}
-          Showing history
+          <div class="clear clearfix p-4 bg-blue-100">
+            <table>
+              <thead>
+                <tr>
+                  <td>
+                    name
+                  </td>
+                  <td>
+                    weight
+                  </td>
+                  <td>
+                    date
+                  </td>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each loggedExerciseHistory as |oldLoggedExercise|}}
+                  <tr data-test-move-histories>
+                    <td>{{oldLoggedExercise.name}}</td>
+                    <td>{{oldLoggedExercise.weight}}</td>
+                    <td>{{moment oldLoggedExercise.loggedSession.endedAt 'YYYY-MM-DD'}}</td>
+                  </tr>
+                {{else}}
+                  <tr data-test-no-move-history-found><td>No History Found</td></tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
         {{/if}}
       </div>
   {{/animated-if}}
