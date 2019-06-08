@@ -123,6 +123,7 @@
               {{if showSets 'underline'}}
             "
             data-test-advanced-option
+            data-test-set-information
           >
             Sets
           </button>
@@ -132,7 +133,6 @@
             }}
             class="
               p-2
-              text-blue-300
               text-blue-{{if showHistory  '100' '300'}}
               {{if showHistory 'underline'}}
             "
@@ -143,7 +143,7 @@
           </button>
         </div>
         {{#if showSets}}
-          Showing sets
+          <ViewMove::Sets @loggedExercise={{this.loggedExercise}}/>
         {{else if showHistory}}
           <ViewMove::History @loggedExercise={{this.loggedExercise}}/>
         {{/if}}

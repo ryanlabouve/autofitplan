@@ -5,4 +5,5 @@ export default Model.extend({
   exercise: belongsTo('exercise', {async: false}),
   loggedSession: belongsTo(),
   loggedExerciseHistory: hasMany('logged-exercise'),
+  loggedSets: hasMany(),
 });

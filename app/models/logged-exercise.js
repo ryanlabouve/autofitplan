@@ -10,4 +10,5 @@ export default DS.Model.extend({
   skipped: attr('boolean'),
   failed: attr('boolean'),
   loggedExerciseHistory: hasMany('logged-exercises'),
+  loggedSets: hasMany('logged-sets', {async: false}),
 });

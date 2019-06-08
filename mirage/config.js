@@ -82,4 +82,18 @@ export default function() {
 
   this.post('/daily-measurements');
   this.patch('/daily-measurements/:id');
+
+  this.get('/logged-sets', ({loggedSets}, request) => {
+    let returnedLoggedSets;
+
+    if (request.queryParams) {
+      let loggedExerciseId = request.queryParams['filter[logged_exercise_id]'];
+      return loggedSets.where({loggedExerciseId});
+    } else {
+      returnedLoggedSets = loggedSets.all();
+    }
+
+    return returnedLoggedSets;
+  });
+  this.get('/logged-sets/:id');
 }
