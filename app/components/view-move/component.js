@@ -5,6 +5,7 @@ import {task, timeout} from 'ember-concurrency';
 import {inject as service} from '@ember/service';
 import EXERCISE_MAP from 'autofitplan/utils/exercise-map';
 import {assert} from '@ember/debug';
+import fade from 'ember-animated/transitions/fade';
 
 const SAVE_DELAY = 800;
 

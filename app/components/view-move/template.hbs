@@ -1,6 +1,6 @@
 <Box
   @color={{color}}
-  class="relative mt-8"
+  class="relative mt-8 mb-0 z-20"
   >
   <div class="clear clearfix">
     <div class="text-lg font-bold float-left">
@@ -149,4 +149,43 @@
       </table>
     </div>
   {{/if}}
+
 </Box>
+<AnimatedContainer>
+  {{#animated-if (eq showAdvanced true) use=this.transition}}
+      <div class="bg-gray-800 text-white z-10 mx-4">
+        <div>
+          <button onclick={{queue
+              (action (mut showSets) true)
+              (action (mut showHistory) false)
+            }}
+            data-test-advanced-option
+          >
+            Sets
+          </button>
+          <button onclick={{queue
+              (action (mut showSets) false)
+              (action (mut showHistory) true)
+            }}
+            data-test-advanced-option
+          >
+            History
+          </button>
+        </div>
+        {{#if showSets}}
+          Showing sets
+        {{else if showHistory}}
+          Showing history
+        {{/if}}
+      </div>
+  {{/animated-if}}
+  <div class="text-center z-10">
+    <button
+      class="bg-gray-800 text-white text-xs -m-3 p-2 inline-block"
+      onclick={{action (mut showAdvanced) (not showAdvanced)}}
+      data-test-expand-advanced
+    >
+      {{if showAdvanced 'Hide' 'Show'}} Advanced
+    </button>
+  </div>
+</AnimatedContainer>
