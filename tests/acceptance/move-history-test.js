@@ -17,10 +17,6 @@ module('Acceptance | move history test', function(hooks) {
 
     await visit(`/logged-sessions/${firstLoggedSession.id}`);
 
-    assert
-      .dom('[data-test-move-history]')
-      .hasText('View Leg-press Variation history');
-
     await click('[data-test-expand-advanced]');
     await click('[data-test-move-history]');
     assert.dom('[data-test-no-move-history-found]').exists();
@@ -60,9 +56,6 @@ module('Acceptance | move history test', function(hooks) {
 
     await visit(`/logged-sessions/${firstLoggedSession.id}`);
 
-    assert
-      .dom('[data-test-move-history]')
-      .hasText('View Leg-press Variation history');
     await click('[data-test-expand-advanced]');
     await click('[data-test-move-history]');
     assert.dom('[data-test-move-histories]').exists({count: 3});

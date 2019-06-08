@@ -1,6 +1,5 @@
 import Component from '@ember/component';
 import {computed, get, set} from '@ember/object';
-import {alias} from '@ember/object/computed';
 import {task, timeout} from 'ember-concurrency';
 import {inject as service} from '@ember/service';
 import EXERCISE_MAP from 'autofitplan/utils/exercise-map';
@@ -12,6 +11,11 @@ const SAVE_DELAY = 800;
 export default Component.extend({
   store: service(),
 
+  transition: fade,
+
+  showSets: true,
+  showHistory: false,
+
   loggedExerciseService: service('logged-exercise'),
   rawExercise: computed('exercise.code', function() {
     let code = get(this, 'exercise.code');
@@ -20,16 +24,6 @@ export default Component.extend({
     assert(`We find an exercise for ${code}`, rawExercise);
 
     return rawExercise;
-  }),
-
-  loggedExerciseHistory: alias(
-    'loadLoggedExerciseHistory.lastSuccessful.value',
-  ),
-
-  loadLoggedExerciseHistory: task(function*() {
-    let loggedExercise = get(this, 'loggedExercise');
-    let oldLoggedExercises = yield loggedExercise.get('loggedExerciseHistory');
-    return oldLoggedExercises;
   }),
 
   updateDefaultLoggedExerciseNameIfBlank() {

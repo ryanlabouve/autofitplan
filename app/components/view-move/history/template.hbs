@@ -1,0 +1,28 @@
+<div class="clear clearfix p-4">
+  <table>
+    <thead>
+      <tr>
+        <td>
+          name
+        </td>
+        <td>
+          weight
+        </td>
+        <td>
+          date
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each loggedExerciseHistory as |oldLoggedExercise|}}
+        <tr data-test-move-histories>
+          <td>{{oldLoggedExercise.name}}</td>
+          <td>{{oldLoggedExercise.weight}}</td>
+          <td>{{moment oldLoggedExercise.loggedSession.endedAt 'YYYY-MM-DD'}}</td>
+        </tr>
+      {{else}}
+        <tr data-test-no-move-history-found><td>No History Found</td></tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

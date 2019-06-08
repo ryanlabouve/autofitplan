@@ -71,16 +71,6 @@
     {{/if}}
   </div>
   <div>
-    {{#if (not showHistory)}}
-      <button onClick={{action (queue (action (mut showHistory) true) (perform loadLoggedExerciseHistory))}} class="inline-block float-right mt-4 bold text-xs text-gray-800 underline" data-test-move-history>
-        View {{name}} history
-      </button>
-    {{/if}}
-    {{#if showHistory}}
-      <button onClick={{action (mut showHistory) false}} class="inline-block float-right mt-4 bold text-xs text-gray-800 text-underline" data-test-move-history>
-        Hide {{loggedExercise.name}} history
-      </button>
-    {{/if}}
   </div>
   <div class="mt-2">
     {{#if loggedSession}}
@@ -121,12 +111,17 @@
 </Box>
 <AnimatedContainer>
   {{#animated-if (eq showAdvanced true) use=this.transition}}
-      <div class="bg-gray-800 text-white z-10 mx-4">
-        <div>
+      <div class="bg-gray-800 text-white z-10 mx-4 p-4">
+        <div class="text-center">
           <button onclick={{queue
               (action (mut showSets) true)
               (action (mut showHistory) false)
             }}
+            class="
+              p-2
+              text-blue-{{if showSets '100' '300'}}
+              {{if showSets 'underline'}}
+            "
             data-test-advanced-option
           >
             Sets
@@ -135,6 +130,12 @@
               (action (mut showSets) false)
               (action (mut showHistory) true)
             }}
+            class="
+              p-2
+              text-blue-300
+              text-blue-{{if showHistory  '100' '300'}}
+              {{if showHistory 'underline'}}
+            "
             data-test-advanced-option
             data-test-move-history
           >
@@ -144,34 +145,7 @@
         {{#if showSets}}
           Showing sets
         {{else if showHistory}}
-          <div class="clear clearfix p-4 bg-blue-100">
-            <table>
-              <thead>
-                <tr>
-                  <td>
-                    name
-                  </td>
-                  <td>
-                    weight
-                  </td>
-                  <td>
-                    date
-                  </td>
-                </tr>
-              </thead>
-              <tbody>
-                {{#each loggedExerciseHistory as |oldLoggedExercise|}}
-                  <tr data-test-move-histories>
-                    <td>{{oldLoggedExercise.name}}</td>
-                    <td>{{oldLoggedExercise.weight}}</td>
-                    <td>{{moment oldLoggedExercise.loggedSession.endedAt 'YYYY-MM-DD'}}</td>
-                  </tr>
-                {{else}}
-                  <tr data-test-no-move-history-found><td>No History Found</td></tr>
-                {{/each}}
-              </tbody>
-            </table>
-          </div>
+          <ViewMove::History @loggedExercise={{this.loggedExercise}}/>
         {{/if}}
       </div>
   {{/animated-if}}
