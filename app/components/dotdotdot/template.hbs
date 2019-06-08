@@ -1,11 +1,11 @@
-<div>
+<AnimatedContainer>
   <div class="inline-block">
     {{yield}}
   </div>
-  {{#if showOptions}}
+  {{#animated-if showOptions use=transition duration=200}}
     <div
       style="height: 2.5rem; width: 2.5rem; line-height: 2.5rem;"
-      class="p-1 rounded-full bg-green-500 text-white text-center inline-block mr-2 shadow"
+      class="p-1 rounded-full bg-green-500 text-white text-center inline-block mr-2 shadow cursor-pointer"
       onClick={{action 'thenClose' onComplete}}
       data-test-dot-dot-complete
     >
@@ -14,7 +14,7 @@
 
     <div
       style="height: 2.5rem; width: 2.5rem; line-height: 2.5rem;"
-      class="p-1 rounded-full bg-yellow-500 text-white text-center inline-block mr-2 shadow"
+      class="p-1 rounded-full bg-yellow-500 text-white text-center inline-block mr-2 shadow cursor-pointer"
 
       onClick={{action 'thenClose' onSkip}}
       data-test-dot-dot-skip
@@ -24,7 +24,7 @@
 
     <div
       style="height: 2.5rem; width: 2.5rem; line-height: 2.5rem;"
-      class="p-1 rounded-full bg-red-500 text-white text-center inline-block mr-2 shadow"
+      class="p-1 rounded-full bg-red-500 text-white text-center inline-block mr-2 shadow cursor-pointer"
       onClick={{action 'thenClose' onFail}}
 
       data-test-dot-dot-fail
@@ -43,10 +43,10 @@
     <div
       onClick={{action (mut showOptions) true}}
       style="height: 2.5rem; width: 2.5rem; line-height: 2.5rem;"
-      class="p-1 rounded-full bg-purple-500 text-white text-center inline-block shadow"
+      class="p-1 rounded-full bg-purple-500 text-white text-center inline-block shadow cursor-pointer"
       data-test-dot-dot-dot
       >
       <img src="/icons/more.svg" style=" vertical-align: middle;">
     </div>
-  {{/if}}
-</div>
+  {{/animated-if}}
+</AnimatedContainer>
