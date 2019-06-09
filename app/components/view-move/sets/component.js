@@ -47,4 +47,25 @@ export default Component.extend({
     loggedSet.set('reps', currentReps - 1);
     yield loggedSet.save();
   }),
+
+  completeSet: task(function*(loggedSet) {
+    loggedSet.set('completed', true);
+    loggedSet.set('skipped', false);
+    loggedSet.set('failed', false);
+    yield loggedSet.save();
+  }),
+
+  skipSet: task(function*(loggedSet) {
+    loggedSet.set('completed', false);
+    loggedSet.set('skipped', true);
+    loggedSet.set('failed', false);
+    yield loggedSet.save();
+  }),
+
+  failSet: task(function*(loggedSet) {
+    loggedSet.set('completed', false);
+    loggedSet.set('skipped', false);
+    loggedSet.set('failed', true);
+    yield loggedSet.save();
+  }),
 });

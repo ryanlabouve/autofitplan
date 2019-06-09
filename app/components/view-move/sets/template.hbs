@@ -1,10 +1,15 @@
 <table class="w-full text-center">
   <tr>
+    <td>
+      {{!col completed|skiped|failed}}
+    </td>
     <td>Set No.</td>
     <td>Weight</td>
     <td>Reps</td>
     <td>RPE</td>
-    <td></td>
+    <td>
+      {{! kebab }}
+    </td>
   </tr>
   {{#each this.loggedSets as |loggedSet|}}
     <ViewMove::SingleSet
@@ -12,6 +17,9 @@
       @subtractPound={{action (perform this.subtractPound loggedSet)}}
       @addRep={{action (perform this.addRep loggedSet)}}
       @subtractRep={{action (perform this.subtractRep loggedSet)}}
+      @completeSet={{action (perform this.completeSet loggedSet)}}
+      @failSet={{action (perform this.failSet loggedSet)}}
+      @skipSet={{action (perform this.skipSet loggedSet)}}
       @loggedSet={{loggedSet}} />
   {{else}}
     <tr>

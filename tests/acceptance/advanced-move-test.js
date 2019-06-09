@@ -7,7 +7,7 @@ import {
 } from 'autofitplan/tests/helpers/program-creator';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 
-module('Acceptance | move history test', function(hooks) {
+module('Acceptance | advanced move test', function(hooks) {
   setupApplicationTest(hooks);
   setupMirage(hooks);
 
@@ -141,4 +141,58 @@ module('Acceptance | move history test', function(hooks) {
 
   // TODO: edit AMRAP total
   // TODO: How does this work with running workouts?
+
+  test('Can complete set', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    let {firstLoggedSession} = await startNewProgram(this.server);
+
+    await visit(`/logged-sessions/${firstLoggedSession.id}`);
+
+    assert.equal(server.db.loggedSets.find(1).completed, false);
+
+    await click('[data-test-expand-advanced]');
+    await click('[data-test-set-information]');
+    await click('[data-test-view-set="1"] [data-test-kebab]');
+
+    await click('[data-test-view-kebab="1"] [data-test-complete-set]');
+
+    assert.equal(server.db.loggedSets.find(1).completed, true);
+    assert.dom('[data-test-view-set="1"] [data-test-set-completed]').exists();
+  });
+
+  test('Can skip set', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    let {firstLoggedSession} = await startNewProgram(this.server);
+
+    await visit(`/logged-sessions/${firstLoggedSession.id}`);
+
+    assert.equal(server.db.loggedSets.find(1).skipped, false);
+
+    await click('[data-test-expand-advanced]');
+    await click('[data-test-set-information]');
+    await click('[data-test-view-set="1"] [data-test-kebab]');
+
+    await click('[data-test-view-kebab="1"] [data-test-skip-set]');
+
+    assert.equal(server.db.loggedSets.find(1).skipped, true);
+    assert.dom('[data-test-view-set="1"] [data-test-set-skipped]').exists();
+  });
+
+  test('Can fail set', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    let {firstLoggedSession} = await startNewProgram(this.server);
+
+    await visit(`/logged-sessions/${firstLoggedSession.id}`);
+
+    assert.equal(server.db.loggedSets.find(1).failed, false);
+
+    await click('[data-test-expand-advanced]');
+    await click('[data-test-set-information]');
+    await click('[data-test-view-set="1"] [data-test-kebab]');
+
+    await click('[data-test-view-kebab="1"] [data-test-fail-set]');
+
+    assert.equal(server.db.loggedSets.find(1).failed, true);
+    assert.dom('[data-test-view-set="1"] [data-test-set-failed]').exists();
+  });
 });

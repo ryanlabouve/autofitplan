@@ -9,6 +9,10 @@ export default Model.extend({
   repsHigh: DS.attr('number'),
   rpe: DS.attr('number'),
 
+  completed: DS.attr('boolean'),
+  skipped: DS.attr('boolean'),
+  failed: DS.attr('boolean'),
+
   exercise: DS.belongsTo(),
   loggedExercise: DS.belongsTo(),
 });

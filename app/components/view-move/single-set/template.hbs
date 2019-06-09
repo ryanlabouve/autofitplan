@@ -1,4 +1,23 @@
 <tr data-test-view-set={{this.loggedSet.id}}>
+  <td>
+    {{#if loggedSet.completed}}
+      <span data-test-set-completed>
+        {{fa-icon "check-circle"}}
+      </span>
+    {{/if}}
+
+    {{#if loggedSet.skipped}}
+      <span data-test-set-skipped>
+        {{fa-icon "minus-circle"}}
+      </span>
+    {{/if}}
+
+    {{#if loggedSet.failed}}
+      <span data-test-set-failed>
+        {{fa-icon "times-circle"}}
+      </span>
+    {{/if}}
+  </td>
   <td
     class="py-4"
     data-test-set>
@@ -41,6 +60,14 @@
     class="py-4"
     data-test-set-rpe>
     {{loggedSet.rpe}}
+  </td>
+  <td>
+    <button
+      data-test-kebab
+      onclick={{action (mut this.currentlyEditing) 'kebab'}}
+      >
+      {{fa-icon "ellipsis-v"}}
+    </button>
   </td>
 </tr>
 
@@ -92,4 +119,34 @@
       </button>
     </td>
   </tr>
+{{/if}}
+
+{{#if (eq this.currentlyEditing 'kebab')}}
+<tr class="bg-black" data-test-view-kebab={{loggedSet.id}}>
+  <td
+    colspan=1000
+    class="py-4"
+  >
+    <button
+      onclick={{action this.completeSet}}
+      data-test-complete-set
+      >
+      Complete
+    </button>
+
+    <button
+      onclick={{action this.skipSet}}
+      data-test-skip-set
+      >
+      Skip
+    </button>
+
+    <button
+      onclick={{action this.failSet}}
+      data-test-fail-set
+      >
+      Fail
+    </button>
+  </td>
+</tr>
 {{/if}}

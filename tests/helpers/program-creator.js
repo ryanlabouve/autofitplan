@@ -168,6 +168,10 @@ let startNewProgram = async (server, user, macrocycle) => {
                 repsHigh: loggedExercise.exercise.repsHigh,
                 rpe: loggedExercise.exercise.rpe,
 
+                completed: false,
+                skipped: false,
+                failed: false,
+
                 exercise,
                 loggedExercise,
               });
