@@ -96,4 +96,5 @@ export default function() {
     return returnedLoggedSets;
   });
   this.get('/logged-sets/:id');
+  this.patch('/logged-sets/:id');
 }

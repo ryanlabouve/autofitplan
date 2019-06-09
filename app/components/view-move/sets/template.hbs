@@ -7,34 +7,10 @@
     <td></td>
   </tr>
   {{#each this.loggedSets as |loggedSet|}}
-    <tr>
-      <td
-        class="py-4"
-        data-test-set>
-        {{loggedSet.setNumber}}
-      </td>
-      <td
-        class="py-4"
-        data-test-set-weight>
-        {{loggedSet.weight}}
-      </td>
-      <td
-        class="py-4"
-        >
-        <span data-test-set-reps-low>
-          {{loggedSet.repsLow}}
-        </span>
-        -
-        <span data-test-set-reps-high>
-          {{loggedSet.repsHigh}}
-        </span>
-      </td>
-      <td
-        class="py-4"
-        data-test-set-rpe>
-        {{loggedSet.rpe}}
-      </td>
-    </tr>
+    <ViewMove::SingleSet
+      @addPound={{action (perform this.addPound loggedSet)}}
+      @subtractPound={{action (perform this.subtractPound loggedSet)}}
+      @loggedSet={{loggedSet}} />
   {{else}}
     <tr>
       <td colspan=100>

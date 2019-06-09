@@ -23,4 +23,16 @@ export default Component.extend({
 
     return loggedSets;
   }),
+
+  addPound: task(function*(loggedSet) {
+    let currentWeight = loggedSet.get('weight');
+    loggedSet.set('weight', currentWeight + 1);
+    yield loggedSet.save();
+  }),
+
+  subtractPound: task(function*(loggedSet) {
+    let currentWeight = loggedSet.get('weight');
+    loggedSet.set('weight', currentWeight - 1);
+    yield loggedSet.save();
+  }),
 });

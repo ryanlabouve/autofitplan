@@ -34,7 +34,7 @@ module('Acceptance | move history test', function(hooks) {
     assert.dom('[data-test-set]').exists({count: firstExercise.sets});
   });
 
-  test('Load in default set information -- rl', async function(assert) {
+  test('Load in default set information', async function(assert) {
     await setupDefaultPrograms(this.server);
     let {firstLoggedSession} = await startNewProgram(this.server);
     // TODO: How can we express this better?
@@ -54,12 +54,49 @@ module('Acceptance | move history test', function(hooks) {
     assert.dom('[data-test-set-reps-high]').hasText(`${repsHigh}`);
     assert.dom('[data-test-set-rpe]').hasText(`${rpe}`);
 
-    await pauseTest();
-
-    // weight, reps range, rep, amrap, distance
+    // amrap, distance
   });
 
-  // test('Can edit weight' async function(assert){
+  test('Can edit weight --rl', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    let {firstLoggedSession} = await startNewProgram(this.server);
+    let firstLoggedExercise = firstLoggedSession.loggedExercises.models[0];
+    let {weight} = firstLoggedExercise;
+
+    await visit(`/logged-sessions/${firstLoggedSession.id}`);
+
+    await click('[data-test-expand-advanced]');
+    await click('[data-test-set-information]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-weight]')
+      .hasText(`${weight}`);
+
+    await click('[data-test-view-set="1"] [data-test-set-weight]');
+    assert.dom('[data-test-edit-weight="1"]').exists();
+
+    await click('[data-test-edit-weight="1"] [data-test-subtract-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-subtract-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-subtract-pound]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-weight]')
+      .hasText(`${weight - 3}`);
+    assert.equal(server.db.loggedSets.find(1).weight, weight - 3);
+
+    await click('[data-test-edit-weight="1"] [data-test-add-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-add-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-add-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-add-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-add-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-add-pound]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-weight]')
+      .hasText(`${weight + 3}`);
+    assert.equal(server.db.loggedSets.find(1).weight, weight + 3);
+  });
+
   // test('Can edit rep range' async function(assert){
   // test('Can edit when single rep range' async function(assert){
   // test('Can edit amrap total' async function(assert){
