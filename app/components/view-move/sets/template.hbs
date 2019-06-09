@@ -1,5 +1,45 @@
-{{#each this.loggedSets as |loggedSet|}}
-  <div data-test-set>{{loggedSet}}</div>
-{{else}}
-  No sets loaded
-{{/each}}
+<table class="w-full text-center">
+  <tr>
+    <td>Set No.</td>
+    <td>Weight</td>
+    <td>Reps</td>
+    <td>RPE</td>
+    <td></td>
+  </tr>
+  {{#each this.loggedSets as |loggedSet|}}
+    <tr>
+      <td
+        class="py-4"
+        data-test-set>
+        {{loggedSet.setNumber}}
+      </td>
+      <td
+        class="py-4"
+        data-test-set-weight>
+        {{loggedSet.weight}}
+      </td>
+      <td
+        class="py-4"
+        >
+        <span data-test-set-reps-low>
+          {{loggedSet.repsLow}}
+        </span>
+        -
+        <span data-test-set-reps-high>
+          {{loggedSet.repsHigh}}
+        </span>
+      </td>
+      <td
+        class="py-4"
+        data-test-set-rpe>
+        {{loggedSet.rpe}}
+      </td>
+    </tr>
+  {{else}}
+    <tr>
+      <td colspan=100>
+        No sets loaded
+      </td>
+    </tr>
+  {{/each}}
+</table>

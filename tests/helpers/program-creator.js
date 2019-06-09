@@ -154,12 +154,19 @@ let startNewProgram = async (server, user, macrocycle) => {
           session.exercises.models.forEach(function(exercise) {
             let loggedExercise = server.create('logged-exercise', {
               exercise,
+              weight: 80,
               loggedSession,
             });
 
             // Create set objects
             for (let i = 0; i < exercise.sets; i++) {
               let _loggedSet = server.create('logged-set', {
+                setNumber: i + 1,
+                weight: loggedExercise.weight,
+                repsLow: loggedExercise.exercise.repsLow,
+                repsHigh: loggedExercise.exercise.repsHigh,
+                rpe: loggedExercise.exercise.rpe,
+
                 exercise,
                 loggedExercise,
               });

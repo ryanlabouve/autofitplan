@@ -33,4 +33,36 @@ module('Acceptance | move history test', function(hooks) {
     let firstExercise = firstLoggedSession.loggedExercises.models[0].exercise;
     assert.dom('[data-test-set]').exists({count: firstExercise.sets});
   });
+
+  test('Load in default set information -- rl', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    let {firstLoggedSession} = await startNewProgram(this.server);
+    // TODO: How can we express this better?
+    let firstLoggedExercise = firstLoggedSession.loggedExercises.models[0];
+
+    let {weight} = firstLoggedExercise;
+    let firstExercise = firstLoggedExercise.exercise;
+    let {repsLow, repsHigh, rpe} = firstExercise;
+
+    await visit(`/logged-sessions/${firstLoggedSession.id}`);
+
+    await click('[data-test-expand-advanced]');
+    await click('[data-test-set-information]');
+
+    assert.dom('[data-test-set-weight]').hasText(`${weight}`);
+    assert.dom('[data-test-set-reps-low]').hasText(`${repsLow}`);
+    assert.dom('[data-test-set-reps-high]').hasText(`${repsHigh}`);
+    assert.dom('[data-test-set-rpe]').hasText(`${rpe}`);
+
+    await pauseTest();
+
+    // weight, reps range, rep, amrap, distance
+  });
+
+  // test('Can edit weight' async function(assert){
+  // test('Can edit rep range' async function(assert){
+  // test('Can edit when single rep range' async function(assert){
+  // test('Can edit amrap total' async function(assert){
+  // test('Can edit distance' async function(assert){
+  // TODO: amrap, distance
 });
