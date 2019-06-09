@@ -10,6 +10,8 @@
     <ViewMove::SingleSet
       @addPound={{action (perform this.addPound loggedSet)}}
       @subtractPound={{action (perform this.subtractPound loggedSet)}}
+      @addRep={{action (perform this.addRep loggedSet)}}
+      @subtractRep={{action (perform this.subtractRep loggedSet)}}
       @loggedSet={{loggedSet}} />
   {{else}}
     <tr>

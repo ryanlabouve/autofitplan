@@ -35,4 +35,16 @@ export default Component.extend({
     loggedSet.set('weight', currentWeight - 1);
     yield loggedSet.save();
   }),
+
+  addRep: task(function*(loggedSet) {
+    let currentReps = loggedSet.get('reps');
+    loggedSet.set('reps', currentReps + 1);
+    yield loggedSet.save();
+  }),
+
+  subtractRep: task(function*(loggedSet) {
+    let currentReps = loggedSet.get('reps');
+    loggedSet.set('reps', currentReps - 1);
+    yield loggedSet.save();
+  }),
 });

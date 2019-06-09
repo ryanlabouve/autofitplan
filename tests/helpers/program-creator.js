@@ -163,6 +163,7 @@ let startNewProgram = async (server, user, macrocycle) => {
               let _loggedSet = server.create('logged-set', {
                 setNumber: i + 1,
                 weight: loggedExercise.weight,
+                reps: loggedExercise.exercise.repsLow + 1,
                 repsLow: loggedExercise.exercise.repsLow,
                 repsHigh: loggedExercise.exercise.repsHigh,
                 rpe: loggedExercise.exercise.rpe,

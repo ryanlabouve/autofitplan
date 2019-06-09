@@ -19,13 +19,23 @@
   <td
     class="py-4"
     >
-    <span data-test-set-reps-low>
-      {{loggedSet.repsLow}}
-    </span>
-    -
-    <span data-test-set-reps-high>
-      {{loggedSet.repsHigh}}
-    </span>
+
+    <button
+      data-test-edit-set-reps
+      onclick={{action (mut this.currentlyEditing) 'reps'}}
+      >
+      <span data-test-set-reps>
+        {{loggedSet.reps}}
+      </span>
+      /
+      <span data-test-set-reps-low>
+        {{loggedSet.repsLow}}
+      </span>
+      -
+      <span data-test-set-reps-high>
+        {{loggedSet.repsHigh}}
+      </span>
+    </button>
   </td>
   <td
     class="py-4"
@@ -52,6 +62,31 @@
         class="p-2 bg-white m-1 rounded text-black"
         onclick={{action addPound}}
         data-test-add-pound
+      >
+        +
+      </button>
+    </td>
+  </tr>
+{{/if}}
+
+{{#if (eq this.currentlyEditing 'reps')}}
+  <tr class="bg-black" data-test-edit-reps={{loggedSet.id}}>
+    <td
+      colspan=1000
+      class="py-4"
+    >
+      <button
+        class="p-2 bg-white m-1 rounded text-black"
+        data-test-subtract-rep
+        onclick={{action subtractRep}}
+      >
+        -
+      </button>
+
+      <button
+        class="p-2 bg-white m-1 rounded text-black"
+        onclick={{action addRep}}
+        data-test-add-rep
       >
         +
       </button>

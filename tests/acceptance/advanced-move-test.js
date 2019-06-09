@@ -50,6 +50,9 @@ module('Acceptance | move history test', function(hooks) {
     await click('[data-test-set-information]');
 
     assert.dom('[data-test-set-weight]').hasText(`${weight}`);
+    assert
+      .dom('[data-test-set-reps]')
+      .hasText(`${server.db.loggedSets.find(1).reps}`);
     assert.dom('[data-test-set-reps-low]').hasText(`${repsLow}`);
     assert.dom('[data-test-set-reps-high]').hasText(`${repsHigh}`);
     assert.dom('[data-test-set-rpe]').hasText(`${rpe}`);
@@ -57,7 +60,7 @@ module('Acceptance | move history test', function(hooks) {
     // amrap, distance
   });
 
-  test('Can edit weight --rl', async function(assert) {
+  test('Can edit weight', async function(assert) {
     await setupDefaultPrograms(this.server);
     let {firstLoggedSession} = await startNewProgram(this.server);
     let firstLoggedExercise = firstLoggedSession.loggedExercises.models[0];
@@ -97,9 +100,45 @@ module('Acceptance | move history test', function(hooks) {
     assert.equal(server.db.loggedSets.find(1).weight, weight + 3);
   });
 
-  // test('Can edit rep range' async function(assert){
-  // test('Can edit when single rep range' async function(assert){
-  // test('Can edit amrap total' async function(assert){
-  // test('Can edit distance' async function(assert){
-  // TODO: amrap, distance
+  test('Can edit rep range', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    let {firstLoggedSession} = await startNewProgram(this.server);
+    let {reps} = server.db.loggedSets.find(1);
+
+    await visit(`/logged-sessions/${firstLoggedSession.id}`);
+
+    await click('[data-test-expand-advanced]');
+    await click('[data-test-set-information]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-reps]')
+      .hasText(`${server.db.loggedSets.find(1).reps}`);
+
+    await click('[data-test-view-set="1"] [data-test-edit-set-reps]');
+    assert.dom('[data-test-edit-reps="1"]').exists();
+
+    await click('[data-test-edit-reps="1"] [data-test-subtract-rep]');
+    await click('[data-test-edit-reps="1"] [data-test-subtract-rep]');
+    await click('[data-test-edit-reps="1"] [data-test-subtract-rep]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-reps]')
+      .hasText(`${reps - 3}`);
+    assert.equal(server.db.loggedSets.find(1).reps, reps - 3);
+
+    await click('[data-test-edit-reps="1"] [data-test-add-rep]');
+    await click('[data-test-edit-reps="1"] [data-test-add-rep]');
+    await click('[data-test-edit-reps="1"] [data-test-add-rep]');
+    await click('[data-test-edit-reps="1"] [data-test-add-rep]');
+    await click('[data-test-edit-reps="1"] [data-test-add-rep]');
+    await click('[data-test-edit-reps="1"] [data-test-add-rep]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-reps]')
+      .hasText(`${reps + 3}`);
+    assert.equal(server.db.loggedSets.find(1).reps, reps + 3);
+  });
+
+  // TODO: edit AMRAP total
+  // TODO: How does this work with running workouts?
 });
