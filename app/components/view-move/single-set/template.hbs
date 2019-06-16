@@ -30,7 +30,7 @@
     >
     <button
       data-test-set-weight
-      onclick={{action (mut this.currentlyEditing) 'weight'}}
+      onclick={{action changeShowing 'weight'}}
       >
       {{loggedSet.weight}}
     </button>
@@ -41,7 +41,7 @@
 
     <button
       data-test-edit-set-reps
-      onclick={{action (mut this.currentlyEditing) 'reps'}}
+      onclick={{action changeShowing  'reps'}}
       >
       <span data-test-set-reps>
         {{loggedSet.reps}}
@@ -64,7 +64,7 @@
   <td>
     <button
       data-test-kebab
-      onclick={{action (mut this.currentlyEditing) 'kebab'}}
+      onclick={{action changeShowing  'kebab'}}
       >
       {{fa-icon "ellipsis-v"}}
     </button>

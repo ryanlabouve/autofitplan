@@ -112,6 +112,13 @@
 <AnimatedContainer>
   {{#animated-if (eq showAdvanced true) use=this.transition}}
       <div class="bg-gray-800 text-white z-10 mx-4 p-4">
+        <button
+          class="bg-gray-800 text-white text-xs -m-3 p-2 inline-block float-right"
+          onclick={{action (mut showAdvanced) false}}
+          data-test-expand-advanced
+        >
+          Hide
+        </button>
         <div class="text-center">
           <button onclick={{queue
               (action (mut showSets) true)
