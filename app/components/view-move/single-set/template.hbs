@@ -19,7 +19,8 @@
     {{/if}}
   </td>
   <td
-    class="py-4"
+    class="py-4
+    "
     data-test-set>
     {{loggedSet.setNumber}}
   </td>
@@ -36,7 +37,9 @@
     </button>
   </td>
   <td
-    class="py-4"
+    class="py-4
+      {{if (eq this.currentlyEditing 'reps') 'bg-black text-xl'}}
+    "
     >
 
     <button
@@ -57,11 +60,18 @@
     </button>
   </td>
   <td
-    class="py-4"
+    class="py-4
+      {{if (eq this.currentlyEditing 'rpe') 'bg-black text-xl'}}
+    "
     data-test-set-rpe>
     {{loggedSet.rpe}}
   </td>
-  <td>
+  <td
+    class="
+      px-2
+      {{if (eq this.currentlyEditing 'kebab') 'bg-black text-xl'}}
+    "
+    >
     <button
       data-test-kebab
       onclick={{action changeShowing  'kebab'}}
@@ -78,7 +88,7 @@
       class="py-4"
     >
       <button
-        class="p-2 bg-white m-1 rounded text-black"
+        class="p-2 px-4 bg-white m-1 rounded text-black"
         data-test-subtract-pound
         onclick={{action subtractPound}}
       >
@@ -86,7 +96,7 @@
       </button>
 
       <button
-        class="p-2 bg-white m-1 rounded text-black"
+        class="p-2 px-4 bg-white m-1 rounded text-black"
         onclick={{action addPound}}
         data-test-add-pound
       >
@@ -128,6 +138,7 @@
     class="py-4"
   >
     <button
+      class="px-2 mx-4 underline"
       onclick={{action this.completeSet}}
       data-test-complete-set
       >
@@ -135,6 +146,7 @@
     </button>
 
     <button
+      class="px-2 mx-4 underline"
       onclick={{action this.skipSet}}
       data-test-skip-set
       >
@@ -142,6 +154,7 @@
     </button>
 
     <button
+      class="px-2 mx-4 underline"
       onclick={{action this.failSet}}
       data-test-fail-set
       >
