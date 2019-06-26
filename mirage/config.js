@@ -9,6 +9,8 @@ export default function() {
   });
 
   this.get('/users/:id');
+  this.patch('/users/:id');
+
   this.get('/users/me', ({users}, req) => {
     let res = new Mirage.Response(404, {}, {});
 

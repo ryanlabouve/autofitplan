@@ -14,6 +14,7 @@ export default Service.extend({
         .queryRecord('user', {me: true, include: 'profile'})
         .then(user => {
           that.set('user', user);
+          that.updateUsersTimezone();
         })
         .catch(error => {
           console.error(error);
@@ -25,5 +26,14 @@ export default Service.extend({
 
   reloadUser() {
     get(this, 'user').reload();
+  },
+
+  updateUsersTimezone() {
+    let tz = moment.tz.guess();
+    let u = this.user.currentTimeZone;
+    if (this.user.currentTimeZone != tz) {
+      this.user.set('currentTimeZone', tz);
+      this.user.save();
+    }
   },
 });
