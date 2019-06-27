@@ -1,2 +1,77 @@
-<h1>Goals and Progress</h1>
-<p>coming soon</p>
+{{#let model.firstObject as |weeklyProgress|}}
+  <h1 class="text-bold mb-4">Goals and Progress</h1>
+
+  {{!
+  <h2 class="text-xl mb-2">Your Progress</h2>
+
+  <div
+    class="text-gray bg-white px-4 py-8 rounded shadow-2xl text-center mb-8">
+
+    <div>
+      Did you progress this week?
+    </div>
+
+    <div>
+      Stronger? Run further? PR individual exercises?
+      Did you do enough to prevent attrophy?
+      did you reset?
+      Helms pyrimid... Adherance, Vol/Int/Freq, progression, exercise selection, rest periods, temp
+    </div>
+  </div>
+  }}
+
+  <h2 class="text-xl mb-2">Last Week</h2>
+  <div
+    class="text-white bg-purple-500 px-4 py-8 rounded shadow-2xl flex text-center mb-8">
+
+    <div class="flex-1">
+      <div class="text-xs">
+        Total Workouts
+      </div>
+      <div class="text-4xl">
+        {{weeklyProgress.totalWorkouts}}
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <div class="text-xs">
+        Lbs Lifted
+      </div>
+      <div class="text-4xl">
+        {{weeklyProgress.poundsLifted}}
+      </div>
+      <div class="text-xs text-green-100">
+        {{!+200lbs}}
+      </div>
+    </div>
+
+    <div class="flex-1">
+      <div class="text-xs">
+        Miles Run
+      </div>
+      <div class="text-4xl">
+        {{weeklyProgress.milesRun}}
+      </div>
+      <div class="text-xs text-green-100">
+        {{!+2 miles}}
+      </div>
+    </div>
+  </div>
+
+
+  <h2 class="text-xl mb-2">Advanced Details</h2>
+
+  <p>Coming soon</p>
+  {{!
+  Total vol by movements
+  Total working sets by movement
+
+
+  Progress Score
+
+  Volume by workout movement
+
+
+  # Last 6 Week trend
+  }}
+{{/let}}
