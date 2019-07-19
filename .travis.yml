@@ -21,6 +21,5 @@ env:
     - JOBS=1
 
 script:
-  - npm run lint:hbs
   - npm run lint:js
   - npm test
