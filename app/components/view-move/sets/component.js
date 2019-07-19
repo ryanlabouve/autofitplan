@@ -48,6 +48,18 @@ export default Component.extend({
     yield loggedSet.save();
   }),
 
+  maxRep: task(function*(loggedSet) {
+    let repsHigh = loggedSet.get('repsHigh');
+    loggedSet.set('reps', repsHigh);
+    yield loggedSet.save();
+  }),
+
+  minRep: task(function*(loggedSet) {
+    let repsLow = loggedSet.get('repsLow');
+    loggedSet.set('reps', repsLow);
+    yield loggedSet.save();
+  }),
+
   completeSet: task(function*(loggedSet) {
     loggedSet.set('completed', true);
     loggedSet.set('skipped', false);

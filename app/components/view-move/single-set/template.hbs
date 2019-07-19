@@ -114,6 +114,14 @@
     >
       <button
         class="p-2 bg-white m-1 rounded text-black"
+        data-test-min-rep
+        onclick={{action minRep}}
+      >
+        Min
+      </button>
+
+      <button
+        class="p-2 bg-white m-1 rounded text-black"
         data-test-subtract-rep
         onclick={{action subtractRep}}
       >
@@ -126,6 +134,14 @@
         data-test-add-rep
       >
         +
+      </button>
+
+      <button
+        class="p-2 bg-white m-1 rounded text-black"
+        data-test-max-rep
+        onclick={{action maxRep}}
+      >
+        Max
       </button>
     </td>
   </tr>
