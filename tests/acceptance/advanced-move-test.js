@@ -100,6 +100,56 @@ module('Acceptance | advanced move test', function(hooks) {
     assert.equal(server.db.loggedSets.find(1).weight, weight + 3);
   });
 
+  test('Can edit weight by 5s and 10s', async function(assert) {
+    await setupDefaultPrograms(this.server);
+    let {firstLoggedSession} = await startNewProgram(this.server);
+    let firstLoggedExercise = firstLoggedSession.loggedExercises.models[0];
+    let {weight} = firstLoggedExercise;
+
+    await visit(`/logged-sessions/${firstLoggedSession.id}`);
+
+    await click('[data-test-expand-advanced]');
+    await click('[data-test-set-information]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-weight]')
+      .hasText(`${weight}`);
+
+    await click('[data-test-view-set="1"] [data-test-set-weight]');
+    assert.dom('[data-test-edit-weight="1"]').exists();
+
+    await click('[data-test-edit-weight="1"] [data-test-subtract-five-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-subtract-five-pound]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-weight]')
+      .hasText(`${weight - 10}`);
+    assert.equal(server.db.loggedSets.find(1).weight, weight - 10);
+
+    await click('[data-test-edit-weight="1"] [data-test-subtract-ten-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-subtract-ten-pound]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-weight]')
+      .hasText(`${weight - 30}`);
+    assert.equal(server.db.loggedSets.find(1).weight, weight - 30);
+
+    await click('[data-test-edit-weight="1"] [data-test-add-ten-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-add-ten-pound]');
+
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-weight]')
+      .hasText(`${weight - 10}`);
+    assert.equal(server.db.loggedSets.find(1).weight, weight - 10);
+
+    await click('[data-test-edit-weight="1"] [data-test-add-five-pound]');
+    await click('[data-test-edit-weight="1"] [data-test-add-five-pound]');
+    assert
+      .dom('[data-test-view-set="1"] [data-test-set-weight]')
+      .hasText(`${weight}`);
+    assert.equal(server.db.loggedSets.find(1).weight, weight);
+  });
+
   test('Can edit rep range', async function(assert) {
     await setupDefaultPrograms(this.server);
     let {firstLoggedSession} = await startNewProgram(this.server);
