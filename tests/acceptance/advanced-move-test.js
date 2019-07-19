@@ -137,6 +137,16 @@ module('Acceptance | advanced move test', function(hooks) {
       .dom('[data-test-view-set="1"] [data-test-set-reps]')
       .hasText(`${reps + 3}`);
     assert.equal(server.db.loggedSets.find(1).reps, reps + 3);
+
+    await click('[data-test-edit-reps="1"] [data-test-max-rep]');
+
+    assert.dom('[data-test-view-set="1"] [data-test-set-reps]').hasText(`8`);
+    assert.equal(server.db.loggedSets.find(1).reps, 8);
+
+    await click('[data-test-edit-reps="1"] [data-test-min-rep]');
+
+    assert.dom('[data-test-view-set="1"] [data-test-set-reps]').hasText(`5`);
+    assert.equal(server.db.loggedSets.find(1).reps, 5);
   });
 
   // TODO: edit AMRAP total
