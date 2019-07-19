@@ -19,6 +19,7 @@ env:
     - JOBS=1
 
 script:
+  - yarn insatll
   - npm run lint:hbs
   - npm run lint:js
   - npm test
