@@ -21,5 +21,6 @@ env:
     - JOBS=1
 
 script:
+  - bower install
   - npm run lint:js
   - npm test

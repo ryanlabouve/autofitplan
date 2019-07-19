@@ -2,6 +2,7 @@ import Service from '@ember/service';
 import {inject as service} from '@ember/service';
 import {resolve} from 'rsvp';
 import {get} from '@ember/object';
+import moment from 'moment';
 
 export default Service.extend({
   session: service(),
@@ -31,7 +32,7 @@ export default Service.extend({
   updateUsersTimezone() {
     let tz = moment.tz.guess();
     let u = this.user.currentTimeZone;
-    if (this.user.currentTimeZone != tz) {
+    if (u != tz) {
       this.user.set('currentTimeZone', tz);
       this.user.save();
     }
