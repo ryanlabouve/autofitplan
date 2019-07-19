@@ -89,6 +89,22 @@
     >
       <button
         class="p-2 px-4 bg-white m-1 rounded text-black"
+        data-test-subtract-ten-pound
+        onclick={{action subtractTenPound}}
+      >
+        -10
+      </button>
+
+      <button
+        class="p-2 px-4 bg-white m-1 rounded text-black"
+        data-test-subtract-five-pound
+        onclick={{action subtractFivePound}}
+      >
+        -5
+      </button>
+
+      <button
+        class="p-2 px-4 bg-white m-1 rounded text-black"
         data-test-subtract-pound
         onclick={{action subtractPound}}
       >
@@ -101,6 +117,22 @@
         data-test-add-pound
       >
         +
+      </button>
+
+      <button
+        class="p-2 px-4 bg-white m-1 rounded text-black"
+        onclick={{action addFivePound}}
+        data-test-add-five-pound
+      >
+        +5
+      </button>
+
+      <button
+        class="p-2 px-4 bg-white m-1 rounded text-black"
+        onclick={{action addTenPound}}
+        data-test-add-ten-pound
+      >
+        +10
       </button>
     </td>
   </tr>

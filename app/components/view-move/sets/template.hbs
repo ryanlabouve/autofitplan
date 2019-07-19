@@ -14,7 +14,11 @@
   {{#each this.loggedSets as |loggedSet|}}
     <ViewMove::SingleSet
       @addPound={{action (perform this.addPound loggedSet)}}
+      @addFivePound={{action (perform this.addPound loggedSet 5)}}
+      @addTenPound={{action (perform this.addPound loggedSet 10)}}
       @subtractPound={{action (perform this.subtractPound loggedSet)}}
+      @subtractFivePound={{action (perform this.subtractPound loggedSet 5)}}
+      @subtractTenPound={{action (perform this.subtractPound loggedSet 10)}}
       @addRep={{action (perform this.addRep loggedSet)}}
       @subtractRep={{action (perform this.subtractRep loggedSet)}}
       @completeSet={{action (perform this.completeSet loggedSet)}}
