@@ -10,7 +10,9 @@ addons:
   chrome: stable
 
 cache:
+  yarn: true
   directories:
+    - node_modules
     - $HOME/.npm
 
 env:
@@ -19,6 +21,5 @@ env:
     - JOBS=1
 
 script:
-  - npm run lint:hbs
   - npm run lint:js
   - npm test

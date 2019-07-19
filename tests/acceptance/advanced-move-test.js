@@ -1,5 +1,5 @@
 import {module, test} from 'qunit';
-import {visit, click, pauseTest} from '@ember/test-helpers';
+import {visit, click} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import {
   setupDefaultPrograms,
