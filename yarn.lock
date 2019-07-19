@@ -641,9 +641,9 @@
     exec-sh "^0.3.2"
     minimist "^1.2.0"
 
-"@ember-data/-build-infra@^3.11.0":
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/@ember-data/-build-infra/-/-build-infra-3.11.0.tgz#2257527f78c67f5eb23fa025b071164ea51fd2cb"
+"@ember-data/-build-infra@^3.11.1":
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/@ember-data/-build-infra/-/-build-infra-3.11.1.tgz#f999bceb5b04c1d8ebd5aa0e5c6399fc63c3a379"
   dependencies:
     babel-plugin-feature-flags "^0.3.1"
     babel-plugin-filter-imports "^2.0.4"
@@ -668,43 +668,43 @@
     rsvp "^4.8.4"
     silent-error "^1.1.1"
 
-"@ember-data/adapter@^3.11.0":
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/@ember-data/adapter/-/adapter-3.11.0.tgz#465a430e80c29b0b28d4c6c3eb465cc318612274"
+"@ember-data/adapter@^3.11.1":
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/@ember-data/adapter/-/adapter-3.11.1.tgz#a8b166d54f54d847ce71ce6ab093df06a31439f9"
   dependencies:
-    "@ember-data/-build-infra" "^3.11.0"
+    "@ember-data/-build-infra" "^3.11.1"
     ember-cli-babel "^7.7.3"
     ember-cli-test-info "^1.0.0"
     ember-cli-typescript "^2.0.1"
 
-"@ember-data/model@^3.11.0":
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/@ember-data/model/-/model-3.11.0.tgz#a927fb5b525fc1b1854270445003d542b137dfc3"
+"@ember-data/model@^3.11.1":
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/@ember-data/model/-/model-3.11.1.tgz#9262aa049e8274f9ec8889ffe1ef0a262a7c93dd"
   dependencies:
-    "@ember-data/-build-infra" "^3.11.0"
-    "@ember-data/store" "^3.11.0"
+    "@ember-data/-build-infra" "^3.11.1"
+    "@ember-data/store" "^3.11.1"
     ember-cli-babel "^7.7.3"
     ember-cli-string-utils "^1.1.0"
     ember-cli-test-info "^1.0.0"
     ember-cli-typescript "^2.0.1"
     inflection "1.12.0"
 
-"@ember-data/serializer@^3.11.0":
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/@ember-data/serializer/-/serializer-3.11.0.tgz#397f031bcf50ee31049b56b63e121a9fde47ab6a"
+"@ember-data/serializer@^3.11.1":
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/@ember-data/serializer/-/serializer-3.11.1.tgz#0ea7ddff292522c00d0c9573089fa2eb601c8fea"
   dependencies:
-    "@ember-data/-build-infra" "^3.11.0"
-    "@ember-data/store" "^3.11.0"
+    "@ember-data/-build-infra" "^3.11.1"
+    "@ember-data/store" "^3.11.1"
     ember-cli-babel "^7.7.3"
     ember-cli-test-info "^1.0.0"
     ember-cli-typescript "^2.0.1"
 
-"@ember-data/store@^3.11.0":
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/@ember-data/store/-/store-3.11.0.tgz#19229f0eaa2521afa20af62f86df5563167b2e00"
+"@ember-data/store@^3.11.1":
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/@ember-data/store/-/store-3.11.1.tgz#38ef550ad52338ca3bb181e02bcffc5b1c6bfc39"
   dependencies:
-    "@ember-data/-build-infra" "^3.11.0"
-    "@ember-data/adapter" "^3.11.0"
+    "@ember-data/-build-infra" "^3.11.1"
+    "@ember-data/adapter" "^3.11.1"
     ember-cli-babel "^7.7.3"
     ember-cli-path-utils "^1.0.0"
     ember-cli-typescript "^2.0.1"
@@ -4191,15 +4191,15 @@ ember-concurrency@^1.0.0:
     ember-cli-babel "^7.1.0"
     ember-getowner-polyfill "^1.1.0 || ^2.0.0"
 
-ember-data@~3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-3.11.0.tgz#a27ca03ee9053918a63f86906fea1421d05c3fe4"
+ember-data@~3.11.1:
+  version "3.11.1"
+  resolved "https://registry.yarnpkg.com/ember-data/-/ember-data-3.11.1.tgz#1342722c9969dbe59f5c3ef863b619e4dbd03b85"
   dependencies:
-    "@ember-data/-build-infra" "^3.11.0"
-    "@ember-data/adapter" "^3.11.0"
-    "@ember-data/model" "^3.11.0"
-    "@ember-data/serializer" "^3.11.0"
-    "@ember-data/store" "^3.11.0"
+    "@ember-data/-build-infra" "^3.11.1"
+    "@ember-data/adapter" "^3.11.1"
+    "@ember-data/model" "^3.11.1"
+    "@ember-data/serializer" "^3.11.1"
+    "@ember-data/store" "^3.11.1"
     "@ember/ordered-set" "^2.0.3"
     "@glimmer/env" "^0.1.7"
     ember-cli-babel "^7.8.0"
