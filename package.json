@@ -15,7 +15,12 @@
     "lint:js": "eslint .",
     "start": "ember serve",
     "start:mirage": "ENABLE_MIRAGE=true ember serve",
-    "test": "ember test"
+    "test": "ember test",
+    "clean":
+      "rm -rf node_modules bower_components dist && yarn clean:system_temp",
+    "clean:system_temp":
+      "find /var/folders -name 'broccoli-*' -type d -print 2> /dev/null | xargs rm -rf",
+    "reset": "yarn clean && yarn"
   },
   "devDependencies": {
     "@ember/jquery": "^0.6.0",
