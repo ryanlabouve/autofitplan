@@ -58,7 +58,7 @@
     "ember-maybe-import-regenerator": "^0.1.6",
     "ember-moment": "^7.8.0",
     "ember-qunit": "^4.4.1",
-    "ember-resolver": "^5.0.1",
+    "ember-resolver": "^5.2.0",
     "ember-simple-auth": "^1.8.1",
     "ember-source": "~3.11.1",
     "ember-test-selectors": "^2.0.0",
