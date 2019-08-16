@@ -3976,9 +3976,9 @@ ember-cli-moment-shim@^3.7.1:
     moment "^2.19.3"
     moment-timezone "^0.5.13"
 
-ember-cli-netlify@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/ember-cli-netlify/-/ember-cli-netlify-0.3.0.tgz#940a31817063d9a7f50e8ae152a91337739688ca"
+ember-cli-netlify@^0.3.1:
+  version "0.3.1"
+  resolved "https://registry.yarnpkg.com/ember-cli-netlify/-/ember-cli-netlify-0.3.1.tgz#5092024b44d983260f18db87240c9a37f8e17595"
 
 ember-cli-normalize-entity-name@^1.0.0:
   version "1.0.0"
