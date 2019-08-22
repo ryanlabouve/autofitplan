@@ -111,6 +111,16 @@ const EXERCISE_MAP = {
     exercises: [{name: 'Pushup'}],
   },
 
+  kb_swing: {
+    name: 'KB Swing',
+    exercises: [{name: '2-handed KB Swing'}],
+  },
+
+  ruck: {
+    name: 'Ruck',
+    exercises: [{name: 'Rucking'}],
+  },
+
   plank: {
     name: 'Plank',
     exercises: [{name: 'Plank'}],
