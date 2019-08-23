@@ -1,7 +1,26 @@
 <button
   class="
-    border border-blue-500 bg-blue-500
-    hover:bg-white hover:text-blue-500
+    {{if (eq color "primary")
+      "
+        border border-blue-500 bg-blue-500
+        hover:bg-white hover:text-blue-500
+      "
+    }}
+
+    {{if (eq color "danger")
+      "
+        border border-red-500 bg-red-500
+        hover:bg-white hover:text-red-500
+      "
+    }}
+
+    {{if (eq color "info")
+      "
+        border border-gray-500 bg-gray-500
+        hover:bg-white hover:text-gray-500
+      "
+    }}
+
     text-white rounded p-2
   "
   onclick={{action clickAction}}

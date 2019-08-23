@@ -24,21 +24,10 @@
       {{/if}}
 
       {{#if homeScreenItem.loggedMacrocycle}}
-        <Box>
-          <h2 class="text-lg">{{homeScreenItem.loggedMacrocycle.macrocycle.name}}</h2>
-          <p class="text-gray-500">
-            Started {{moment-format homeScreenItem.loggedMacrocycle.createdAt 'YYYY-MM-DD'}}
-          </p>
-
-          <div class="clearfix">
-            {{#link-to "protected.program" homeScreenItem.loggedMacrocycle.id
-              class="text-blue-500 mt-4 block float-right"
-              data-test-go-to-program="true"
-            }}
-              Continue Working Out {{fa-icon "arrow-circle-right"}}
-            {{/link-to}}
-          </div>
-        </Box>
+        <HomeScreenItem::LoggedMacrocycle
+          @homeScreenItem={{homeScreenItem}}
+          @dailyMeasurement={{homeScreenItem.dailyMeasurement}}
+        />
       {{/if}}
 
       {{#if homeScreenItem.performanceTest}}
@@ -49,6 +38,7 @@
             data-test-go-to-performance-test="true"
           }}
         </Box>
+
       {{/if}}
 
 

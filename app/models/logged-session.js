@@ -6,6 +6,8 @@ export default DS.Model.extend({
   loggedExercises: hasMany('logged-exercises', {async: false}),
   week: attr('number'),
 
+  loggedMicrocycle: belongsTo(),
+
   startedAt: attr('string'),
   endedAt: attr('string'),
 });
