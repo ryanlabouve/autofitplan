@@ -5,4 +5,6 @@ export default Component.extend({
   clickAction: e => {
     e.preventDefault();
   },
+
+  color: 'primary',
 });
