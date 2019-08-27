@@ -74,6 +74,8 @@ export default function() {
   this.get('/logged-macrocycles');
   this.post('/logged-macrocycles');
   this.get('/logged-macrocycles/:id');
+  this.patch('/logged-macrocycles/:id');
+  this.delete('/logged-macrocycles/:id');
 
   this.get('/performance-tests');
   this.get('/performance-tests/:id');

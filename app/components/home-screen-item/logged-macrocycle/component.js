@@ -19,6 +19,21 @@ export default Component.extend({
     }
   }),
 
+  actuallyArchiveProgram: task(function*() {
+    let flashMessages = this.flashMessages;
+    let loggedMacrocycle = this.homeScreenItem.loggedMacrocycle;
+    loggedMacrocycle.set('archived', true);
+    set(this, 'showArchiveProgramModal', false);
+
+    try {
+      yield loggedMacrocycle.save();
+      flashMessages.success('Program archived');
+    } catch (e) {
+      flashMessages.danger('Something went wrong!');
+      console.error(e);
+    }
+  }),
+
   actions: {
     deleteProgram() {
       set(this, 'showMenu', false);
@@ -31,11 +46,11 @@ export default Component.extend({
 
     archiveProgram() {
       set(this, 'showMenu', false);
-      set(this, 'showDeleteProgramModal', true);
+      set(this, 'showArchiveProgramModal', true);
     },
 
     cancelArchiveProgram() {
-      set(this, 'showDeleteProgramModal', false);
+      set(this, 'showArchiveProgramModal', false);
     },
   },
 });

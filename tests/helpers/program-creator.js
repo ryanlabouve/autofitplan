@@ -19,6 +19,10 @@ let setupDefaultUser = async server => {
       token: 'hotdog',
     },
   });
+
+  return {
+    user,
+  };
 };
 
 let setupDefaultCycles = server => {
@@ -84,8 +88,12 @@ let setupDefaultCycles = server => {
 };
 
 let setupDefaultPrograms = async server => {
-  await setupDefaultUser(server);
+  let {user} = await setupDefaultUser(server);
   setupDefaultCycles(server);
+
+  return {
+    user,
+  };
 };
 
 let setupBasicProgram = server => {

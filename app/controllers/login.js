@@ -13,7 +13,7 @@ export default Controller.extend({
       let recaptcha = document.createElement('script');
       recaptcha.setAttribute = 'text/javascript';
       // async defer>
-      recaptcha.src = `https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit`;
+      recaptcha.src = `https://www.google.com/recaptcha/api.js?render=explicit`;
       recaptcha.onload = this.afterRecaptchaLoaded.bind(this);
       let head = document.querySelector('head');
       head.appendChild(recaptcha);

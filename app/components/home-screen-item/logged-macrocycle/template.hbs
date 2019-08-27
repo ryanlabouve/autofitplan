@@ -8,7 +8,7 @@
       style="min-width: 80%;"
       >
       <p class="mb-4">
-        Are you sure you want to delete you program?
+        Are you sure you want to delete your program?
       </p>
 
       <p class="mb-8">
@@ -16,7 +16,9 @@
       </p>
       <UiButton
         onclick={{perform actuallyDeleteProgram}}
-        @color="danger">
+        @color="danger"
+        data-test-confirm-delete-logged-macrocycle
+      >
         I understand. Eff this program
       </UiButton>
       <br><br>
@@ -30,10 +32,41 @@
   {{/modal-dialog}}
 {{/if}}
 
+{{#if showArchiveProgramModal}}
+  {{#modal-dialog
+      onClose=(action "cancelArchiveProgram")
+      targetAttachment="center"
+      translucentOverlay=true
+  }}
+    <div class="p-4  m-2"
+      style="min-width: 80%;"
+      >
+      <p class="mb-4">
+        Are you sure you want to archive your program?
+      </p>
+
+      <UiButton
+        onclick={{perform actuallyArchiveProgram}}
+        @color="danger"
+        data-test-confirm-archive-logged-macrocycle
+      >
+        I understand.
+      </UiButton>
+      <br><br>
+      <UiButton
+        onclick={{action "cancelArchiveProgram"}}
+        @color="info"
+        >
+        Cancel
+      </UiButton>
+    </div>
+  {{/modal-dialog}}
+{{/if}}
+
 <Box>
 
   <div style="position: relative;" class="float-right" >
-    <div class="cursor-pointer p-2" onclick={{action (mut showMenu) true}}>
+    <div class="cursor-pointer p-2" onclick={{action (mut showMenu) true}} data-test-show-menu>
       {{fa-icon "ellipsis-v"}}
     </div>
 
@@ -44,10 +77,18 @@
           position: absolute; top: 5px; right: -5px;
           width: 300px;
         ">
-        <div class="p-3 border-b cursor-pointer">
+        <div
+          onclick={{action "archiveProgram"}}
+          class="p-3 border-b cursor-pointer"
+          data-test-archive-logged-macrocycle
+        >
           Archive Program
         </div>
-        <div onclick={{action "deleteProgram"}} class="p-3 border-b cursor-pointer">
+        <div
+          onclick={{action "deleteProgram"}}
+          class="p-3 border-b cursor-pointer"
+          data-test-delete-logged-macrocycle
+        >
           Delete Program
         </div>
         <div class="p-3 cursor-pointer" onclick={{action (mut showMenu) false}}>
