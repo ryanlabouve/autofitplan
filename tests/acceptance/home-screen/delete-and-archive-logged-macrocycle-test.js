@@ -1,5 +1,5 @@
 import {module, test} from 'qunit';
-import {visit, click, fillIn} from '@ember/test-helpers';
+import {visit, click} from '@ember/test-helpers';
 import {setupApplicationTest} from 'ember-qunit';
 import setupMirage from 'ember-cli-mirage/test-support/setup-mirage';
 import {
@@ -12,7 +12,7 @@ module('Acceptance | home screen | delete program', function(hooks) {
   setupMirage(hooks);
 
   test('Delete a program', async function(assert) {
-    let {user} = await setupDefaultPrograms(this.server);
+    await setupDefaultPrograms(this.server);
     let {loggedMacrocycle} = await startNewProgram(this.server);
 
     let _item = server.create('home-screen-item', {
@@ -31,7 +31,7 @@ module('Acceptance | home screen | delete program', function(hooks) {
   });
 
   test('Archive a program', async function(assert) {
-    let {user} = await setupDefaultPrograms(this.server);
+    await setupDefaultPrograms(this.server);
     let {loggedMacrocycle} = await startNewProgram(this.server);
 
     let _item = server.create('home-screen-item', {
