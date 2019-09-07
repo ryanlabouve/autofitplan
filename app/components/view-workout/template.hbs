@@ -64,4 +64,58 @@
   {{else}}
     <div data-test-moves-hidden></div>
   {{/if}}
+<<<<<<< Updated upstream
+=======
+
+  {{#if curcuits.length}}
+    <h2 class="text-xl mt-8 mb-4">Curcuits</h2>
+    <div class="shadow bg-white">
+      {{#each exercisesByCurcuit as |exercises|}}
+
+        <h3 class="bold">Round x/y</h3>
+
+        <UiButton>
+          Start round one
+        </UiButton>
+        <UiButton>
+          fail
+        </UiButton>
+
+        sets low, sets high
+
+        create
+        <table class="w-full">
+          <tr>
+            <td>Move</td>
+            <td>Weight</td>
+            <td>Reps</td>
+            <td>dotdotdot</td>
+          </tr>
+          {{#each exercises as |exercise|}}
+            {{#let (get-logged-exercise loggedSession.loggedExercises exercise) as |loggedExercise|}}
+              <tr>
+                <td
+                  class="border border-b-1 p-2">
+                  {{exercise.defaultExercise}}
+                </td>
+                <td
+                  class="border border-b-1 p-2">
+                  {{loggedExercise.weight}}
+                </td>
+                <td
+                  class="border border-b-1 p-2">
+                  {{exercise.repsLow}} / {{exercise.repsHigh}}
+                </td>
+                <td
+                  class="border border-b-1 p-2">
+                  dot
+                </td>
+              </tr>
+            {{/let}}
+          {{/each}}
+        </table>
+      {{/each}}
+    </div>
+  {{/if}}
+>>>>>>> Stashed changes
 </div>
