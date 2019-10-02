@@ -1390,7 +1390,7 @@ babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-core@^6.24.1, babel-core@^6.26.0, babel-core@^6.26.3:
+babel-core@^6.26.0, babel-core@^6.26.3:
   version "6.26.3"
   resolved "https://registry.yarnpkg.com/babel-core/-/babel-core-6.26.3.tgz#b2e2f09e342d0f0c88e2f02e067794125e75c207"
   dependencies:
@@ -4159,14 +4159,13 @@ ember-composable-helpers@^2.3.1:
     ember-cli-babel "^7.1.0"
     resolve "^1.10.0"
 
-ember-concurrency@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-1.0.0.tgz#3b650672fdd5dc1d45007626119135829076c2b6"
+ember-concurrency@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ember-concurrency/-/ember-concurrency-1.1.0.tgz#955f6961937c655ecc6ee4c3213e1191dc227ba3"
   dependencies:
-    babel-core "^6.24.1"
-    ember-cli-babel "^6.8.2"
+    ember-cli-babel "^7.7.3"
     ember-compatibility-helpers "^1.2.0"
-    ember-maybe-import-regenerator "^0.1.5"
+    ember-maybe-import-regenerator "^0.1.6"
 
 "ember-cookies@^0.3.0 || ^0.4.0":
   version "0.4.0"
