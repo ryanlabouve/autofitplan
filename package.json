@@ -75,6 +75,6 @@
     "node": "8.* || >= 10.*"
   },
   "dependencies": {
-    "chart.js": "^2.8.0"
+    "chart.js": "^2.9.4"
   }
 }
